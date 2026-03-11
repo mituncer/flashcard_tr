@@ -67,7 +67,7 @@
   .card-inner.flipped .card-back #mini-gender-badge-back,
   .card-inner.flipped .card-back .divider {
     opacity: 1;
-    transition: opacity .1s ease .2s; /* animasyonun ikinci yarısında belir */
+    transition: opacity .1s ease .2s;
   }
 
   .card-face {
@@ -243,15 +243,38 @@
 
   .mode-btn {
     font-size: 13px; font-family: 'Outfit', sans-serif;
-    border-radius: 20px; padding: 4px 8px; cursor: pointer;
+    border-radius: 20px; padding: 7px 14px; cursor: pointer;
     transition: all .25s; border: 1px solid var(--border);
     background: var(--surface); color: var(--text-muted);
     white-space: nowrap; flex-shrink: 0;
   }
   .mode-btn.tr-mode { border-color: rgba(106,171,247,.4); color: #6aabf7; background: rgba(106,171,247,.08); }
+  .back-btn {
+    font-size: 13px; color: var(--text-muted); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 20px; padding: 7px 14px;
+    cursor: pointer; font-family: 'Outfit', sans-serif; transition: all .2s;
+    letter-spacing: .5px; white-space: nowrap; flex-shrink: 0;
+  }
+  .back-btn:hover { color: var(--gold); border-color: var(--gold); background: var(--gold-soft); }
+  .splash-dir-btn {
+    padding: 8px 24px; border-radius: 20px; border: 2px solid var(--gold);
+    background: var(--gold-soft); color: var(--gold);
+    font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all .2s; letter-spacing: 1px;
+  }
+  .splash-dir-btn:hover { background: rgba(201,169,110,.25); }
+  .splash-set-btn {
+    width: 100%; padding: 14px 20px; border-radius: 14px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text-muted); font-family: 'Outfit', sans-serif;
+    font-size: 15px; font-weight: 500; cursor: pointer; transition: all .2s;
+    text-align: left;
+  }
+  .splash-set-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+  .splash-set-btn.active { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); box-shadow: 0 0 0 1px var(--gold); }
   .finish-btn {
-    font-size: 11px; color: var(--text-muted); background: var(--surface);
-    border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px;
+    font-size: 13px; color: var(--text-muted); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 20px; padding: 7px 14px;
     cursor: pointer; font-family: 'Outfit', sans-serif; transition: all .2s;
     letter-spacing: .5px; white-space: nowrap; flex-shrink: 0;
   }
@@ -273,14 +296,24 @@
   <div class="splash-copy">
     This application was developed by<br>
     <strong style="color:var(--text)">Mustafa Tuncer</strong><br>
-    <a href="mailto:mituncer@gmail.com" style="color:var(--gold);text-decoration:none">mituncer@gmail.com</a><br><br>
-    Unauthorized copying or distribution is prohibited.
+    <span id="contact-email" style="color:var(--gold)"></span><br><br>
+    Commercial use is prohibited.
   </div>
   <div class="splash-copy-tr">
     Bu uygulama Mustafa Tuncer tarafından hazırlanmıştır.<br>
-    İzinsiz kopyalanması ve dağıtılması yasaktır.
+    Ticari kullanımı yasaktır.
   </div>
-  <button class="splash-btn" onclick="startApp()">▶ Başla · Start</button>
+  <!-- Direction toggle -->
+  <div style="display:flex;justify-content:center;margin-bottom:12px;">
+    <button class="splash-dir-btn" id="splash-dir-btn" onclick="toggleSplashDir()">PL → TR</button>
+  </div>
+  <!-- Set selection -->
+  <div style="display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:12px;">
+    <button class="splash-set-btn" id="splash-btn-gunluk" onclick="startApp('gunluk')">📘 Günlük Cümleler</button>
+    <button class="splash-set-btn" id="splash-btn-b1" onclick="startApp('b1')">🎓 B1 Kelimeler</button>
+    <button class="splash-set-btn" id="splash-btn-calisma" onclick="startApp('calisma')">📌 Çalışma Seti</button>
+  </div>
+  <div id="splash-empty-msg" style="display:none;color:var(--red);font-size:12px;text-align:center;padding:8px 0;background:rgba(224,90,90,.1);border:1px solid rgba(224,90,90,.3);border-radius:10px;margin-bottom:4px;">📌 Çalışma seti boş — diğer seçeneklerden başla</div>
   <button class="splash-help-btn" onclick="openHelp()">? Nasıl Çalışır</button>
   <a href="https://ko-fi.com/webbeee" target="_blank" class="kofi-btn">☕ Ko-fi'de Destek Ol</a>
 </div>
@@ -305,7 +338,7 @@
         <div class="help-item"><span class="help-key">↑ kaydır</span> Önceki kart</div>
         <div class="help-item"><span class="help-key">✓ Doğru</span> Biliyorum, doğru işaretle</div>
         <div class="help-item"><span class="help-key">✗ Yanlış</span> Bilmiyorum, yanlış işaretle</div>
-        <div class="help-item"><span class="help-key">📌 Sete Ekle</span> Seçili kelimeler listesine ekle</div>
+        <div class="help-item"><span class="help-key">📌 Çalışma Setine Ekle</span> Seçili kelimeler listesine ekle</div>
         <div class="help-item"><span class="help-key">💡 Örnek cümle</span> Kelimeyi cümle içinde gör</div>
       </div>
 
@@ -357,6 +390,7 @@
       <div class="counter-badge" id="counter">1 / 34</div>
     </div>
     <div class="header-row2">
+      <button class="back-btn" id="back-btn" onclick="goToSplash()">◀ Başa Dön</button>
       <button class="mode-btn" id="mode-btn">PL → TR</button>
       <button class="finish-btn" id="finish-btn">■ Bitir</button>
     </div>
@@ -396,7 +430,7 @@
   <div class="actions actions-hidden" id="actions">
     <button class="btn btn-wrong"   onclick="markWrong()">  <span class="btn-icon">❌</span>Yanlış</button>
     <button class="btn btn-correct" onclick="markCorrect()"><span class="btn-icon">✅</span>Doğru</button>
-    <button class="btn btn-save"    onclick="markSave()">   <span class="btn-icon">📌</span>Sete Ekle</button>
+    <button class="btn btn-save"    onclick="markSave()">   <span class="btn-icon">📌</span>Çalışma Setine Ekle</button>
   </div>
   <div class="dot-nav" id="dot-nav"></div>
 </div>
@@ -405,7 +439,6 @@
 <div class="hint-overlay" id="hint-overlay" onclick="closeHint()">
   <div class="hint-sheet">
     <div class="hint-sheet-tag">örnek cümle</div>
-    <div class="hint-word" id="hint-word"></div>
     <div class="hint-sentence-pl" id="hint-sentence-pl"></div>
     <div class="hint-sentence-tr" id="hint-sentence-tr"></div>
     <div class="hint-close-hint">dokunarak kapat · lehçeye dön</div>
@@ -483,7 +516,7 @@ let reverseMode = false;
 
 // ── localStorage helpers ──
 const LS_KEY = 'polonceKart_saved';
-function loadSaved(){ try { return JSON.parse(localStorage.getItem(LS_KEY)||'[]'); } catch(e){ return []; } }
+function loadSaved(){ try { return (JSON.parse(localStorage.getItem(LS_KEY)||'[]')).map(s=>s.trim()); } catch(e){ return []; } }
 function saveSaved(arr){ try { localStorage.setItem(LS_KEY, JSON.stringify(arr)); } catch(e){} }
 let savedWords = loadSaved(); // array of pl strings
 
@@ -500,21 +533,51 @@ function parseCSV(text){
   return result;
 }
 
-async function loadWords(){
+let wordsGunluk = [];
+let wordsB1 = [];
+
+async function fetchCSV(path){
   try {
-    const resp = await fetch('kelimeler.csv');
+    const resp = await fetch(path);
+    if(!resp.ok) throw new Error('HTTP ' + resp.status);
     const text = await resp.text();
-    words = parseCSV(text);
+    const parsed = parseCSV(text);
+    console.log(path + ' yüklendi: ' + parsed.length + ' kelime');
+    return parsed;
   } catch(e) {
-    // fallback: words already defined inline (for local use)
-    console.warn('CSV yüklenemedi, inline kelimeler kullanılıyor.');
+    console.error(path + ' yüklenemedi:', e);
+    return [];
+  }
+}
+
+async function loadWords(){
+  [wordsGunluk, wordsB1] = await Promise.all([
+    fetchCSV('./kelimeler-basic-tr.csv'),
+    fetchCSV('./kelimeler.csv')
+  ]);
+  words = wordsB1; // default
+  if(!wordsGunluk.length && !wordsB1.length){
+    const msg = document.getElementById('splash-empty-msg');
+    if(msg){ 
+      msg.textContent = '⚠️ Kelime dosyası yüklenemedi — sayfayı yenile';
+      msg.style.display = 'block';
+      msg.style.color = 'var(--red)';
+      msg.style.background = 'rgba(224,90,90,.1)';
+      msg.style.border = '1px solid rgba(224,90,90,.3)'; 
+    }
   }
   initApp();
 }
 
 function initApp(){
-  deck=[...words].sort(()=>Math.random()-.5);
-  buildDots(); showCard('right');
+  // Restore saved direction
+  reverseMode = localStorage.getItem('polonceKart_dir') === '1';
+  if(reverseMode){
+    const mb = document.getElementById('mode-btn');
+    if(mb){ mb.textContent='TR → PL'; mb.classList.add('tr-mode'); }
+  }
+  updateSplashActive();
+  // Do NOT auto-start deck — user picks from splash
   document.getElementById('mode-btn').addEventListener('click', toggleMode);
   document.getElementById('finish-btn').addEventListener('click', showComplete);
   document.getElementById('hint-overlay').addEventListener('click', closeHint);
@@ -550,13 +613,14 @@ function updateHeader(){
   document.getElementById('lbl-remain').textContent=(deck.length-learnedCount)+' kaldı';
 }
 function showCard(dir){
+  if(!deck || !deck[current]) return;
   const w=deck[current];
   // front face — Türkçe modda cinsiyet rozeti gösterme
   document.getElementById('polish-word').textContent = reverseMode ? w.tr : w.pl;
   document.getElementById('gender-badge-front').innerHTML = reverseMode ? '' : gBadge(w.g);
   document.querySelector('#card-container .card-front .card-label').textContent = reverseMode ? 'türkçe' : 'lehçe';
   document.querySelector('.flip-hint').textContent = reverseMode ? 'kaydır → lehçe gör' : 'kaydır → türkçe gör';
-  // back face — Türkçe modda Lehçe + cinsiyet, normal modda Türkçe
+  // back face
   document.getElementById('back-polish').textContent  = reverseMode ? w.tr : w.pl;
   document.getElementById('turkish-word').textContent = reverseMode ? w.pl : w.tr;
   document.getElementById('gender-badge-back').innerHTML = reverseMode ? gBadge(w.g) : '';
@@ -584,25 +648,25 @@ function markWrong(){   results[current]='wrong';   updateDots(); flash('fb-left
 function markSave(){
   if(!results[current]) learnedCount++;
   results[current]='save';
-  // localStorage'a ekle
-  const pl = deck[current].pl;
+  const pl = deck[current].pl.trim();
   if(!savedWords.includes(pl)){ savedWords.push(pl); saveSaved(savedWords); }
   updateDots(); flash('fb-up'); setTimeout(nextCard,300);
 }
 
 // ── HINT ──
-function showHint(e){ e.stopPropagation(); const w=deck[current]; _showHintOverlay(w); }
-function showMiniHint(e){ 
-  e.stopPropagation(); 
-  if(!miniDeck || miniDeck.length===0) return;
-  const w=miniDeck[miniCurrent]; 
+function showHint(e){ e.stopPropagation(); if(!deck||!deck[current]) return; const w=deck[current]; _showHintOverlay(w); }
+function showMiniHint(e){
+  e.stopPropagation();
+  if(!miniDeck||!miniDeck.length||miniCurrent===undefined) return;
+  const w=miniDeck[miniCurrent];
   if(!w) return;
-  _showHintOverlay(w); 
+  _showHintOverlay(w);
 }
 function _showHintOverlay(w){
-  document.getElementById('hint-word').innerHTML=`<span>${w.pl}</span>`;
-  document.getElementById('hint-sentence-pl').textContent=w.ex_pl;
-  document.getElementById('hint-sentence-tr')?document.getElementById('hint-sentence-tr').textContent=w.ex_tr:null;
+  if(!w) return;
+  document.getElementById('hint-sentence-pl').textContent=w.ex_pl||'';
+  const trEl = document.getElementById('hint-sentence-tr');
+  if(trEl) trEl.textContent=w.ex_tr||'';
   document.getElementById('hint-overlay').classList.add('show');
 }
 function closeHint(){ document.getElementById('hint-overlay').classList.remove('show'); }
@@ -627,9 +691,16 @@ function restart(){
 
 // ── MINI TOUR ──
 function startSavedTour(){
-  // localStorage'daki kayıtlı kelimeleri yükle
+  // localStorage'daki kayıtlı kelimeleri yükle — tüm kelime havuzundan ara
   savedWords = loadSaved();
-  miniDeck = words.filter(w => savedWords.includes(w.pl)).sort(()=>Math.random()-.5);
+  const allWords = wordsB1.concat(wordsGunluk);
+  const seen = new Set();
+  const pool = allWords.filter(w => { 
+    if(seen.has(w.pl.trim())) return false; 
+    seen.add(w.pl.trim()); 
+    return true; 
+  });
+  miniDeck = pool.filter(w => savedWords.includes(w.pl.trim())).sort(()=>Math.random()-.5);
   if(!miniDeck.length) return;
   miniCurrent=0; miniFlipped=false;
   document.getElementById('complete-screen').classList.remove('show');
@@ -681,9 +752,14 @@ function miniSkip(){ nextMiniCard(); }
 
 function miniMastered(){
   // localStorage'dan çıkar
-  const pl = miniDeck[miniCurrent].pl;
+  const pl = miniDeck[miniCurrent].pl.trim();
   savedWords = savedWords.filter(w => w !== pl);
   saveSaved(savedWords);
+  // Sonuç ekranındaki sayıyı güncelle
+  const savedEl = document.getElementById('c-saved');
+  if(savedEl) savedEl.textContent = savedWords.length;
+  const tapEl = document.getElementById('saved-tap');
+  if(tapEl) tapEl.style.visibility = savedWords.length > 0 ? 'visible' : 'hidden';
   // Setten çıkar
   miniDeck.splice(miniCurrent, 1);
   if(miniDeck.length === 0){ closeMiniTour(); return; }
@@ -744,26 +820,96 @@ document.addEventListener('keydown',e=>{
 
 function toggleMode(){
   reverseMode = !reverseMode;
+  localStorage.setItem('polonceKart_dir', reverseMode ? '1' : '0');
   const btn = document.getElementById('mode-btn');
   if(reverseMode){ btn.textContent='TR → PL'; btn.classList.add('tr-mode'); }
   else            { btn.textContent='PL → TR'; btn.classList.remove('tr-mode'); }
   showCard('right');
 }
 
+function toggleSplashDir(){
+  reverseMode = !reverseMode;
+  localStorage.setItem('polonceKart_dir', reverseMode ? '1' : '0');
+  const btn = document.getElementById('splash-dir-btn');
+  btn.textContent = reverseMode ? 'TR → PL' : 'PL → TR';
+}
+
+function goToSplash(){
+  document.getElementById('splash').classList.remove('hide');
+  document.getElementById('splash').style.display = '';
+  document.getElementById('splash').style.opacity = '1';
+  document.getElementById('splash').style.pointerEvents = 'all';
+  updateSplashActive();
+}
+
+function updateSplashActive(){
+  const sel = localStorage.getItem('polonceKart_set') || 'gunluk';
+  ['gunluk','b1','calisma'].forEach(s => {
+    const b = document.getElementById('splash-btn-'+s);
+    if(b) b.classList.toggle('active', s===sel);
+  });
+  const dir = localStorage.getItem('polonceKart_dir');
+  const db = document.getElementById('splash-dir-btn');
+  if(db) db.textContent = reverseMode ? 'TR → PL' : 'PL → TR';
+}
+
 function openHelp(){ document.getElementById('help-overlay').classList.add('show'); }
 function closeHelp(){ document.getElementById('help-overlay').classList.remove('show'); }
 
-function startApp(){
+function startApp(set){
+  if(set) localStorage.setItem('polonceKart_set', set);
+  const sel = set || localStorage.getItem('polonceKart_set') || 'gunluk';
+  // filter words by set
+  let filtered;
+  if(sel === 'gunluk'){
+    filtered = wordsGunluk.length ? wordsGunluk : wordsB1;
+  } else if(sel === 'b1'){
+    filtered = wordsB1;
+  } else if(sel === 'calisma'){
+    const sv = loadSaved().map(s => s.trim());
+    const allWords = wordsB1.concat(wordsGunluk);
+    // deduplicate by pl
+    const seen = new Set();
+    const pool = allWords.filter(w => { 
+      if(seen.has(w.pl.trim())) return false; 
+      seen.add(w.pl.trim()); 
+      return true; 
+    });
+    filtered = pool.filter(w => sv.includes(w.pl.trim()));
+    console.log('Çalışma seti: kayıtlı=' + sv.length + ', bulunan=' + filtered.length);
+    console.log('Kayıtlı kelimeler:', sv);
+    if(!filtered.length){
+      const msg = document.getElementById('splash-empty-msg');
+      if(msg){
+        msg.textContent = '📌 Çalışma seti boş — diğer seçeneklerden başla';
+        msg.style.display='block';
+        setTimeout(()=>{ msg.style.display='none'; }, 3000);
+      }
+      return;
+    }
+  } else {
+    filtered = wordsB1;
+  }
+  deck = [...filtered].sort(()=>Math.random()-.5);
+  current=0; flipped=false; results={}; learnedCount=0;
+  buildDots();
+  updateSplashActive();
   const splash = document.getElementById('splash');
   splash.classList.add('hide');
-  setTimeout(() => splash.style.display='none', 500);
+  setTimeout(() => { 
+    splash.style.display = 'none';
+    showCard('right');
+  }, 300);
 }
 
-// ── INIT ──
-loadWords();
+// Render email at runtime to prevent Netlify obfuscation
+(function(){
+  const u='mituncer'; const d='gmail.com';
+  const el = document.getElementById('contact-email');
+  if(el) el.textContent = u + '@' + d;
+})();
 
-document.getElementById('mode-btn').addEventListener('click', toggleMode);
-document.getElementById('finish-btn').addEventListener('click', showComplete);
+loadWords();
 </script>
 </body>
 </html>
