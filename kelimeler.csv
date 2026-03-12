@@ -152,3 +152,114 @@ urodzenie|nijaki|Data urodzenia jest potrzebna do wypełnienia formularza.|doğu
 ilość|zenski|Proszę podać ilość osób na rezerwację.|miktar|Rezervasyon için kişi sayısını belirtiniz.
 wysiłek|meski|Nauka języka wymaga dużego wysiłku i cierpliwości.|çaba, efor|Dil öğrenmek büyük çaba ve sabır gerektirir.
 kondycja|zenski|Muszę poprawić swoją kondycję fizyczną.|kondisyon, durum|Fiziksel kondisyonumu geliştirmem gerekiyor.
+iść|fiil|Idę do sklepu.|gitmek (yürüyerek)|Markete gidiyorum.
+jechać|fiil|Jadę do Warszawy pociągiem.|gitmek (araçla)|Varşova'ya trenle gidiyorum.
+przychodzić|fiil|Przychodzę do pracy o ósmej.|gelmek|İşe saat sekizde geliyorum.
+przyjeżdżać|fiil|Przyjeżdżam z Turcji.|gelmek (araçla)|Türkiye'den geliyorum.
+otwierać|fiil|Otwieram okno, bo jest gorąco.|açmak|Sıcak olduğu için pencereyi açıyorum.
+zamykać|fiil|Zamykam drzwi na klucz.|kapamak|Kapıyı anahtarla kapatıyorum.
+czytać|fiil|Czytam książkę przed snem.|okumak|Uyumadan önce kitap okuyorum.
+pisać|fiil|Piszę wiadomość do przyjaciela.|yazmak|Arkadaşıma mesaj yazıyorum.
+słuchać|fiil|Słucham muzyki w drodze do pracy.|dinlemek|İşe giderken müzik dinliyorum.
+rozmawiać|fiil|Rozmawiamy o projekcie.|konuşmak|Proje hakkında konuşuyoruz.
+mówić|fiil|Mówię po polsku trochę.|söylemek|Biraz Lehçe konuşuyorum.
+robić|fiil|Co robisz w weekend?|yapmak, etmek|Haftasonu ne yapıyorsun?
+być|fiil|Jestem zmęczony po pracy.|olmak|İşten sonra yorgunum.
+chcieć|fiil|Chcę nauczyć się polskiego.|istemek|Lehçe öğrenmek istiyorum.
+wiedzieć|fiil|Wiem, gdzie jest dworzec.|bilmek (bilgi)|İstasyonun nerede olduğunu biliyorum.
+umieć|fiil|Umiem mówić po angielsku.|bilmek (beceri)|İngilizce konuşmasını biliyorum.
+widzieć|fiil|Widzę piękny widok z okna.|görmek|Pencereden güzel bir manzara görüyorum.
+patrzeć|fiil|Patrzę na ekran komputera.|bakmak|Bilgisayar ekranına bakıyorum.
+oglądać|fiil|Oglądam film wieczorem.|izlemek, seyretmek|Akşam film seyrediyorum.
+brać|fiil|Biorę parasolkę, bo pada.|almak (elde etmek)|Yağmur yağdığı için şemsiye alıyorum.
+kupować|fiil|Kupuję bilety online.|satın almak|Biletleri çevrimiçi satın alıyorum.
+dawać|fiil|Daję ci moją wizytówkę.|vermek|Sana kartvizitimi veriyorum.
+jeść|fiil|Jem śniadanie o siódmej.|yemek (yemek yemek)|Saat yedide kahvaltı ediyorum.
+pić|fiil|Piję kawę każdego ranka.|içmek|Her sabah kahve içiyorum.
+spać|fiil|Śpię osiem godzin dziennie.|uyumak|Günde sekiz saat uyuyorum.
+wstawać|fiil|Wstaję o szóstej rano.|kalkmak|Sabah altıda kalkıyorum.
+siedzieć|fiil|Siedzę przy biurku cały dzień.|oturmak|Bütün gün masada oturuyorum.
+wracać|fiil|Wracam do domu o osiemnastej.|dönmek|Saat on sekizde eve dönüyorum.
+dzwonić|fiil|Dzwonię do ciebie jutro.|aramak (telefon)|Yarın seni arıyorum.
+czekać|fiil|Czekam na autobus już pół godziny.|beklemek|Otobüsü yarım saattir bekliyorum.
+rozumieć|fiil|Nie rozumiem tego zdania.|anlamak|Bu cümleyi anlamıyorum.
+myśleć|fiil|Myślę, że to dobry pomysł.|düşünmek|Bence bu iyi bir fikir.
+kochać|fiil|Kocham swoją rodzinę.|sevmek (aşkla)|Ailemi seviyorum.
+lubić|fiil|Lubię polską kuchnię.|sevmek (beğenmek)|Lehçe mutfağını seviyorum.
+pracować|fiil|Pracuję w firmie budowlanej.|çalışmak (işte)|İnşaat şirketinde çalışıyorum.
+uczyć się|fiil|Uczę się polskiego każdego dnia.|öğrenmek|Her gün Lehçe öğreniyorum.
+płacić|fiil|Płacę kartą kredytową.|ödemek|Kredi kartıyla ödüyorum.
+pomagać|fiil|Pomagam kolegom w pracy.|yardım etmek|İş arkadaşlarıma yardım ediyorum.
+zaczynać|fiil|Zaczynam pracę o dziewiątej.|başlamak|İşe saat dokuzda başlıyorum.
+kończyć|fiil|Kończę spotkanie o południu.|bitirmek|Toplantıyı öğleyin bitiriyorum.
+wchodzić|fiil|Wchodzę do biura z kartą.|girmek|Ofise kartla giriyorum.
+wychodzić|fiil|Wychodzę z domu o siódmej.|çıkmak|Evden saat yedide çıkıyorum.
+poznanie|nijaki|Poznanie języka wymaga czasu.|tanıma, öğrenme|Bir dili öğrenmek zaman alır.
+znajomi|cogul|Mam wielu znajomych w Warszawie.|tanıdıklar|Varşova'da pek çok tanıdığım var.
+moment|meski|Poczekaj chwilę, za moment wracam.|an|Bekle, bir an içinde dönüyorum.
+kąpiel|zenski|Biorę kąpiel po długim dniu.|banyo|Uzun bir günün ardından banyo yapıyorum.
+muzyka|zenski|Słucham muzyki klasycznej.|müzik|Klasik müzik dinliyorum.
+satysfakcja|zenski|Praca daje mi dużo satysfakcji.|tatmin, memnuniyet|İş bana çok tatmin veriyor.
+wyszukiwarka|zenski|Używam wyszukiwarki do znalezienia informacji.|arama motoru|Bilgi bulmak için arama motoru kullanıyorum.
+potrawa|zenski|To tradycyjna polska potrawa.|yemek, yiyecek|Bu geleneksel bir Lehçe yemeği.
+ochota|zenski|Mam ochotę na kawę.|istek, arzu|Kahve içmek istiyorum.
+produkt|meski|Ten produkt jest wysokiej jakości.|ürün|Bu ürün yüksek kaliteli.
+informacja|zenski|Potrzebuję więcej informacji.|bilgi|Daha fazla bilgiye ihtiyacım var.
+skaner|meski|Używam skanera do dokumentów.|tarayıcı|Belgeler için tarayıcı kullanıyorum.
+kod|meski|Wpisuję kod dostępu.|kod|Erişim kodunu giriyorum.
+zdjęcie|nijaki|Robię zdjęcie na pamiątkę.|fotoğraf|Hatıra fotoğrafı çekiyorum.
+aktywność|zenski|Aktywność fizyczna jest ważna dla zdrowia.|aktivite, etkinlik|Fiziksel aktivite sağlık için önemlidir.
+ćwiczenia|cogul|Robię ćwiczenia każdego ranka.|egzersizler|Her sabah egzersiz yapıyorum.
+baza|zenski|Mamy dużą bazę danych klientów.|temel, veri tabanı|Büyük bir müşteri veri tabanımız var.
+opcja|zenski|Jest kilka opcji do wyboru.|seçenek|Seçmek için birkaç seçenek var.
+prędkość|zenski|Prędkość internetu jest bardzo dobra.|hız|İnternet hızı çok iyi.
+intensywność|zenski|Intensywność treningu wzrosła.|yoğunluk|Antrenmanın yoğunluğu arttı.
+obsługa|zenski|Obsługa klienta jest na wysokim poziomie.|hizmet, kullanım|Müşteri hizmeti yüksek düzeyde.
+ekran|meski|Ekran komputera jest zbyt jasny.|ekran|Bilgisayar ekranı çok parlak.
+reklama|zenski|Ta reklama jest bardzo kreatywna.|reklam|Bu reklam çok yaratıcı.
+funkcja|zenski|Ta funkcja ułatwia pracę.|işlev, fonksiyon|Bu işlev çalışmayı kolaylaştırıyor.
+konto|nijaki|Zakładam nowe konto bankowe.|hesap|Yeni bir banka hesabı açıyorum.
+robot|meski|Robot wykonuje powtarzalne zadania.|robot|Robot tekrarlayan görevleri yerine getirir.
+technologia|zenski|Technologia zmienia nasz świat.|teknoloji|Teknoloji dünyamızı değiştiriyor.
+inteligencja|zenski|Inteligencja emocjonalna jest kluczowa.|zeka|Duygusal zeka çok önemlidir.
+pracownik|meski|Nowy pracownik zaczyna w poniedziałek.|çalışan, işçi|Yeni çalışan Pazartesi başlıyor.
+urlop|meski|Idę na urlop w sierpniu.|izin, tatil|Ağustos'ta tatile gidiyorum.
+tajemnica|zenski|To jest tajemnica firmy.|sır, gizem|Bu şirketin sırrıdır.
+pamięć|zenski|Mam dobrą pamięć do liczb.|hafıza, bellek|Sayılar için iyi bir hafızam var.
+sprawdzian|meski|Jutro mam sprawdzian z języka.|sınav, test|Yarın dil sınavım var.
+test|meski|Zdałem test na prawo jazdy.|test|Ehliyet testini geçtim.
+problem|meski|Mamy problem z dostawą.|sorun|Teslimatla ilgili bir sorunumuz var.
+człowiek|meski|Każdy człowiek popełnia błędy.|insan|Her insan hata yapar.
+kontakt|meski|Jestem w stałym kontakcie z klientem.|iletişim, temas|Müşteriyle sürekli iletişim halindeyim.
+motywacja|zenski|Motywacja zespołu jest bardzo wysoka.|motivasyon|Takımın motivasyonu çok yüksek.
+nauka|zenski|Nauka języków otwiera drzwi.|bilim, öğrenme|Dil öğrenmek kapılar açar.
+element|meski|To ważny element projektu.|unsur, öğe|Bu projenin önemli bir unsurudur.
+młodzież|zenski|Młodzież jest przyszłością kraju.|gençlik, gençler|Gençlik ülkenin geleceğidir.
+zaleta|zenski|Główną zaletą jest niska cena.|avantaj, üstünlük|Temel avantaj düşük fiyattır.
+korzyść|zenski|Jakie są korzyści z tego rozwiązania?|fayda, kazanım|Bu çözümün faydaları nelerdir?
+meble|cogul|Kupujemy nowe meble do biura.|mobilya|Ofise yeni mobilya satın alıyoruz.
+klient|meski|Klient zawsze ma rację.|müşteri|Müşteri her zaman haklıdır.
+jakość|zenski|Jakość produktu jest bardzo dobra.|kalite|Ürünün kalitesi çok iyi.
+wygląd|meski|Wygląd aplikacji jest nowoczesny.|görünüm|Uygulamanın görünümü modern.
+lider|meski|Ona jest naturalnym liderem zespołu.|lider|O, ekibin doğal lideridir.
+rynek|meski|Wchodzimy na nowy rynek.|pazar|Yeni bir pazara giriyoruz.
+producent|meski|Producent gwarantuje jakość.|üretici|Üretici kaliteyi garanti eder.
+porada|zenski|Potrzebuję porady prawnej.|tavsiye|Hukuki tavsiyeye ihtiyacım var.
+kierownik|meski|Kierownik zatwierdził budżet.|yönetici|Yönetici bütçeyi onayladı.
+dziedzina|zenski|Specjalizuję się w tej dziedzinie.|alan, saha|Bu alanda uzmanlaşıyorum.
+opinia|zenski|Chciałbym poznać pańską opinię.|görüş, fikir|Görüşünüzü öğrenmek isterim.
+temat|meski|Temat spotkania to nowy projekt.|konu|Toplantının konusu yeni proje.
+współpraca|zenski|Współpraca między działami jest kluczowa.|işbirliği|Departmanlar arası işbirliği çok önemli.
+szef|meski|Szef zatwierdził mój wniosek.|patron, amir|Amiri başvurumu onayladı.
+kariera|zenski|Buduję swoją karierę od podstaw.|kariyer|Kariyerimi sıfırdan inşa ediyorum.
+projekt|meski|Projekt zakończy się w marcu.|proje|Proje Mart'ta tamamlanacak.
+ekspert|meski|Zaproszono eksperta z Niemiec.|uzman|Almanya'dan bir uzman davet edildi.
+zespół|meski|Nasz zespół liczy dwadzieścia osób.|takım, ekip|Ekibimiz yirmi kişiden oluşuyor.
+menadżer|meski|Menadżer organizuje pracę zespołu.|yönetici|Yönetici ekibin çalışmasını organize eder.
+stanowisko|nijaki|Ubiegam się o stanowisko kierownika.|pozisyon, görev|Müdür pozisyonuna başvuruyorum.
+odpowiedzialność|zenski|Biorę odpowiedzialność za ten błąd.|sorumluluk|Bu hata için sorumluluğu üstleniyorum.
+awans|meski|Dostałem awans po dwóch latach.|terfi|İki yıl sonra terfi aldım.
+strona|zenski|Otwieram nową stronę internetową.|sayfa, taraf|Yeni bir web sayfası açıyorum.
+obowiązek|meski|Mam wiele obowiązków w pracy.|yükümlülük, görev|İşte çok sayıda görevim var.
+koncentracja|zenski|Koncentracja jest kluczowa podczas negocjacji.|konsantrasyon|Müzakerelerde konsantrasyon çok önemlidir.
+konflikt|meski|Rozwiązujemy konflikt w zespole.|çatışma, anlaşmazlık|Ekipteki çatışmayı çözüyoruz.
