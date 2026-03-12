@@ -801,6 +801,19 @@ function addSwipe(stageId, flipFn, nextFn, prevFn, getFlipped, setFlipped, actio
 addSwipe('stage',     flipCard,     nextCard,     prevCard,     ()=>flipped,     v=>{flipped=v;},     'actions');
 addSwipe('mini-stage',flipMiniCard, nextMiniCard, prevMiniCard, ()=>miniFlipped, v=>{miniFlipped=v;}, null);
 
+// Mouse wheel navigation
+document.getElementById('stage').addEventListener('wheel', e=>{
+  e.preventDefault();
+  if(e.deltaY < 0) prevCard();
+  else nextCard();
+}, {passive:false});
+
+document.getElementById('mini-stage').addEventListener('wheel', e=>{
+  e.preventDefault();
+  if(e.deltaY < 0) prevMiniCard();
+  else nextMiniCard();
+}, {passive:false});
+
 document.addEventListener('keydown',e=>{
   if(document.getElementById('hint-overlay').classList.contains('show')){ if(e.key==='Escape') closeHint(); return; }
   if(document.getElementById('mini-tour').classList.contains('show')){
@@ -816,6 +829,7 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='ArrowUp')   prevCard();
   else if(e.key==='Enter'&&flipped)     markCorrect();
   else if(e.key==='Backspace'&&flipped) markWrong();
+  else if(e.key==='Tab'){ e.preventDefault(); if(deck&&deck[current]) markSave(); }
 });
 
 function toggleMode(){
