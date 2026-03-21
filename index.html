@@ -82,7 +82,7 @@
   .card-back { position: absolute; top: 0; left: 0; transform: rotateY(180deg); }
 
   .card-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 18px; font-family: 'DM Mono', monospace; }
-  .polish-word { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--text); letter-spacing: -2.5px; line-height: 1; margin-bottom: 14px; }
+  .polish-word { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--text); letter-spacing: -2.5px; line-height: 1.1; margin-bottom: 14px; word-break: break-word; overflow-wrap: break-word; }
 
   .gender-badge { display: inline-flex; align-items: center; padding: 5px 16px; border-radius: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 14px; }
   .gender-badge.meski  { background: rgba(106,171,247,.1); color: #6aabf7; border: 1px solid rgba(106,171,247,.2); }
@@ -279,11 +279,45 @@
     letter-spacing: .5px; white-space: nowrap; flex-shrink: 0;
   }
   .finish-btn:hover { color: var(--red); border-color: var(--red); background: rgba(224,90,90,.08); }
+  .list-btn {
+    font-size: 15px; color: var(--text-muted); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 20px; padding: 7px 12px;
+    cursor: pointer; font-family: 'Outfit', sans-serif; transition: all .2s;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .list-btn:hover { color: var(--gold); border-color: var(--gold); background: var(--gold-soft); }
   @keyframes slideInLeft  { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform: translateX(0); } }
   @keyframes slideInUp    { from { opacity:0; transform: translateY(30px); }  to { opacity:1; transform: translateY(0); } }
   .slide-right { animation: slideInRight .35s cubic-bezier(.4,0,.2,1) both; }
   .slide-left  { animation: slideInLeft  .35s cubic-bezier(.4,0,.2,1) both; }
   .slide-up    { animation: slideInUp    .35s cubic-bezier(.4,0,.2,1) both; }
+
+  /* LIST OVERLAY */
+  .list-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 150; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+  .list-overlay.show { opacity: 1; pointer-events: all; }
+  .list-modal { background: var(--surface); border: 1px solid var(--border); border-radius: 28px 28px 0 0; width: 100%; max-width: 480px; max-height: 85vh; display: flex; flex-direction: column; transform: translateY(20px); transition: transform .3s ease; }
+  .list-overlay.show .list-modal { transform: translateY(0); }
+  .list-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  .list-modal-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--gold); }
+  .list-tabs { display: flex; gap: 6px; padding: 10px 16px; flex-shrink: 0; overflow-x: auto; }
+  .list-tab { flex-shrink: 0; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); color: var(--text-muted); font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer; transition: all .2s; }
+  .list-tab.active { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+  .list-add-row { display: flex; gap: 6px; padding: 8px 16px; flex-shrink: 0; }
+  .list-input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 13px; outline: none; }
+  .list-input:focus { border-color: var(--gold); }
+  .list-add-btn { padding: 8px 14px; border-radius: 10px; border: 1px solid rgba(201,169,110,.3); background: var(--gold-soft); color: var(--gold); font-family: 'Outfit', sans-serif; font-size: 13px; cursor: pointer; white-space: nowrap; }
+  .list-body { overflow-y: auto; padding: 8px 16px 32px; flex: 1; }
+  .list-item { display: flex; align-items: center; padding: 10px 4px; border-bottom: 1px solid var(--border); gap: 8px; }
+  .list-item:last-child { border-bottom: none; }
+  .list-pl { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); flex: 1; }
+  .list-tr { font-size: 13px; color: var(--text-muted); flex: 1; text-align: right; }
+  .list-star { font-size: 16px; cursor: pointer; flex-shrink: 0; opacity: 0.4; transition: opacity .2s; }
+  .list-remove { font-size: 14px; cursor: pointer; flex-shrink: 0; opacity: 0.4; transition: opacity .2s; }
+  .list-remove:hover { opacity: 1; }
+  .list-star.active { opacity: 1; }
+  .list-badge { font-size: 9px; padding: 1px 6px; border-radius: 8px; flex-shrink: 0; }
+  .list-empty { text-align: center; color: var(--text-muted); font-size: 13px; padding: 40px 0; }
+
 </style>
 </head>
 <body>
@@ -392,6 +426,7 @@
     <div class="header-row2">
       <button class="back-btn" id="back-btn" onclick="goToSplash()">◀ Başa Dön</button>
       <button class="mode-btn" id="mode-btn">PL → TR</button>
+      <button class="list-btn" id="list-btn" onclick="openList()">☰</button>
       <button class="finish-btn" id="finish-btn">■ Bitir</button>
     </div>
   </div>
@@ -466,6 +501,7 @@
 <div class="mini-tour" id="mini-tour">
   <div class="mini-header">
     <div class="mini-title">📌 Seçili Kelimeler</div>
+    <button class="list-btn" onclick="openList()" style="margin-right:6px">☰</button>
     <button class="mini-close-btn" onclick="closeMiniTour()">✕ Kapat</button>
   </div>
   <div class="progress-wrap">
@@ -497,12 +533,36 @@
   </div>
   <div class="dot-nav" id="mini-dot-nav"></div>
   <div class="mini-actions" id="mini-actions">
+    <button class="btn btn-save" onclick="toggleStar()" id="star-btn"><span class="btn-icon">☆</span>Günlük</button>
     <button class="btn btn-correct" onclick="miniMastered()"><span class="btn-icon">🎓</span>Öğrendim</button>
   </div>
   <div class="mini-done-wrap">
     <button class="btn-restart" onclick="closeMiniTour()">✓ Tamamlandı · Sonuçlara Dön</button>
   </div>
 </div>
+
+<!-- LIST OVERLAY -->
+<div class="list-overlay" id="list-overlay">
+  <div class="list-modal">
+    <div class="list-modal-header">
+      <div class="list-modal-title" id="list-modal-title">☰ Kelime Listesi</div>
+      <button class="mini-close-btn" onclick="closeList()">✕ Kapat</button>
+    </div>
+    <div class="list-tabs">
+      <button class="list-tab active" id="tab-all" onclick="switchListTab('all')">Tüm Liste</button>
+      <button class="list-tab" id="tab-saved" onclick="switchListTab('saved')">📌 Çalışma</button>
+      <button class="list-tab" id="tab-star" onclick="switchListTab('star')">⭐ Günlük</button>
+      <button class="list-tab" id="tab-add" onclick="switchListTab('add')">✏️ Kelime Ekle</button>
+    </div>
+    <div class="list-add-row" id="list-add-row" style="display:none">
+      <input type="text" id="custom-pl" placeholder="Lehçe kelime" class="list-input">
+      <input type="text" id="custom-tr" placeholder="Türkçe karşılık" class="list-input">
+      <button class="list-add-btn" onclick="addCustomWord()">+ Ekle</button>
+    </div>
+    <div class="list-body" id="list-body"></div>
+  </div>
+</div>
+
 
 <script>
 
@@ -616,7 +676,9 @@ function showCard(dir){
   if(!deck || !deck[current]) return;
   const w=deck[current];
   // front face — Türkçe modda cinsiyet rozeti gösterme
-  document.getElementById('polish-word').textContent = reverseMode ? w.tr : w.pl;
+  const pw = reverseMode ? w.tr : w.pl;
+  document.getElementById('polish-word').textContent = pw;
+  adjustFontSize('polish-word', pw);
   document.getElementById('gender-badge-front').innerHTML = reverseMode ? '' : gBadge(w.g);
   document.querySelector('#card-container .card-front .card-label').textContent = reverseMode ? 'türkçe' : 'lehçe';
   document.querySelector('.flip-hint').textContent = reverseMode ? 'kaydır → lehçe gör' : 'kaydır → türkçe gör';
@@ -721,7 +783,9 @@ function updateMiniDots(){
 function showMiniCard(dir){
   const w=miniDeck[miniCurrent];
   // same mode logic as main deck
-  document.getElementById('mini-polish-word').textContent = reverseMode ? w.tr : w.pl;
+  const mpw = reverseMode ? w.tr : w.pl;
+  document.getElementById('mini-polish-word').textContent = mpw;
+  adjustFontSize('mini-polish-word', mpw);
   document.getElementById('mini-gender-badge').innerHTML  = reverseMode ? '' : gBadge(w.g);
   document.querySelector('#mini-card-container .card-front .card-label').textContent = reverseMode ? 'türkçe · seçili set' : 'lehçe · seçili set';
   document.getElementById('mini-back-polish').textContent  = reverseMode ? w.tr : w.pl;
@@ -739,6 +803,7 @@ function showMiniCard(dir){
   document.getElementById('mini-remain').textContent=`${miniDeck.length-miniCurrent-1} kaldı`;
   document.getElementById('mini-progress-fill').style.width=((miniCurrent+1)/miniDeck.length*100)+'%';
   updateMiniDots();
+  updateStarBtn();
 }
 function flipMiniCard(){
   const inn=document.getElementById('mini-card-inner');
@@ -832,6 +897,17 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='Tab'){ e.preventDefault(); if(deck&&deck[current]) markSave(); }
 });
 
+function adjustFontSize(elId, word){
+  const el = document.getElementById(elId);
+  if(!el) return;
+  const len = word.length;
+  if(len <= 10)      el.style.fontSize = '48px';
+  else if(len <= 14) el.style.fontSize = '38px';
+  else if(len <= 18) el.style.fontSize = '30px';
+  else if(len <= 22) el.style.fontSize = '24px';
+  else               el.style.fontSize = '20px';
+}
+
 function toggleMode(){
   reverseMode = !reverseMode;
   localStorage.setItem('polonceKart_dir', reverseMode ? '1' : '0');
@@ -922,6 +998,146 @@ function startApp(set){
   const el = document.getElementById('contact-email');
   if(el) el.textContent = u + '@' + d;
 })();
+// ── STAR SET (Günlük) ──
+const LS_STAR = 'polonceKart_star';
+const LS_CUSTOM = 'polonceKart_custom';
+function loadStar(){ try { return JSON.parse(localStorage.getItem(LS_STAR)||'[]'); } catch(e){ return []; } }
+function saveStar(arr){ try { localStorage.setItem(LS_STAR, JSON.stringify(arr)); } catch(e){} }
+function loadCustom(){ try { return JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]'); } catch(e){ return []; } }
+function saveCustom(arr){ try { localStorage.setItem(LS_CUSTOM, JSON.stringify(arr)); } catch(e){} }
+let starWords = loadStar();
+let customWords = loadCustom(); // [{pl, tr}]
+
+function toggleStar(){
+  if(!miniDeck||!miniDeck[miniCurrent]) return;
+  const pl = miniDeck[miniCurrent].pl.trim();
+  const idx = starWords.indexOf(pl);
+  if(idx===-1){ starWords.push(pl); }
+  else { starWords.splice(idx,1); }
+  saveStar(starWords);
+  updateStarBtn();
+}
+function updateStarBtn(){
+  if(!miniDeck||!miniDeck[miniCurrent]) return;
+  const pl = miniDeck[miniCurrent].pl.trim();
+  const btn = document.getElementById('star-btn');
+  if(!btn) return;
+  const isStarred = starWords.includes(pl);
+  btn.querySelector('.btn-icon').textContent = isStarred ? '⭐' : '☆';
+  btn.style.opacity = isStarred ? '1' : '0.6';
+}
+
+// ── LIST OVERLAY ──
+let currentListTab = 'all';
+function openList(){
+  document.getElementById('list-overlay').classList.add('show');
+  renderList(currentListTab);
+}
+function closeList(){
+  document.getElementById('list-overlay').classList.remove('show');
+}
+function switchListTab(tab){
+  currentListTab = tab;
+  document.querySelectorAll('.list-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.getElementById('list-add-row').style.display = tab==='add' ? 'flex' : 'none';
+  renderList(tab);
+}
+function renderList(tab){
+  const body = document.getElementById('list-body');
+  const title = document.getElementById('list-modal-title');
+  let items = [];
+  starWords = loadStar();
+  customWords = loadCustom();
+  const allPool = wordsB1.concat(wordsGunluk).concat(customWords);
+  const seen = new Set();
+  const pool = allPool.filter(w => { if(seen.has(w.pl)) return false; seen.add(w.pl); return true; });
+
+  if(tab==='all'){
+    title.textContent = '☰ Tüm Liste';
+    items = deck.length ? deck : pool;
+  } else if(tab==='saved'){
+    title.textContent = '📌 Çalışma Seti';
+    const sv = loadSaved();
+    items = pool.filter(w => sv.includes(w.pl.trim()));
+  } else if(tab==='star'){
+    title.textContent = '⭐ Günlük Set';
+    items = pool.filter(w => starWords.includes(w.pl.trim()));
+  } else if(tab==='add'){
+    title.textContent = '✏️ Kelime Ekle';
+    document.getElementById('list-add-row').style.display = 'flex';
+    // Show custom words added so far
+    items = customWords;
+  }
+
+  if(!items.length){
+    body.innerHTML = '<div class="list-empty">Kelime yok</div>';
+    return;
+  }
+
+  const sv2 = loadSaved();
+  body.innerHTML = items.map(w => {
+    const isStarred = starWords.includes(w.pl.trim());
+    const isSaved = sv2.includes(w.pl.trim());
+    const plSafe = w.pl.replace(/'/g,"\\'");
+    let actions = '';
+    if(tab==='star'){
+      actions = `<span class="list-star active" title="Günlükten çıkar" onclick="removeStarFromList('${plSafe}', this)">⭐</span>`;
+    } else if(tab==='saved'){
+      actions = `<span class="list-star ${isStarred?'active':''}" onclick="toggleStarFromList('${plSafe}', this)">${isStarred?'⭐':'☆'}</span>
+        <span class="list-remove" onclick="removeSavedFromList('${plSafe}', this.closest('.list-item'))">🗑</span>`;
+    } else {
+      actions = `<span class="list-star ${isStarred?'active':''}" onclick="toggleStarFromList('${plSafe}', this)">${isStarred?'⭐':'☆'}</span>`;
+    }
+    return `<div class="list-item">
+      <span class="list-pl">${w.pl}</span>
+      <span class="list-tr">${w.tr}</span>
+      ${actions}
+    </div>`;
+  }).join('');
+}
+function toggleStarFromList(pl, el){
+  pl = pl.trim();
+  const idx = starWords.indexOf(pl);
+  if(idx===-1){ starWords.push(pl); el.textContent='⭐'; el.classList.add('active'); }
+  else { starWords.splice(idx,1); el.textContent='☆'; el.classList.remove('active'); }
+  saveStar(starWords);
+}
+function removeStarFromList(pl, el){
+  pl = pl.trim();
+  starWords = starWords.filter(w => w !== pl);
+  saveStar(starWords);
+  el.closest('.list-item').remove();
+}
+function removeSavedFromList(pl, row){
+  pl = pl.trim();
+  savedWords = savedWords.filter(w => w !== pl);
+  saveSaved(savedWords);
+  row.remove();
+}
+
+// ── CUSTOM WORDS ──
+function addCustomWord(){
+  const plEl = document.getElementById('custom-pl');
+  const trEl = document.getElementById('custom-tr');
+  const pl = plEl.value.trim();
+  const tr = trEl.value.trim();
+  if(!pl||!tr) return;
+  customWords = loadCustom();
+  if(customWords.find(w=>w.pl===pl)) { plEl.value=''; trEl.value=''; return; }
+  const newWord = {pl, g:'', ex_pl:'', tr, ex_tr:''};
+  customWords.push(newWord);
+  saveCustom(customWords);
+  // Auto-add to saved set
+  savedWords = loadSaved();
+  if(!savedWords.includes(pl)){ savedWords.push(pl); saveSaved(savedWords); }
+  plEl.value=''; trEl.value='';
+  // Show confirmation
+  const btn = document.querySelector('.list-add-btn');
+  if(btn){ btn.textContent='✓ Eklendi'; setTimeout(()=>btn.textContent='+ Ekle', 1500); }
+  renderList('add');
+}
+
 
 loadWords();
 </script>
