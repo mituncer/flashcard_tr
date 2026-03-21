@@ -503,9 +503,10 @@
 <!-- MINI TOUR -->
 <div class="mini-tour" id="mini-tour">
   <div class="mini-header">
-    <div class="mini-title">📌 Seçili Kelimeler</div>
-    <button class="list-btn" onclick="openList()" style="margin-right:6px">☰</button>
-    <button class="mini-close-btn" onclick="closeMiniTour()">✕ Kapat</button>
+    <button class="back-btn" onclick="closeMiniTour(); goToSplash()">◀ Başa Dön</button>
+    <button class="mode-btn" id="mini-mode-btn" onclick="toggleMode()">PL → TR</button>
+    <button class="list-btn" onclick="openList()">☰</button>
+    <button class="finish-btn" onclick="closeMiniTour()">■ Kapat</button>
   </div>
   <div class="progress-wrap">
     <div class="progress-track"><div class="progress-fill" id="mini-progress-fill" style="width:0%"></div></div>
@@ -637,8 +638,10 @@ function initApp(){
   // Restore saved direction
   reverseMode = localStorage.getItem('polonceKart_dir') === '1';
   if(reverseMode){
-    const mb = document.getElementById('mode-btn');
-    if(mb){ mb.textContent='TR → PL'; mb.classList.add('tr-mode'); }
+    ['mode-btn','mini-mode-btn'].forEach(id => {
+      const mb = document.getElementById(id);
+      if(mb){ mb.textContent='TR → PL'; mb.classList.add('tr-mode'); }
+    });
   }
   updateSplashActive();
   // Do NOT auto-start deck — user picks from splash
@@ -915,10 +918,14 @@ function adjustFontSize(elId, word){
 function toggleMode(){
   reverseMode = !reverseMode;
   localStorage.setItem('polonceKart_dir', reverseMode ? '1' : '0');
-  const btn = document.getElementById('mode-btn');
-  if(reverseMode){ btn.textContent='TR → PL'; btn.classList.add('tr-mode'); }
-  else            { btn.textContent='PL → TR'; btn.classList.remove('tr-mode'); }
-  showCard('right');
+  ['mode-btn','mini-mode-btn'].forEach(id => {
+    const btn = document.getElementById(id);
+    if(!btn) return;
+    if(reverseMode){ btn.textContent='TR → PL'; btn.classList.add('tr-mode'); }
+    else            { btn.textContent='PL → TR'; btn.classList.remove('tr-mode'); }
+  });
+  if(document.getElementById('mini-tour').classList.contains('show')) showMiniCard('right');
+  else showCard('right');
 }
 
 function toggleSplashDir(){
