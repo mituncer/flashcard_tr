@@ -1190,7 +1190,6 @@ function startFromList(){
 }
 function switchListTab(tab){
   currentListTab = tab;
-  if(tab==='star') starWords = loadStar(); // geçiş anında taze oku
   document.querySelectorAll('.list-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
   document.getElementById('list-add-row').style.display = tab==='add' ? 'flex' : 'none';
@@ -1286,19 +1285,9 @@ function renderList(tab){
 function toggleStarFromList(pl, el){
   pl = pl.trim();
   const idx = starWords.indexOf(pl);
-  if(idx===-1){ 
-    starWords.push(pl); 
-    el.textContent='⭐'; 
-    el.classList.add('active'); 
-  } else { 
-    starWords.splice(idx,1); 
-    el.textContent='☆'; 
-    el.classList.remove('active'); 
-  }
+  if(idx===-1){ starWords.push(pl); el.textContent='⭐'; el.classList.add('active'); }
+  else { starWords.splice(idx,1); el.textContent='☆'; el.classList.remove('active'); }
   saveStar(starWords);
-  // Sekme sayısını güncelle
-  const tabStar = document.getElementById('tab-star');
-  if(tabStar) tabStar.textContent = starWords.length > 0 ? '⭐ Günlük (' + starWords.length + ')' : '⭐ Günlük';
 }
 function removeStarFromList(pl, el){
   pl = pl.trim();
