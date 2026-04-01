@@ -641,7 +641,8 @@ let savedWords = loadSaved();
 function getPool(){
   const cw = (typeof customWords !== 'undefined') ? customWords : [];
   const dw = (typeof digerWords !== 'undefined') ? digerWords : [];
-  const all = wordsB1.concat(wordsGunluk).concat(cw).concat(dw);
+  const activeSel = localStorage.getItem('polonceKart_set');
+  const all = wordsB1.concat(wordsGunluk).concat(cw).concat(activeSel==='diger' ? dw : []);
   const seen = new Set();
   return all.filter(w => { if(seen.has(w.pl)) return false; seen.add(w.pl); return true; });
 }
@@ -1161,7 +1162,7 @@ function startFromList(){
   const tab = currentListTab;
   starWords = loadStar();      // taze oku
   savedWords = loadSaved();    // taze oku
-  const allPool = wordsB1.concat(wordsGunluk).concat(customWords).concat(digerWords||[]);
+  const allPool = wordsB1.concat(wordsGunluk).concat(customWords);
   const seen = new Set();
   const pool = allPool.filter(w => { if(seen.has(w.pl)) return false; seen.add(w.pl); return true; });
   let filtered = [];
