@@ -1,0 +1,74 @@
+name: 🔄 Swap Index
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_file:
+        description: 'index.html yerine geçecek dosya adı (örn: elevthnking.html)'
+        required: true
+        type: string
+
+jobs:
+  swap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate target file
+        run: |
+          TARGET="${{ github.event.inputs.target_file }}"
+
+          if [ ! -f "$TARGET" ]; then
+            echo "❌ Hata: '$TARGET' dosyası repoda bulunamadı."
+            exit 1
+          fi
+
+          if [ "$TARGET" = "index.html" ]; then
+            echo "❌ Hata: Hedef dosya zaten index.html."
+            exit 1
+          fi
+
+          echo "✅ Hedef dosya bulundu: $TARGET"
+
+      - name: Find next backup number
+        id: backup
+        run: |
+          MAX=0
+          for f in index_backup_*.html; do
+            [ -f "$f" ] || continue
+            NUM=$(echo "$f" | sed 's/index_backup_\([0-9]*\)\.html/\1/' | sed 's/^0*//')
+            [ -z "$NUM" ] && NUM=0
+            [ "$NUM" -gt "$MAX" ] && MAX=$NUM
+          done
+          NEXT=$(printf "%03d" $((MAX + 1)))
+          echo "backup_name=index_backup_${NEXT}.html" >> $GITHUB_OUTPUT
+          echo "📦 Mevcut index.html → index_backup_${NEXT}.html olacak"
+
+      - name: Rename current index.html to backup
+        run: |
+          if [ -f "index.html" ]; then
+            mv index.html "${{ steps.backup.outputs.backup_name }}"
+            echo "✅ index.html → ${{ steps.backup.outputs.backup_name }}"
+          else
+            echo "⚠️ Mevcut index.html bulunamadı, yeni oluşturulacak."
+          fi
+
+      - name: Rename target file to index.html
+        run: |
+          TARGET="${{ github.event.inputs.target_file }}"
+          cp "$TARGET" index.html
+          rm "$TARGET"
+          echo "✅ $TARGET → index.html"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "🔄 swap: ${{ github.event.inputs.target_file }} → index.html (backup: ${{ steps.backup.outputs.backup_name }})"
+          git push
+          echo "🚀 Değişiklikler push edildi."
