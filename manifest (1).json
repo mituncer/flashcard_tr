@@ -1,0 +1,16 @@
+{
+  "sets": [
+    {
+      "id": "vucudumuz",
+      "title": "Vücudumuz",
+      "file": "vucudumuz.csv",
+      "icon": "🫀"
+    },
+    {
+      "id": "mobilya",
+      "title": "Ev, Ofis ve Mobilya",
+      "file": "mobilya.csv",
+      "icon": "🛋️"
+    }
+  ]
+}
