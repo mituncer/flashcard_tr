@@ -686,9 +686,10 @@ async function loadWords(){
   ]);
   words = wordsB1; // default
   await loadManifest();
-  // En son seçilen diger seti otomatik yükle (hangi set aktif olursa olsun)
+  // En son seçilen diger seti otomatik yükle
+  const lastSet = localStorage.getItem('polonceKart_set');
   const lastDigerTitle = localStorage.getItem('polonceKart_diger_title');
-  if(lastDigerTitle && digerSets.length) {
+  if(lastSet === 'diger' && lastDigerTitle && digerSets.length) {
     const lastDigerSet = digerSets.find(s => s.title === lastDigerTitle);
     if(lastDigerSet) {
       try {
