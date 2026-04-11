@@ -14,7 +14,7 @@
     },
     {
       "id": "czasowniki_dokonane",
-      "title": "Tamamlanmış Fiiller",
+      "title": "Geçmiş zaman",
       "file": "czasowniki-dokonane.csv",
       "icon": "✅"
     }
