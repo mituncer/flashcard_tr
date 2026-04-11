@@ -1,0 +1,28 @@
+{
+  "sets": [
+    {
+      "id": "vucudumuz",
+      "title": "Vücudumuz",
+      "file": "vucudumuz.csv",
+      "icon": "🫀"
+    },
+    {
+      "id": "mobilya",
+      "title": "Ev, Ofis ve Mobilya",
+      "file": "mobilya.csv",
+      "icon": "🛋️"
+    },
+    {
+      "id": "czasowniki_dokonane",
+      "title": "Tamamlanmış Fiiller",
+      "file": "czasowniki-dokonane.csv",
+      "icon": "✅"
+    },
+    {
+      "id": "chodzic",
+      "title": "Chodzić Fiilleri",
+      "file": "chodzic-fiilleri.csv",
+      "icon": "🚶"
+    }
+  ]
+}
