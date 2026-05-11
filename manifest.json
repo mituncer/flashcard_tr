@@ -2,12 +2,6 @@
   "sets": [
 
     {
-      "id": "mobilya",
-      "title": "Ev, Ofis ve Mobilya",
-      "file": "mobilya.csv",
-      "icon": "🛋️"
-    },
-    {
       "id": "czasowniki_dokonane",
       "title": "Tamamlanmış Fiiller",
       "file": "czasowniki-dokonane.csv",
