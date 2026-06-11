@@ -1,29 +1,25 @@
 {
-  "sets": [
-
+  "name": "PolonceKart",
+  "short_name": "PolonceKart",
+  "description": "Polonca–Türkçe kelime kartları",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e0e10",
+  "theme_color": "#0e0e10",
+  "orientation": "portrait",
+  "icons": [
     {
-      "id": "czasowniki_dokonane",
-      "title": "Tamamlanmış Fiiller",
-      "file": "czasowniki-dokonane.csv",
-      "icon": "✅"
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "id": "chodzic",
-      "title": "Chodzić Fiilleri",
-      "file": "chodzic-fiilleri.csv",
-      "icon": "🚶"
-    },
-    {
-      "id": "aile",
-      "title": "İnsanlar ve Aile",
-      "file": "aile.csv",
-      "icon": "👨‍👩‍👧‍👦"
-    },
-    {
-      "id": "b1_secilmis",
-      "title": "B1 2024 Sınav",
-      "file": "B1_2024.csv",
-      "icon": "📚"
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
