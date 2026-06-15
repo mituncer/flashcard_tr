@@ -12,6 +12,12 @@
       "file": "b1_2024.csv",
       "icon": "🛋️"
     },
+        {
+      "id": "b1_2023",
+      "title": "B1 2023",
+      "file": "b1_2023.csv",
+      "icon": "🛋️"
+    },
     {
       "id": "czasowniki_dokonane",
       "title": "Tamamlanmış Fiiller",
