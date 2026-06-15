@@ -1,5 +1,28 @@
 {
   "sets": [
-    { "title": "Günlük Set", "icon": "📅", "file": "gunluk260602.csv" }
+    {
+      "id": "aile",
+      "title": "Aile",
+      "file": "aile.csv",
+      "icon": "🫀"
+    },
+    {
+      "id": "b1_2024",
+      "title": "B1 2024",
+      "file": "b1_2024",
+      "icon": "🛋️"
+    },
+    {
+      "id": "czasowniki_dokonane",
+      "title": "Tamamlanmış Fiiller",
+      "file": "czasowniki-dokonane.csv",
+      "icon": "✅"
+    },
+    {
+      "id": "chodzic",
+      "title": "Chodzić Fiilleri",
+      "file": "chodzic-fiilleri.csv",
+      "icon": "🚶"
+    }
   ]
 }
