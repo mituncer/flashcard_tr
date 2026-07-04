@@ -101,7 +101,14 @@
     }
     .card-face::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 55%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent); }
     .card-face::after  { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.015) 1px, transparent 1px); background-size: 24px 24px; border-radius: 28px; pointer-events: none; }
-    .card-back { position: absolute; top: 0; left: 0; transform: rotateY(180deg); }
+    .card-back { position: absolute; top: 0; left: 0; transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+    .card-front { transform: rotateY(0deg); -webkit-transform: rotateY(0deg); }
+    /* iOS Safari düzeltmesi: backface-visibility alt elemanlarda (z-index'li
+       .hint-btn vb.) güvenilir çalışmaz — ön yüz arkada aynalı görünür.
+       Yüzleri dönüşün ortasında (.55s animasyonun ~yarısı) visibility ile gizle. */
+    .card-front, .card-back { transition: visibility 0s linear .2s; }
+    .card-inner.flipped .card-front { visibility: hidden; }
+    .card-inner:not(.flipped) .card-back { visibility: hidden; }
 
     .card-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 18px; font-family: 'DM Mono', monospace; }
     .polish-word { font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; font-size: 48px; color: var(--text); letter-spacing: -2.5px; line-height: 1.15; margin-bottom: 14px; word-break: break-word; overflow-wrap: break-word; white-space: normal; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; }
