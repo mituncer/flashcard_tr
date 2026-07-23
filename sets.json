@@ -1,34 +1,9 @@
 {
   "sets": [
-    {
-      "id": "aile",
-      "title": "Aile",
-      "file": "aile.csv",
-      "icon": "🫀"
-    },
-    {
-      "id": "b1_2024",
-      "title": "B1 2024",
-      "file": "b1_2024.csv",
-      "icon": "🛋️"
-    },
-        {
-      "id": "b1_2023",
-      "title": "B1 2023",
-      "file": "b1_2023.csv",
-      "icon": "🛋️"
-    },
-    {
-      "id": "czasowniki_dokonane",
-      "title": "Tamamlanmış Fiiller",
-      "file": "czasowniki-dokonane.csv",
-      "icon": "✅"
-    },
-    {
-      "id": "chodzic",
-      "title": "Chodzić Fiilleri",
-      "file": "chodzic-fiilleri.csv",
-      "icon": "🚶"
-    }
+    { "title": "B1 2023", "icon": "📘", "file": "b1_2023.txt" },
+    { "title": "B1 2024", "icon": "📗", "file": "b1_2024.txt" },
+    { "title": "Chodzić Fiilleri", "icon": "🚶", "file": "chodzic-fiilleri.txt" },
+    { "title": "Dokonane Fiiller", "icon": "🏁", "file": "czasowniki-dokonane.txt" }
   ]
 }
+
