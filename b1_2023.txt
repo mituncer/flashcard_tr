@@ -1,0 +1,251 @@
+pl / type / tag / tr / exPl / exTr
+że / bağlaç /  / ki, -dığını / Wiem, że masz rację. / Haklı olduğunu biliyorum.
+prosić / fiil /  / rica etmek, istemek [poproś, prosi, prosimy, proszę] / Proszę cię o pomoc. / Senden yardım istiyorum.
+zadanie / nijaki /  / ödev, görev [zadania, zadaniu] / To zadanie jest bardzo trudne. / Bu ödev çok zor.
+tego / zamir /  / bunun / Nie znam tego człowieka. / Bu adamı tanımıyorum.
+zgodny / sıfat /  / uygun, uyumlu [zgodne, zgodnie] / Ten plan jest zgodny z prawem. / Bu plan yasaya uygun.
+podstawa / zenski /  / temel, esas [podstawie] / Zaufanie to podstawa przyjaźni. / Güven, dostluğun temelidir.
+jak / zarf /  / nasıl, gibi / Jak się dzisiaj czujesz? / Bugün nasıl hissediyorsun?
+rok / meski /  / yıl [lat, lata, latach, rokiem, roku] / W tym roku jadę do Polski. / Bu yıl Polonya'ya gidiyorum.
+wypowiedź / zenski /  / ifade, konuşma [wypowiedzi] / Jego wypowiedź była bardzo jasna. / Onun ifadesi çok açıktı.
+ten / zamir /  / bu, şu [te, temu, tymi, tę] / Ten film jest naprawdę ciekawy. / Bu film gerçekten ilginç.
+tekst / meski /  / metin [tekstem, tekstu] / Muszę przeczytać ten tekst. / Bu metni okumam gerek.
+co / zamir /  / ne [czemu] / Co robisz dzisiaj wieczorem? / Bu akşam ne yapıyorsun?
+liczba / zenski /  / sayı / Liczba studentów wciąż rośnie. / Öğrenci sayısı hâlâ artıyor.
+który / zamir /  / hangi, ki [która, których, którzy] / Który autobus jedzie do centrum? / Hangi otobüs merkeze gidiyor?
+miejsce / nijaki /  / yer [miejsc, miejsca, miejscach, miejscu] / To jest dobre miejsce na spotkanie. / Burası buluşmak için iyi bir yer.
+ze / edat /  / ile, -den / Idę do kina ze znajomymi. / Arkadaşlarımla sinemaya gidiyorum.
+wynikać / fiil /  / sonuçlanmak, ortaya çıkmak [wynika] / Z tego wynika, że masz rację. / Bundan senin haklı olduğun ortaya çıkıyor.
+już / zarf /  / artık, zaten / Jest już bardzo późno. / Artık çok geç oldu.
+zadań / nijaki /  / görevler (çoğul, -ın hâli) / Mam dziś dużo zadań do zrobienia. / Bugün yapacak çok işim var.
+chcieć / fiil /  / istemek [chce, chcemy, chcesz, chciał, chciała, chciałabym, chciałbym, chcą, chcę] / Chcę nauczyć się polskiego. / Lehçe öğrenmek istiyorum.
+nagranie / nijaki /  / kayıt [nagrania] / Posłuchaj tego nagrania jeszcze raz. / Bu kaydı bir kez daha dinle.
+luty / meski /  / Şubat / W lutym często pada śnieg. / Şubat'ta sık sık kar yağar.
+kwiecień / meski /  / Nisan / Kwiecień jest miesiącem wiosny. / Nisan bir ilkbahar ayıdır.
+listopad / meski /  / Kasım / W listopadzie dni są krótkie. / Kasım'da günler kısadır.
+rozumienie / nijaki /  / anlama, kavrama [rozumienia] / Rozumienie ze słuchu jest ważne. / Dinlediğini anlama önemlidir.
+człowiek / meski /  / insan [człowieka, ludzi, ludzie, ludziom, ludźmi] / Każdy człowiek jest inny. / Her insan farklıdır.
+czerwiec / meski /  / Haziran / W czerwcu kończy się rok szkolny. / Haziran'da okul yılı biter.
+dziecko / nijaki /  / çocuk [dzieci, dzieciom, dziecka, dziecku] / To dziecko jest bardzo grzeczne. / Bu çocuk çok uslu.
+które / zamir /  / hangi (nötr/çoğul) / Które zdjęcie ci się podoba? / Hangi fotoğrafı beğendin?
+jako / edat /  / olarak / Pracuję jako nauczyciel. / Öğretmen olarak çalışıyorum.
+więcej / zarf /  / daha fazla / Chcę wiedzieć więcej o Polsce. / Polonya hakkında daha fazla şey bilmek istiyorum.
+niż / bağlaç /  / -den/-dan (karşılaştırmada) / On jest wyższy niż ja. / O benden daha uzun.
+przed / edat /  / önünde, -den önce / Spotkajmy się przed kinem. / Sinemanın önünde buluşalım.
+słowo / nijaki /  / kelime, sözcük [słowa, słów] / To słowo jest trudne do wymówienia. / Bu kelimenin telaffuzu zor.
+jeśli / bağlaç /  / eğer / Jeśli masz czas, zadzwoń do mnie. / Vaktin varsa beni ara.
+oznaczać / fiil /  / anlamına gelmek [oznacza] / Co oznacza to słowo? / Bu kelime ne anlama geliyor?
+wiedzieć / fiil /  / bilmek [wie, wiedział, wiedzą, wiem, wiemy, wiesz] / Nie wiem, gdzie on mieszka. / Onun nerede oturduğunu bilmiyorum.
+obcego / sıfat /  / yabancı (ilgi hâli) / Uczę się obcego języka. / Yabancı bir dil öğreniyorum.
+warto / zarf /  / değer, -meye değer / Warto zobaczyć ten film. / Bu filmi görmeye değer.
+poprawność / zenski /  / doğruluk / Sprawdź poprawność zdania. / Cümlenin doğruluğunu kontrol et.
+zaznaczyć / fiil /  / işaretlemek / Zaznacz poprawną odpowiedź. / Doğru cevabı işaretle.
+inny / sıfat /  / başka, farklı [inne, innych] / Wybierz inny kolor. / Başka bir renk seç.
+żeby / bağlaç /  / -mek/-mak için, diye / Uczę się, żeby zdać egzamin. / Sınavı geçmek için çalışıyorum.
+zdanie / nijaki /  / cümle [zdania] / Napisz jedno zdanie po polsku. / Lehçe bir cümle yaz.
+jeść / fiil /  / yemek yemek [je, jedzą, jemy] / Lubię jeść owoce. / Meyve yemeyi severim.
+musieć / fiil /  / zorunda olmak, -meli [musi, musiałbym, musiały, musieli, musimy, musisz, muszą, muszę] / Muszę iść do pracy. / İşe gitmem gerek.
+wyraz / meski /  / sözcük, kelime [wyrazami] / Podkreśl ten wyraz w tekście. / Metinde bu sözcüğün altını çiz.
+zestaw / meski /  / takım, set, küme / Kup nowy zestaw długopisów. / Yeni bir kalem seti al.
+podróż / zenski /  / seyahat, yolculuk [podróżach, podróżami, podróżom, podróży, podróżą] / Nasza podróż była bardzo długa. / Yolculuğumuz çok uzundu.
+razy / cogul /  / kez, defa / Byłem tam trzy razy. / Oraya üç kez gittim.
+dzięki / edat /  / sayesinde / Dzięki tobie zdałem egzamin. / Senin sayende sınavı geçtim.
+odpowiedź / zenski /  / cevap [odpowiedzi] / Twoja odpowiedź jest poprawna. / Cevabın doğru.
+więc / bağlaç /  / bu yüzden, dolayısıyla / Padało, więc zostałem w domu. / Yağmur yağıyordu, bu yüzden evde kaldım.
+bo / bağlaç /  / çünkü / Nie przyszedłem, bo byłem chory. / Gelmedim çünkü hastaydım.
+znajomości / zenski /  / bilgi, tanışıklık (ilgi hâli) / Uczę się języka dla lepszej znajomości kultury. / Kültürü daha iyi tanımak için dil öğreniyorum.
+wykonywać / fiil /  / yapmak, icra etmek / Muszę wykonywać swoje obowiązki. / Görevlerimi yerine getirmem gerek.
+podany / sıfat /  / verilen, belirtilen [podanym] / Uzupełnij tekst podanymi słowami. / Metni verilen kelimelerle tamamla.
+tej / zamir /  / bu (dişil, tamlayan) / Nie znam tej kobiety. / Bu kadını tanımıyorum.
+państwowa / sıfat /  / devlet (dişil) / To jest szkoła państwowa. / Bu bir devlet okulu.
+komisja / zenski /  / komisyon, kurul / Komisja oceni twój egzamin. / Kurul sınavını değerlendirecek.
+poświadczania / nijaki /  / tasdikleme (ilgi hâli) / To dokument do poświadczania tożsamości. / Bu, kimlik doğrulama belgesidir.
+słuchu / meski /  / işitme (tamlayan) / Ćwiczymy rozumienie ze słuchu. / Dinlediğini anlamayı çalışıyoruz.
+uważnie / zarf /  / dikkatli bir şekilde / Słuchaj uważnie nagrania. / Kaydı dikkatlice dinle.
+zostanie / fiil /  / kalacak, olacak / Nagranie zostanie odtworzone dwa razy. / Kayıt iki kez oynatılacak.
+odtworzone / sıfat /  / oynatılmış, çalınmış / Nagranie będzie odtworzone dwukrotnie. / Kayıt iki kez çalınacak.
+podanych / sıfat /  / verilen (çoğul, ilgi hâli) / Użyj podanych wyrazów. / Verilen sözcükleri kullan.
+nawiasach / meski /  / parantezlerde / Wpisz czasownik w nawiasach. / Parantez içindeki fiili yaz.
+zdającego / sıfat /  / sınava giren (ilgi hâli) / To zadanie dla zdającego egzamin. / Bu, sınava giren kişi için bir görev.
+sam / zamir /  / kendisi, tek başına [sama, sami, samo] / Zrobiłem to sam. / Bunu kendim yaptım.
+przez / edat /  / boyunca, aracılığıyla / Idę przez park do szkoły. / Okula parkın içinden gidiyorum.
+coraz / zarf /  / giderek, gittikçe / Jest coraz zimniej. / Hava gittikçe soğuyor.
+także / zarf /  / ayrıca, de/da / Mówię także po angielsku. / Ayrıca İngilizce de konuşuyorum.
+aby / bağlaç /  / -mek/-mak için / Uczę się, aby zdać egzamin. / Sınavı geçmek için çalışıyorum.
+jej / zamir /  / onun (dişil) / To jest jej samochód. / Bu onun arabası.
+oraz / bağlaç /  / ve, ile / Kupiłem chleb oraz mleko. / Ekmek ve süt aldım.
+razem / zarf /  / birlikte, toplam / Idziemy do kina razem. / Sinemaya birlikte gidiyoruz.
+zrobić / fiil /  / yapmak (tamamlanmış) [zrobił, zrobiła, zrobiłbyś, zrób] / Muszę zrobić zakupy. / Alışveriş yapmam gerek.
+swoje / zamir /  / kendi, kendinin / Zabierz swoje rzeczy. / Kendi eşyalarını al.
+ponieważ / bağlaç /  / çünkü, -dığı için / Zostałem w domu, ponieważ byłem chory. / Evde kaldım çünkü hastaydım.
+często / zarf /  / sık sık / Często chodzę do kina. / Sık sık sinemaya giderim.
+jeszcze / zarf /  / hâlâ, daha / Jeszcze nie skończyłem. / Henüz bitirmedim.
+wybrać / fiil /  / seçmek [wybierze, wybrał] / Musisz wybrać jedną odpowiedź. / Bir cevap seçmelisin.
+niech / edat /  / bırak, -sin (dilek) / Niech on to zrobi. / Bırak bunu o yapsın.
+pisany / sıfat /  / yazılı [pisanych] / To jest tekst pisany ręcznie. / Bu, elle yazılmış bir metin.
+podpisane / sıfat /  / imzalanmış / Dokumenty są już podpisane. / Belgeler artık imzalı.
+zostaną / fiil /  / olacaklar, kalacaklar / Zadania zostaną sprawdzone jutro. / Görevler yarın kontrol edilecek.
+zebrane / sıfat /  / toplanmış / Wszystkie dane są zebrane. / Tüm veriler toplandı.
+właściwy / sıfat /  / uygun, doğru [właściwe, właściwą] / Wybierz właściwy wyraz. / Doğru sözcüğü seç.
+trzeba / zarf /  / gerekli, lazım, -meli / Trzeba się uczyć codziennie. / Her gün çalışmak gerekir.
+rodzice / cogul /  / anne baba, ebeveynler [rodziców] / Moi rodzice mieszkają w Warszawie. / Ailem Varşova'da yaşıyor.
+ponad / edat /  / üzerinde, -den fazla / Czekam już ponad godzinę. / Bir saatten fazladır bekliyorum.
+swoich / zamir /  / kendi (çoğul, ilgi hâli) / Kocham swoich rodziców. / Aileme çok değer veririm.
+podkreślić / fiil /  / altını çizmek / Podkreślić należy najważniejsze słowa. / En önemli kelimelerin altı çizilmelidir.
+kilka / sayı /  / birkaç / Mam kilka pytań. / Birkaç sorum var.
+przykładami / meski /  / örneklerle / Wyjaśnij to przykładami. / Bunu örneklerle açıkla.
+poprawny / sıfat /  / doğru, düzgün [poprawne, poprawną] / To jest poprawny wynik. / Bu doğru sonuç.
+wyrazów / meski /  / sözcüklerin (çoğul, ilgi) / Użyj podanych wyrazów. / Verilen sözcükleri kullan.
+rodzina / zenski /  / aile [rodzinie, rodziny, rodziną, rodzinę] / Moja rodzina jest duża. / Ailem büyük.
+pracować / fiil /  / çalışmak [pracowali, pracował, pracuje, pracują, pracuję] / Muszę pracować w weekend. / Hafta sonu çalışmam gerek.
+częścią / zenski /  / bölüm, parça (araç hâli) / Sport jest częścią mojego życia. / Spor hayatımın bir parçası.
+należy / fiil /  / gerekir, aittir / Należy uważnie czytać pytania. / Soruları dikkatlice okumak gerekir.
+jednak / bağlaç /  / ancak, yine de / Było zimno, jednak wyszedłem. / Hava soğuktu ama yine de çıktım.
+podczas / edat /  / sırasında, esnasında / Podczas lekcji nie rozmawiamy. / Ders sırasında konuşmayız.
+różny / sıfat /  / farklı, çeşitli [różne, różnych] / Mamy różne pomysły. / Farklı fikirlerimiz var.
+jego / zamir /  / onun (erkek) / To jest jego dom. / Bu onun evi.
+którym / zamir /  / hangi (araç/yer hâli) / To miasto, w którym mieszkam. / Bu, yaşadığım şehir.
+również / zarf /  / ayrıca, de/da / Ona również lubi muzykę. / O da müziği sever.
+pierwszy / sıfat /  / birinci, ilk [pierwsza, pierwsze] / To jest mój pierwszy dzień. / Bu benim ilk günüm.
+każdy / zamir /  / her, her bir [każda, każde, każdego] / Każdy uczeń ma książkę. / Her öğrencinin bir kitabı var.
+mniej / zarf /  / daha az / Teraz pracuję mniej. / Şimdi daha az çalışıyorum.
+wszystkie / zamir /  / hepsi, tümü / Zrobiłem wszystkie zadania. / Bütün ödevleri yaptım.
+cały / sıfat /  / bütün, tüm [cała, całe, całego, całą] / Spałem cały dzień. / Bütün gün uyudum.
+swoją / zamir /  / kendi (dişil, belirtme) / Kocham swoją pracę. / İşimi seviyorum.
+myśleć / fiil /  / düşünmek [myśli, myślimy, myślisz, myślę] / Myślę, że masz rację. / Bence haklısın.
+jaki / zamir /  / hangi, ne tür [jakich, jakie] / Jaki masz plan? / Ne planın var?
+mieszkać / fiil /  / oturmak, yaşamak [mieszka, mieszkają, mieszkał, mieszkałam, mieszkałem] / Mieszkam w Stambule. / İstanbul'da yaşıyorum.
+ważny / sıfat /  / önemli [ważne] / To jest ważny egzamin. / Bu önemli bir sınav.
+wysłuchać / fiil /  / dinlemek (tamamen) / Wysłuchaj nagrania dwa razy. / Kaydı iki kez dinle.
+przeczytać / fiil /  / okumak [przeczytaj] / Przeczytaj tekst i odpowiedz. / Metni oku ve cevapla.
+nas / zamir /  / bizi, bizim / Odwiedź nas w niedzielę. / Pazar günü bizi ziyaret et.
+nad / edat /  / üzerinde, üstünde / Lampa wisi nad stołem. / Lamba masanın üstünde asılı.
+znaleźć / fiil /  / bulmak [znalazł] / Muszę znaleźć klucze. / Anahtarları bulmam gerek.
+wiele / zamir /  / çok, birçok / Mam wiele pracy. / Çok işim var.
+pisanie / nijaki /  / yazma / Pisanie po polsku jest trudne. / Lehçe yazmak zordur.
+nastąpi / fiil /  / gerçekleşecek / Przerwa nastąpi po pierwszej części. / İlk bölümden sonra ara olacak.
+przerwa / zenski /  / mola, ara / Mamy krótką przerwę na kawę. / Kahve için kısa bir aramız var.
+dalszą / sıfat /  / devam eden (belirtme) / Przejdź do dalszej części zadania. / Görevin devam eden kısmına geç.
+oceniającego / sıfat /  / değerlendiren (ilgi hâli) / To jest opinia oceniającego nauczyciela. / Bu, değerlendiren öğretmenin görüşü.
+czytelny / sıfat /  / okunaklı / Twój tekst musi być czytelny. / Metnin okunaklı olmalı.
+upływie / meski /  / geçişinde, dolmasında / Po upływie czasu oddaj pracę. / Süre dolduğunda ödevi teslim et.
+rozmawiać / fiil /  / konuşmak, sohbet etmek [rozmawia, rozmawialiśmy, rozmawiam, rozmawiamy] / Lubię rozmawiać z przyjaciółmi. / Arkadaşlarımla sohbet etmeyi severim.
+znajdować / fiil /  / bulmak, yer almak [znajdowały, znajduje, znajdują] / Trudno znajdować czas na sport. / Spora vakit bulmak zor.
+planować / fiil /  / planlamak [planowali, planuje, planujemy, planujesz, planują, planuję] / Planujemy wakacje w Polsce. / Polonya'da tatil planlıyoruz.
+uzupełnić / fiil /  / tamamlamak / Uzupełnij zdania czasownikami. / Cümleleri fiillerle tamamla.
+objętość / zenski /  / hacim, boyut / Tekst ma odpowiednią objętość. / Metnin uzunluğu uygun.
+udział / meski /  / katılım, pay / Wziąłem udział w konkursie. / Yarışmaya katıldım.
+pomagać / fiil /  / yardım etmek [pomaga, pomagają, pomagasz] / Lubię pomagać innym. / Başkalarına yardım etmeyi severim.
+uważać / fiil /  / dikkat etmek, saymak [uważa, uważają, uważam, uważamy, uważał] / Musisz uważać na ulicy. / Sokakta dikkatli olmalısın.
+znać / fiil /  / tanımak, bilmek [zna, znają, znamy, znasz, znał] / Znam ją od dziecka. / Onu çocukluğumdan beri tanırım.
+prawie / zarf /  / neredeyse / Jest prawie gotowe. / Neredeyse hazır.
+wtedy / zarf /  / o zaman / Wtedy nie miałem czasu. / O zaman vaktim yoktu.
+której / zamir /  / hangi (dişil, ilgi) / To jest książka, której szukam. / Bu, aradığım kitap.
+sposób / meski /  / yol, yöntem, biçim / Znam dobry sposób na naukę słówek. / Kelime öğrenmek için iyi bir yöntem biliyorum.
+zaczynać / fiil /  / başlamak (süreğen) [zaczyna, zaczynają] / Zaczynam pracę o ósmej. / İşe sekizde başlıyorum.
+lepiej / zarf /  / daha iyi / Teraz czuję się lepiej. / Şimdi daha iyi hissediyorum.
+polaków / meski /  / Polonyalılar (çoğul, ilgi hâli) / Wielu Polaków mówi po angielsku. / Birçok Polonyalı İngilizce konuşur.
+obecnie / zarf /  / şu anda, halihazırda / Obecnie mieszkam w Polsce. / Şu anda Polonya'da yaşıyorum.
+między / edat /  / arasında / Usiądź między nami. / Aramıza otur.
+rzeczy / cogul /  / şeyler, eşyalar / Spakuj swoje rzeczy. / Eşyalarını topla.
+nawet / zarf /  / bile, hatta / Nawet dzieci to rozumieją. / Bunu çocuklar bile anlıyor.
+wielu / zamir /  / birçok, pek çok / Znam wielu ludzi w Warszawie. / Varşova'da birçok insan tanıyorum.
+zwykle / zarf /  / genellikle / Zwykle wstaję o siódmej. / Genellikle yedide kalkarım.
+wczoraj / zarf /  / dün / Wczoraj byłem w kinie. / Dün sinemadaydım.
+najbardziej / zarf /  / en çok / To lubię najbardziej. / Bunu en çok severim.
+dowiadujemy / fiil /  / öğreniyoruz, haberdar oluyoruz / Z tekstu dowiadujemy się wielu rzeczy. / Metinden birçok şey öğreniyoruz.
+decydować / fiil /  / karar vermek [decyduje, decydujesz, decydują] / Trudno decydować szybko. / Hızlı karar vermek zor.
+coś / zamir /  / bir şey / Chcę ci coś powiedzieć. / Sana bir şey söylemek istiyorum.
+potrzebować / fiil /  / ihtiyaç duymak [potrzebuje, potrzebujemy, potrzebujesz, potrzebują] / Potrzebuję twojej pomocy. / Yardımına ihtiyacım var.
+prowadzić / fiil /  / yürütmek, sürmek [prowadzi] / Umiem prowadzić samochód. / Araba kullanmayı biliyorum.
+zdecydować / fiil /  / karar vermek (tek sefer) [zdecydował, zdecyduje] / Muszę zdecydować dzisiaj. / Bugün karar vermeliyim.
+pamiętać / fiil /  / hatırlamak [pamięta, pamiętamy, pamiętasz] / Pamiętam ten dzień. / O günü hatırlıyorum.
+czego / zamir /  / neyin / Czego potrzebujesz? / Neye ihtiyacın var?
+najlepszy / sıfat /  / en iyi [najlepsza, najlepsze] / To jest najlepszy dzień. / Bu en güzel gün.
+dostać / fiil /  / almak, elde etmek [dostał, dostała, dostałem] / Chcę dostać dobrą ocenę. / İyi bir not almak istiyorum.
+przyszła / fiil /  / geldi (kadın), gelecek (dişil) [przyszły] / Ona przyszła późno. / O (kadın) geç geldi.
+okazji / zenski /  / fırsat, vesile (ilgi hâli) / Z okazji urodzin kupiłem prezent. / Doğum günü vesilesiyle bir hediye aldım.
+swojej / zamir /  / kendi (dişil, tamlayan) / Szukam swojej książki. / Kendi kitabımı arıyorum.
+wykonać / fiil /  / yapmak, icra etmek / Musisz wykonać to zadanie sam. / Bu görevi kendin yapmalısın.
+obydwa / sayı /  / her ikisi / Obydwa filmy są dobre. / Her iki film de güzel.
+życie / nijaki /  / hayat, yaşam / Życie w mieście jest szybkie. / Şehirdeki hayat hızlı.
+niestety / zarf /  / maalesef, ne yazık ki / Niestety nie mogę przyjść. / Maalesef gelemem.
+naukowcy / cogul /  / bilim insanları / Naukowcy badają ten problem. / Bilim insanları bu sorunu araştırıyor.
+oferować / fiil /  / teklif etmek, sunmak [oferowały, oferuje, oferują] / Ta szkoła oferuje wiele kursów. / Bu okul birçok kurs sunuyor.
+widzieć / fiil /  / görmek [widzi, widział, widzą] / Nie widzę tablicy. / Tahtayı göremiyorum.
+trochę / zarf /  / biraz / Mówię trochę po polsku. / Biraz Lehçe konuşuyorum.
+wieku / meski /  / yaş (ilgi hâli) / Dzieci w wieku szkolnym uczą się dużo. / Okul çağındaki çocuklar çok öğrenir.
+dopasować / fiil /  / uydurmak, eşleştirmek / Dopasuj wyrazy do obrazków. / Kelimeleri resimlerle eşleştir.
+bardziej / zarf /  / daha (karşılaştırma) / Ten film jest bardziej ciekawy. / Bu film daha ilginç.
+brakować / fiil /  / eksik olmak, yetmemek [brakuje] / Brakuje mi czasu. / Zamanım yetmiyor.
+swoim / zamir /  / kendi (araç hâli) / Jadę swoim samochodem. / Kendi arabamla gidiyorum.
+każdym / zamir /  / her (araç/yer hâli) / W każdym pokoju jest okno. / Her odada bir pencere var.
+dlatego / bağlaç /  / bu yüzden / Byłem chory, dlatego nie przyszedłem. / Hastaydım, bu yüzden gelmedim.
+formy / zenski /  / formlar, biçimler / Uzupełnij poprawne formy czasowników. / Fiillerin doğru biçimlerini tamamla.
+przymiotników / meski /  / sıfatların (çoğul, ilgi) / Znam wiele przymiotników po polsku. / Lehçe birçok sıfat biliyorum.
+życia / nijaki /  / hayat (ilgi hâli) / To najlepszy dzień mojego życia. / Bu hayatımın en güzel günü.
+ramki / zenski /  / çerçeveler, kutucuklar / Wpisz odpowiedź w ramki. / Cevabı kutucuklara yaz.
+ramce / zenski /  / çerçevede, kutucukta / Napisz słowo w ramce. / Kelimeyi çerçeveye yaz.
+niepotrzebny / sıfat /  / gereksiz / Ten wyraz jest niepotrzebny. / Bu kelime gereksiz.
+kraj / meski /  / ülke [kraje, kraju, krajów] / Polska to piękny kraj. / Polonya güzel bir ülke.
+częściej / zarf /  / daha sık / Teraz częściej czytam książki. / Şimdi daha sık kitap okuyorum.
+stać / fiil /  / durmak, ayakta durmak [staliśmy, stoi, stoją] / Muszę stać w kolejce. / Sırada beklemem gerek.
+powiedzieć / fiil /  / söylemek (tek sefer) [powiedz] / Chcę ci coś powiedzieć. / Sana bir şey söylemek istiyorum.
+ocena / zenski /  / not, değerlendirme [oceny] / Moja ocena z egzaminu jest dobra. / Sınav notum iyi.
+wykonanie / nijaki /  / yapma, icra / Wykonanie zadania zajęło godzinę. / Görevin yapılması bir saat sürdü.
+treść / zenski /  / içerik / Przeczytaj treść zadania. / Görevin içeriğini oku.
+środki / cogul /  / araçlar, yöntemler / Musimy znaleźć nowe środki. / Yeni yöntemler bulmalıyız.
+brudnopis / meski /  / müsvedde, karalama / Najpierw pisz w brudnopisie. / Önce müsveddeye yaz.
+zbędny / sıfat /  / gereksiz, fazla / Usuń zbędny wyraz. / Gereksiz kelimeyi çıkar.
+pozwalać / fiil /  / izin vermek [pozwala, pozwalają, pozwalali, pozwalała] / Rodzice pozwalają mi wychodzić. / Ailem dışarı çıkmama izin veriyor.
+swój / zamir /  / kendi / Zabierz swój parasol. / Şemsiyeni al.
+wystawa / zenski /  / sergi [wystawy, wystawę] / Idziemy na wystawę sztuki. / Sanat sergisine gidiyoruz.
+mąż / meski /  / koca / Mój mąż pracuje w banku. / Kocam bankada çalışıyor.
+wyjść / fiil /  / çıkmak, dışarı çıkmak [wyszedł] / Muszę wyjść z domu wcześnie. / Evden erken çıkmam gerek.
+kilku / sayı /  / birkaç (ilgi hâli) / Znam kilku studentów. / Birkaç öğrenci tanıyorum.
+właśnie / zarf /  / tam olarak, işte / Właśnie skończyłem pracę. / İşimi tam şimdi bitirdim.
+wybierać / fiil /  / seçmek [wybiera, wybierają, wybieramy] / Lubię wybierać prezenty. / Hediye seçmeyi severim.
+siebie / zamir /  / kendini, kendine / Dbaj o siebie. / Kendine iyi bak.
+jedzenie / nijaki /  / yemek / Polskie jedzenie jest smaczne. / Lehçe yemekleri lezzetli.
+we / edat /  / -da/-de (ünlü önünde) / Mieszkam we Wrocławiu. / Wrocław'da yaşıyorum.
+restauracja / zenski /  / restoran [restauracji] / Ta restauracja jest bardzo dobra. / Bu restoran çok iyi.
+zainteresować / fiil /  / ilgilendirmek [zainteresowali, zainteresowała, zainteresowałem, zainteresuje, zainteresują] / Ten temat może cię zainteresować. / Bu konu ilgini çekebilir.
+według / edat /  / -e göre / Według mnie masz rację. / Bence haklısın.
+posiłki / cogul /  / öğünler, yemekler / Jem trzy posiłki dziennie. / Günde üç öğün yerim.
+czuć / fiil /  / hissetmek [czują] / Czuję się dobrze. / İyi hissediyorum.
+nadal / zarf /  / hâlâ, halen / Nadal mieszkam w tym mieście. / Hâlâ bu şehirde yaşıyorum.
+następnie / zarf /  / ardından, sonra / Najpierw jem, następnie idę spać. / Önce yerim, sonra uyurum.
+pierścionek / meski /  / yüzük / Kupił jej piękny pierścionek. / Ona güzel bir yüzük aldı.
+około / edat /  / yaklaşık, civarında / Przyjdę około ósmej. / Sekiz civarında gelirim.
+swojego / zamir /  / kendi (eril, ilgi hâli) / Szukam swojego telefonu. / Kendi telefonumu arıyorum.
+spędzają / fiil /  / geçiriyorlar (zaman) / Oni spędzają wakacje nad morzem. / Onlar tatili deniz kenarında geçiriyor.
+najlepszą / sıfat /  / en iyi (dişil, belirtme) / Wybrałem najlepszą opcję. / En iyi seçeneği seçtim.
+listę / zenski /  / liste (belirtme hâli) / Zrobiłem listę zakupów. / Alışveriş listesi yaptım.
+wśród / edat /  / arasında / Jestem wśród przyjaciół. / Arkadaşlarımın arasındayım.
+badania / nijaki /  / araştırmalar / Naukowcy prowadzą badania. / Bilim insanları araştırma yapıyor.
+ciągu / meski /  / süresince, içinde / W ciągu dnia piję dużo wody. / Gün içinde çok su içerim.
+część / zenski /  / parça, kısım / Pierwsza część filmu jest nudna. / Filmin ilk kısmı sıkıcı.
+ciągle / zarf /  / sürekli / On ciągle mówi o pracy. / O sürekli işten bahsediyor.
+przyszłości / zenski /  / gelecek (ilgi hâli) / W przyszłości chcę być lekarzem. / Gelecekte doktor olmak istiyorum.
+pewno / zarf /  / kesinlikle, muhakkak / Na pewno przyjdę. / Kesinlikle geleceğim.
+zmiany / zenski /  / değişiklikler / Wprowadziliśmy ważne zmiany. / Önemli değişiklikler yaptık.
+wiosna / zenski /  / ilkbahar [wiosny, wiosną, wiosnę] / Wiosna to moja ulubiona pora roku. / İlkbahar en sevdiğim mevsim.
+wszystkich / zamir /  / tüm (çoğul, ilgi hâli) / Znam wszystkich sąsiadów. / Bütün komşuları tanıyorum.
+zdrowie / nijaki /  / sağlık [zdrowia] / Zdrowie jest najważniejsze. / Sağlık en önemli şey.
+dania / nijaki /  / yemekler / Polskie dania są smaczne. / Lehçe yemekleri lezzetli.
+wolontariat / meski /  / gönüllülük / Zajmuję się wolontariatem. / Gönüllülükle uğraşıyorum.
+powinien / fiil /  / yapmalı, -meli / Powinien więcej odpoczywać. / Daha çok dinlenmeli.
+życiu / nijaki /  / hayatta / W życiu trzeba mieć cel. / Hayatta bir amaç olmalı.
+górach / zenski /  / dağlarda / Latem odpoczywamy w górach. / Yazın dağlarda dinleniriz.
+mięso / nijaki /  / et [mięsa] / Nie jem mięsa. / Et yemem.
+kto / zamir /  / kim / Kto to zrobił? / Bunu kim yaptı?
+znajomy / meski /  / tanıdık [znajomego, znajomych] / Mój znajomy mieszka w Krakowie. / Bir tanıdığım Krakov'da yaşıyor.
+jedzenia / nijaki /  / yemek (ilgi hâli) / Nie mam czasu na przygotowanie jedzenia. / Yemek hazırlamaya vaktim yok.
+dorośli / cogul /  / yetişkinler / Dorośli też się uczą. / Yetişkinler de öğrenir.
+kiedyś / zarf /  / bir zamanlar, eskiden / Kiedyś mieszkałem w Polsce. / Eskiden Polonya'da yaşıyordum.
+oddać / fiil /  / vermek, iade etmek [oddają, oddał] / Muszę oddać książkę do biblioteki. / Kitabı kütüphaneye iade etmem gerek.
+powinny / fiil /  / yapmalı (dişil/çoğul) / Dzieci powinny dużo spać. / Çocuklar çok uyumalı.
+pod / edat /  / altında / Kot śpi pod stołem. / Kedi masanın altında uyuyor.
+kultura / zenski /  / kültür [kultury] / Polska kultura jest bogata. / Lehçe kültürü zengindir.
+zacząć / fiil /  / başlamak [zaczął] / Chcę zacząć nowe życie. / Yeni bir hayata başlamak istiyorum.
+lecz / bağlaç /  / ama, fakat / Chciałem przyjść, lecz nie mogłem. / Gelmek istedim ama yapamadım.

@@ -1,0 +1,23 @@
+pl / type / tag / tr / exPl / exTr
+wchodzić / fiil /  / girmek (şimdiki z.) / Codziennie wchodzę do biura o ósmej. / Her gün saat sekizde ofise giriyorum.
+wejść / fiil /  / girmek (geçmiş z.) / Wszedłem do pokoju i zamknąłem drzwi. / Odaya girdim ve kapıyı kapattım.
+wychodzić / fiil /  / çıkmak (şimdiki z.) / Wychodzę z domu o siódmej rano. / Sabah yedide evden çıkıyorum.
+wyjść / fiil /  / çıkmak (geçmiş z.) / Wyszłam ze sklepu bez zakupów. / Alışveriş yapmadan mağazadan çıktım.
+schodzić / fiil /  / inmek (şimdiki z.) / Schodzę po schodach bardzo wolno. / Merdivenlerden çok yavaş iniyorum.
+zejść / fiil /  / inmek (geçmiş z.) / Zeszłam na dół i otworzyłam drzwi. / Aşağıya indim ve kapıyı açtım.
+podchodzić / fiil /  / yaklaşmak (şimdiki z.) / Podchodzę do okna i patrzę na ulicę. / Pencereye yaklaşıyor ve sokağa bakıyorum.
+podejść / fiil /  / yaklaşmak (geçmiş z.) / Podszedłem do niej i się przedstawiłem. / Ona yaklaştım ve kendimi tanıttım.
+przychodzić / fiil /  / gelmek (şimdiki z.) / Ona zawsze przychodzi punktualnie. / O her zaman dakik gelir.
+przyjść / fiil /  / gelmek (geçmiş z.) / Przyszedł za późno na spotkanie. / Toplantıya çok geç geldi.
+przechodzić / fiil /  / geçmek (şimdiki z.) / Codziennie przechodzę przez ten park. / Her gün bu parktan geçiyorum.
+przejść / fiil /  / geçmek (geçmiş z.) / Przeszłam przez ulicę na czerwonym świetle. / Kırmızı ışıkta karşıya geçtim.
+odchodzić / fiil /  / ayrılmak (şimdiki z.) / Odchodzę z tej pracy po dziesięciu latach. / On yılın ardından bu işten ayrılıyorum.
+odejść / fiil /  / ayrılmak (geçmiş z.) / Odszedł bez słowa. / Tek kelime etmeden ayrıldı.
+obchodzić / fiil /  / etrafından dolaşmak (şimdiki z.) / Obchodzę kałużę, żeby nie zamoczyć butów. / Ayakkabılarımı ıslatmamak için su birikintisinin etrafından dolaşıyorum.
+obejść / fiil /  / etrafından dolaşmak (geçmiş z.) / Obeszłam cały budynek szukając wejścia. / Girişi ararken binanın etrafını dolaştım.
+rozchodzić się / fiil /  / dağılmak (şimdiki z.) / Goście rozchodzą się po imprezie. / Misafirler partiden sonra dağılıyor.
+rozejść się / fiil /  / dağılmak (geçmiş z.) / Po spotkaniu wszyscy rozeszli się do domów. / Toplantıdan sonra herkes evlerine dağıldı.
+nadchodzić / fiil /  / yaklaşmak/gelmek (şimdiki z.) / Nadchodzi burza, lepiej wróćmy do domu. / Fırtına geliyor, eve dönelim.
+nadejść / fiil /  / yaklaşmak/gelmek (geçmiş z.) / Nadeszła pora pożegnania. / Veda zamanı geldi.
+dochodzić / fiil /  / ulaşmak (şimdiki z.) / Dochodzę do wniosku, że miałeś rację. / Haklı olduğun sonucuna varıyorum.
+dojść / fiil /  / ulaşmak (geçmiş z.) / Doszliśmy do celu po trzech godzinach. / Üç saat sonra hedefe ulaştık.

@@ -1,0 +1,41 @@
+pl / type / tag / tr / exPl / exTr
+napisać / fiil /  / yazmak (geçmiş z.) / Napisałem list do przyjaciela. / Arkadaşıma mektup yazdım.
+namalować / fiil /  / boyamak (geçmiş z.) / Namalowałam piękny obraz. / Güzel bir tablo boyadım.
+narysować / fiil /  / çizmek (geçmiş z.) / Narysowałem mapę miasta. / Şehrin haritasını çizdim.
+przeczytać / fiil /  / okumak (geçmiş z.) / Przeczytałam tę książkę w tydzień. / Bu kitabı bir haftada okudum.
+poznać / fiil /  / tanımak-tanışmak (geçmiş z.) / Poznałem go na konferencji. / Onu konferansta tanıdım.
+zgryźć / fiil /  / çiğnemek (geçmiş z.) / Zgryzłem twardy orzech. / Sert cevizi çiğnedim.
+pomyśleć / fiil /  / düşünmek (geçmiş z.) / Pomyślałam chwilę i zdecydowałam. / Bir an düşündüm ve karar verdim.
+domyślić się / fiil /  / tahmin etmek / Domyśliłem się od razu. / Hemen tahmin ettim.
+ściągnąć / fiil /  / indirmek (geçmiş z.) / Ściągnąłem plik z internetu. / Dosyayı internetten indirdim.
+spaść / fiil /  / düşmek (geçmiş z.) / Kot spadł z drzewa. / Kedi ağaçtan düştü.
+skoczyć / fiil /  / atlamak (geçmiş z.) / Skoczył przez płot. / Çitin üzerinden atladı.
+dojechać / fiil /  / varmak (araçla) / Dojechałem do Warszawy o ósmej. / Saat sekizde Varşova'ya vardım.
+zjeść / fiil /  / yemek (geçmiş z.) / Zjadłam cały obiad. / Öğle yemeğinin hepsini yedim.
+uszyć / fiil /  / dikmek (geçmiş z.) / Uszyłam sukienkę na wesele. / Düğün için elbise diktim.
+ułożyć / fiil /  / düzenlemek (geçmiş z.) / Ułożyłem książki na półce. / Kitapları rafa dizdim.
+sprzątnąć / fiil /  / temizlemek (geçmiş z.) / Sprzątnęłam cały dom. / Evin tamamını temizledim.
+odrobić / fiil /  / ödevini yapmak / Odrobiłem lekcje przed kolacją. / Akşam yemeğinden önce ödevimi yaptım.
+nauczyć się / fiil /  / öğrenmek (geçmiş z.) / Nauczyłem się nowych słów. / Yeni kelimeler öğrendim.
+przyjść / fiil /  / gelmek (varmak) / Przyszła punktualnie na spotkanie. / Toplantıya zamanında geldi.
+zarobić / fiil /  / kazanmak (geçmiş z.) / Zarobiłem dużo w tym miesiącu. / Bu ay çok kazandım.
+pomieszkać / fiil /  / bir süre kalmak / Pomieszkałem tam przez rok. / Orada bir yıl kaldım.
+wrócić / fiil /  / dönmek (geçmiş z.) / Wróciłam do domu późno. / Eve geç döndüm.
+popatrzeć / fiil /  / bakmak (bir süre) / Popatrzyłem przez okno. / Pencereden baktım.
+wziąć / fiil /  / almak, (geçmiş z.) / Wzięłam parasolkę przed wyjściem. / Çıkmadan önce şemsiyeyi aldım.
+klęknąć / fiil /  / diz çökmek, (geçmiş z.) / Klęknął przed ołtarzem. / Sunağın önünde diz çöktü.
+wyjąć / fiil /  / çıkarmak, (geçmiş z.) / Wyjąłem klucze z kieszeni. / Anahtarları cebimden çıkardım.
+zamówić / fiil /  / sipariş vermek / Zamówiłam pizzę na wieczór. / Akşam için pizza sipariş verdim.
+pozmywać / fiil /  / bulaşık yıkamak (geçmiş z.) / Pozmywałem wszystkie naczynia. / Bütün bulaşıkları yıkadım.
+wypić / fiil /  / içip bitirmek / Wypiłam kawę przed pracą. / İşten önce kahvemi içtim.
+pojechać / fiil /  / gitmek (araçla, geçmiş z.) / Pojechałem do Krakowa na weekend. / Hafta sonu Krakov'a gittim.
+zadzwonić / fiil /  / aramak (telefon, geçmiş z.) / Zadzwoniłam do mamy wieczorem. / Akşam annemi aradım.
+umyć / fiil /  / yıkamak (geçmiş z.) / Umyłem ręce przed jedzeniem. / Yemekten önce ellerimi yıkadım.
+kupić / fiil /  / satın almak (geçmiş z.) / Kupiłam nowe buty w sobotę. / Cumartesi yeni ayakkabı aldım.
+odkurzyć / fiil /  / elektrik süpürgesiyle temizlemek / Odkurzyłem salon i sypialniać. / Oturma odasını ve yatak odasını süpürdüm.
+otworzyć / fiil /  / açmak (geçmiş z.) / Otworzyłam okno, bo było gorąco. / Sıcak olduğu için pencereyi açtım.
+dać / fiil /  / vermek (geçmiş z.) / Dałem jej książkę na urodziny. / Doğum günü için ona kitap verdim.
+spotkać się / fiil /  / buluşmak (geçmiş z.) / Spotkaliśmy się w kawiarni. / Kafede buluştuk.
+obejrzeć / fiil /  / izleyip bitirmek / Obejrzałem ten film dwa razy. / Bu filmi iki kez izledim.
+powiedzieć / fiil /  / söylemek (geçmiş z.) / Powiedziałam mu prawdę. / Ona gerçeği söyledim.
+zobaczyć / fiil /  / görmek (geçmiş z.) / Zobaczyłem ją na ulicy. / Onu sokakta gördüm.

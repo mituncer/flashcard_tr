@@ -1,0 +1,435 @@
+pl / type / tag / tr / exPl / exTr
+spódnica / meski /  / etek / Kupiłam nową spódnicę na lato. / Yaz için yeni bir etek aldım.
+pojemnik / meski /  / konteyner, kap / Wyrzuć butelki do pojemnika na plastik. / Şişeleri plastik kutusuna at.
+kontener / meski /  / konteyner / Na każdej ulicy stoi kontener na makulaturę. / Her sokakta kağıt için bir konteyner var.
+sortownia / meski /  / ayırma tesisi / Odpady trafiają do sortowni. / Atıklar ayırma tesisine gidiyor.
+szafa / meski /  / dolap / W szafie nie ma już miejsca na ubrania. / Dolabın artık kıyafet için yeri kalmadı.
+kosz / meski /  / çöp kutusu / Wrzuć śmieci do kosza. / Çöpü çöp kutusuna at.
+odpady / meski /  / atık / Segregujemy odpady w naszym domu. / Evimizde atıkları ayırıyoruz.
+schronisko / meski /  / barınak / Adoptowałam psa ze schroniska. / Barınaktan bir köpek sahiplendim.
+zwierzę / meski /  / hayvan / Zwierzęta potrzebują opieki i miłości. / Hayvanlar ilgi ve sevgiye ihtiyaç duyar.
+akcja / meski /  / kampanya, eylem / Wzięliśmy udział w akcji sadzenia drzew. / Ağaç dikme kampanyasına katıldık.
+wiedza / meski /  / bilgi / Wiedza o ekologii jest bardzo ważna. / Ekoloji bilgisi çok önemlidir.
+porządek / meski /  / düzen / Lubię mieć porządek na biurku. / Masamdaki düzeni seviyorum.
+życie / meski /  / hayat, yaşam / Życie na wsi jest spokojniejsze. / Kırsalda hayat daha sakin.
+miejscowość / meski /  / yerleşim yeri / Ta miejscowość słynie z pięknych widoków. / Bu yerleşim yeri güzel manzaralarıyla ünlüdür.
+zbierać / fiil /  / toplamak / Zbieram stare ubrania dla potrzebujących. / İhtiyaçlılar için eski kıyafetler topluyorum.
+sortować / fiil /  / ayırmak / Trzeba sortować śmieci na różne kategorie. / Çöpleri farklı kategorilere ayırmak gerekiyor.
+dzielić / fiil /  / bölmek, paylaşmak / Dzielimy się obowiązkami domowymi. / Ev işlerini paylaşıyoruz.
+trafiać / fiil /  / ulaşmak / Plastik często trafia do oceanu. / Plastik çoğu zaman okyanusa ulaşıyor.
+nosić / fiil /  / giymek, taşımak / Noszę tę samą kurtkę od trzech lat. / Bu ceketi üç yıldır giyiyorum.
+nadawać się / fiil /  / uygun olmak / Ta sukienka nie nadaje się na zimę. / Bu elbise kış için uygun değil.
+sprzedać / fiil /  / satmak / Sprzedałam stare meble przez internet. / Eski mobilyaları internetten sattım.
+oddać / fiil /  / vermek, iade etmek / Oddałem książki do biblioteki. / Kitapları kütüphaneye iade ettim.
+wrzucić / fiil /  / atmak / Wrzuć papier do niebieskiego pojemnika. / Kağıdı mavi kutunun içine at.
+przygotowywać / fiil /  / hazırlamak / Przygotowuję prezentację na jutro. / Yarın için sunum hazırlıyorum.
+zdobywać / fiil /  / kazanmak, elde etmek / Zdobywam nowe umiejętności każdego dnia. / Her gün yeni beceriler kazanıyorum.
+prowadzić / fiil /  / yürütmek / Prowadzi firmę od dziesięciu lat. / Şirketi on yıldır yönetiyor.
+skrócić / fiil /  / kısaltmak / Skróciłam spódnicę u krawcowej. / Eteği terzide kısalttım.
+kremowy / sifat /  / krem rengi / Kupiłam kremowy sweter na zimę. / Kış için krem rengi bir kazak aldım.
+niepotrzebny / sifat /  / gereksiz / Wyrzuciłam niepotrzebne rzeczy z szafy. / Dolaptaki gereksiz şeyleri attım.
+czysty / sifat /  / temiz / Pranie jest czyste i świeże. / Çamaşır temiz ve taze.
+zniszczony / sifat /  / yıpranmış, hasarlı / Ten płaszcz jest zbyt zniszczony. / Bu palto çok yıpranmış.
+zmieszany / sifat /  / karışık / Zmieszane odpady trudniej przetworzyć. / Karışık atıkları geri dönüştürmek daha zor.
+edukacyjny / sifat /  / eğitimsel / Program edukacyjny na temat recyklingu. / Geri dönüşüm hakkında eğitici program.
+skórzany / sifat /  / deri / Mam skórzany portfel od lat. / Yıllardır deri cüzdanim var.
+dodatkowo / zarf /  / ek olarak, ayrıca / Dodatkowo dostałam zniżkę w sklepie. / Mağazada ayrıca indirim aldım.
+jedynie / zarf /  / yalnızca, sadece / To jedynie moja opinia. / Bu yalnızca benim görüşüm.
+kod kreskowy / meski /  / barkod / Zeskanuj kod kreskowy przy kasie. / Kasada barkodu tara.
+sprzedaż / meski /  / satış / Sprzedaż wzrosła w tym miesiącu. / Bu ay satışlar arttı.
+użytkownik / meski /  / kullanıcı / Użytkownik może ocenić produkt. / Kullanıcı ürünü değerlendirebilir.
+kapitał / meski /  / sermaye / Firma potrzebuje kapitału na rozwój. / Şirket gelişmek için sermayeye ihtiyaç duyuyor.
+produkcja / meski /  / üretim / Produkcja telefonów wzrosła o dwadzieścia procent. / Telefon üretimi yüzde yirmi arttı.
+rejestracja / meski /  / kayıt, tescil / Rejestracja w serwisie jest bezpłatna. / Servise kayıt ücretsizdir.
+gwarancja / meski /  / garanti / Produkt ma gwarancję na dwa lata. / Ürünün iki yıl garantisi var.
+kryterium / meski /  / kriter, ölçüt / Głównym kryterium jest jakość. / Temel kriter kalitedir.
+podatek / meski /  / vergi / Podatek VAT wynosi dwadzieścia trzy procent. / KDV yüzde yirmi üçtür.
+sieć / meski /  / ağ, zincir / Ta sieć sklepów ma sto oddziałów. / Bu mağaza zincirinin yüz şubesi var.
+smartfon / meski /  / akıllı telefon / Kupiłem nowy smartfon wczoraj. / Dün yeni bir akıllı telefon aldım.
+gotówka / meski /  / nakit / Płacę gotówką, nie mam karty. / Nakit ödüyorum, kartım yok.
+karta / meski /  / kart / Czy mogę zapłacić kartą? / Kartla ödeyebilir miyim?
+oferta / meski /  / teklif / Ta oferta jest bardzo atrakcyjna. / Bu teklif çok cazip.
+zakup / meski /  / satın alma / Zrobiłem zakupy w supermarkecie. / Süpermarketten alışveriş yaptım.
+rynek / meski /  / pazar, piyasa / Rynek elektroniki rośnie bardzo szybko. / Elektronik pazarı çok hızlı büyüyor.
+kupować / fiil /  / satın almak / Kupuję ubrania tylko w promocji. / Kıyafetleri sadece indirimde alıyorum.
+sprawdzić / fiil /  / kontrol etmek / Sprawdź cenę przed zakupem. / Satın almadan önce fiyatı kontrol et.
+skanować / fiil /  / taramak / Skanujemy produkty przy kasie. / Kasada ürünleri tarayoruz.
+uruchamiać / fiil /  / başlatmak / Uruchamiam aplikację na telefonie. / Telefondaki uygulamayı başlatıyorum.
+oceniać / fiil /  / değerlendirmek / Oceniamy produkty po zakupie. / Satın aldıktan sonra ürünleri değerlendiriyoruz.
+kosztować / fiil /  / mal olmak / Ile kosztuje ten sweter? / Bu kazak ne kadar?
+drukować / fiil /  / yazdırmak, basmak / Drukuję paragon dla klienta. / Müşteri için fiş yazdırıyorum.
+oznaczać / fiil /  / anlamına gelmek / Co oznacza ten symbol? / Bu sembol ne anlama geliyor?
+płacić / fiil /  / ödemek / Płacę kartą kredytową. / Kredi kartıyla ödüyorum.
+wyprodukować / fiil /  / üretmek / Ta firma wyprodukowała milion telefonów. / Bu şirket bir milyon telefon üretti.
+zarejestrować się / fiil /  / kayıt olmak / Zarejestruj się, aby korzystać z serwisu. / Servisten yararlanmak için kayıt ol.
+polecać / fiil /  / tavsiye etmek / Polecam ten sklep wszystkim znajomym. / Bu mağazayı herkese tavsiye ediyorum.
+wybierać / fiil /  / seçmek / Wybieram produkty ekologiczne. / Ekolojik ürünler seçiyorum.
+drogi / sifat /  / pahalı / Ten zegarek jest zbyt drogi. / Bu saat çok pahalı.
+tani / sifat /  / ucuz / Znalazłam tani lot do Londynu. / Londra'ya ucuz bir uçuş buldum.
+pomocny / sifat /  / yardımcı, faydalı / Ten przewodnik jest bardzo pomocny. / Bu rehber çok yardımcıdır.
+stacjonarny / sifat /  / sabit / Sklep stacjonarny jest otwarty do osiemnastej. / Fiziksel mağaza saat on sekize kadar açık.
+praktyczny / sifat /  / pratik / To bardzo praktyczne rozwiązanie. / Bu çok pratik bir çözüm.
+całkowicie / zarf /  / tamamen / Jestem całkowicie zadowolona z zakupu. / Satın almadan tamamen memnunum.
+galeria / meski /  / galeri / Nowa galeria sztuki jest otwarta. / Yeni sanat galerisi açık.
+wystawa / meski /  / sergi / Wystawa fotografii trwa do końca miesiąca. / Fotoğraf sergisi ay sonuna kadar devam ediyor.
+przedstawienie / meski /  / gösteri, tiyatro oyunu / Przedstawienie teatralne było niesamowite. / Tiyatro oyunu harikaydı.
+spektakl / meski /  / gösteri, oyun / Spektakl zaczyna się o dziewiętnastej. / Gösteri saat on dokuzda başlıyor.
+seans / meski /  / seans / Ostatni seans jest o dwudziestej drugiej. / Son seans saat yirmi ikide.
+ekran / meski /  / ekran / Siadamy blisko ekranu w kinie. / Sinemada ekrana yakın oturuyoruz.
+pokaz / meski /  / gösterim / Pokaz mody odbędzie się jutro. / Moda gösterisi yarın yapılacak.
+targi / meski /  / fuar / Na targach książki poznałam wielu autorów. / Kitap fuarında pek çok yazar tanıdım.
+miłośnik / meski /  / hayran, meraklı / Jest miłośnikiem jazzu. / Jazz hayranıdır.
+wrażenie / meski /  / izlenim / Spektakl zrobił na mnie duże wrażenie. / Gösteri beni çok etkiledi.
+gatunek / meski /  / tür / Lubię filmy z gatunku thriller. / Gerilim türü filmleri seviyorum.
+tytuł / meski /  / başlık / Nie pamiętam tytułu tej książki. / Bu kitabın başlığını hatırlamıyorum.
+reżyser / meski /  / yönetmen / Reżyser tego filmu jest znany na całym świecie. / Bu filmin yönetmeni dünyaca ünlüdür.
+obraz / meski /  / resim, tablo / Ten obraz wisi w muzeum w Paryżu. / Bu tablo Paris'teki müzede asılı.
+instytucja / meski /  / kurum / Ta instytucja wspiera młodych artystów. / Bu kurum genç sanatçıları destekliyor.
+oglądać / fiil /  / izlemek, seyretmek / Oglądam filmy dokumentalne w weekendy. / Hafta sonları belgesel filmler izliyorum.
+zwiedzać / fiil /  / gezmek / Zwiedzamy miasto z przewodnikiem. / Şehri rehberle geziyoruz.
+słuchać / fiil /  / dinlemek / Słucham podcastów po polsku. / Lehçe podcast dinliyorum.
+uczestniczyć / fiil /  / katılmak / Uczestniczę w kursie językowym. / Dil kursuna katılıyorum.
+prezentować / fiil /  / sunmak, sergilemek / Artysta prezentuje swoje prace. / Sanatçı eserlerini sergiliyor.
+przyciągać / fiil /  / çekmek / Ten film przyciąga wielu widzów. / Bu film pek çok izleyici çekiyor.
+otwierać / fiil /  / açmak / Muzeum otwiera się o dziesiątej. / Müze saat onda açılıyor.
+spacerować / fiil /  / yürüyüş yapmak / Lubię spacerować po starym mieście. / Eski şehirde yürüyüş yapmayı seviyorum.
+grać / fiil /  / çalmak (müzik), oynamak / Gra na fortepianie od pięciu lat. / Beş yıldır piyano çalıyor.
+śpiewać / fiil /  / şarkı söylemek / Śpiewa w chórze kościelnym. / Kilise korosunda şarkı söylüyor.
+klasyczny / sifat /  / klasik / Lubię muzykę klasyczną. / Klasik müziği seviyorum.
+premierowy / sifat /  / ilk gösterim / Obejrzałem premierowy pokaz nowego filmu. / Yeni filmin gala gösterimini izledim.
+kameralny / sifat /  / küçük, samimi / Lubię kameralne koncerty jazzowe. / Samimi caz konserlerini seviyorum.
+niezapomniany / sifat /  / unutulmaz / To był niezapomniany wieczór. / Unutulmaz bir geceydi.
+ciekawy / sifat /  / ilginç / To ciekawy pomysł na weekend. / Hafta sonu için ilginç bir fikir.
+ulubiony / sifat /  / favori, en sevilen / To mój ulubiony film. / Bu benim favori filmim.
+często / zarf /  / sık sık / Często chodzę do kina. / Sık sık sinemaya gidiyorum.
+regularnie / zarf /  / düzenli olarak / Regularnie ćwiczę jogę. / Düzenli olarak yoga yapıyorum.
+podróż / meski /  / seyahat, yolculuk / Podróż do Japonii była marzeniem. / Japonya'ya seyahat bir hayaldi.
+siedzenie / meski /  / koltuk / Zarezerwowałem siedzenie przy oknie. / Pencere kenarında koltuk rezerve ettim.
+stacja / meski /  / istasyon / Stacja metra jest blisko. / Metro istasyonu yakında.
+rozkład / meski /  / tarife / Sprawdź rozkład jazdy autobusów. / Otobüs tarifesine bak.
+opóźnienie / meski /  / gecikme, rötar / Pociąg ma godzinne opóźnienie. / Trende bir saatlik gecikme var.
+wycieczka / meski /  / gezi / Wycieczka do Włoch była niesamowita. / İtalya'ya gezi harikaydı.
+pokład / meski /  / güverte / Na pokładzie samolotu jest sto miejsc. / Uçağın güvertesinde yüz koltuk var.
+linia lotnicza / meski /  / havayolu / Ta linia lotnicza jest najtańsza. / Bu havayolu en ucuzudur.
+stewardessa / meski /  / hostes / Stewardessa przyniosła nam herbatę. / Hostes bize çay getirdi.
+pasażer / meski /  / yolcu / Pasażerowie czekają na opóźniony lot. / Yolcular gecikmeli uçuşu bekliyor.
+droga / meski /  / yol / Ta droga prowadzi do centrum. / Bu yol merkeze gidiyor.
+pobyt / meski /  / konaklama, kalış / Nasz pobyt w hotelu trwał tydzień. / Otel konaklaması bir hafta sürdü.
+transport / meski /  / ulaşım / Transport publiczny jest tani i wygodny. / Toplu taşıma ucuz ve rahattır.
+jezioro / meski /  / göl / Spędzamy weekend nad jeziorem. / Hafta sonunu gölün başında geçiriyoruz.
+wyjazd / meski /  / gezi, yolculuk / Wyjazd zaplanowany jest na piątek. / Gezi Cuma günü planlandı.
+jechać / fiil /  / gitmek (araçla) / Jadę do Warszawy na weekend. / Hafta sonu Varşova'ya gidiyorum.
+lecieć / fiil /  / uçmak / Lecimy do Paryża jutro. / Yarın Paris'e uçuyoruz.
+latać / fiil /  / uçmak (sık sık) / Latam służbowo dwa razy w miesiącu. / Ayda iki kez iş için uçuyorum.
+podróżować / fiil /  / seyahat etmek / Lubię podróżować samotnie. / Yalnız seyahat etmeyi seviyorum.
+odjeżdżać / fiil /  / kalkmak, hareket etmek / Autobus odjeżdża za pięć minut. / Otobüs beş dakika sonra kalkıyor.
+przyjeżdżać / fiil /  / gelmek, varmak / Przyjeżdżam do rodziny na święta. / Bayramda ailemin yanına geliyorum.
+dojechać / fiil /  / ulaşmak / Dojechałem na lotnisko w ostatniej chwili. / Son dakikada havalimanına ulaştım.
+dojść / fiil /  / yürüyerek ulaşmak / Doszliśmy do hotelu pieszo. / Otele yürüyerek ulaştık.
+skręcić / fiil /  / dönmek / Skręć w lewo na skrzyżowaniu. / Kavşakta sola dön.
+odkrywać / fiil /  / keşfetmek / Odkrywam nowe miejsca podczas podróży. / Seyahatte yeni yerler keşfediyorum.
+przeprowadzić się / fiil /  / taşınmak / Przeprowadziłem się do nowego domu. / Yeni eve taşındım.
+wracać / fiil /  / dönmek, geri gelmek / Wracam do domu po długiej podróży. / Uzun bir yolculuktan sonra eve dönüyorum.
+opóźniony / sifat /  / gecikmeli / Nasz lot jest opóźniony o dwie godziny. / Uçuşumuz iki saat gecikmeli.
+podręczny / sifat /  / el (bagajı) / Bagaż podręczny może ważyć dziesięć kilogramów. / El bagajı on kilo olabilir.
+egzotyczny / sifat /  / egzotik / Chcę pojechać w egzotyczne miejsce. / Egzotik bir yere gitmek istiyorum.
+turystyczny / sifat /  / turistik / Centrum turystyczne jest w rynku. / Turistik merkez çarşıdadır.
+powrotny / sifat /  / dönüş / Bilet powrotny jest tańszy. / Dönüş bileti daha ucuz.
+wcześniej / zarf /  / daha önce / Wcześniej sprawdź rozkład jazdy. / Önceden tarife kontrol et.
+posiłek / meski /  / öğün / Staram się jeść trzy posiłki dziennie. / Günde üç öğün yemeye çalışıyorum.
+danie / meski /  / yemek (tabak) / Poproszę danie dnia. / Günün yemeğini alabilir miyim?
+mięso / meski /  / et / Nie jem mięsa od roku. / Bir yıldır et yemiyorum.
+warzywo / meski /  / sebze / Jem dużo warzyw każdego dnia. / Her gün çok sebze yiyorum.
+jajecznica / meski /  / sahanda yumurta / Na śniadanie zrobiłem jajecznicę. / Kahvaltıda sahanda yumurta yaptım.
+boczek / meski /  / pastırma / Boczek z jajkami to klasyka. / Pastırmalı yumurta klasiktir.
+wędlina / meski /  / şarküteri, salam / Kupuję wędlinę w lokalnym sklepie. / Şarküteri ürünlerini yerel mağazadan alıyorum.
+drożdżówka / meski /  / mayalı pasta / Kupuję drożdżówkę w piekarni co rano. / Her sabah fırından mayalı pasta alıyorum.
+żywność / meski /  / gıda / Ceny żywności rosną każdego roku. / Gıda fiyatları her yıl artıyor.
+witamina / meski /  / vitamin / Biorę witaminę C w zimie. / Kışın C vitamini alıyorum.
+słodycze / meski /  / tatlılar, şekerlemeler / Ograniczam słodycze dla zdrowia. / Sağlık için tatlıları kısıtlıyorum.
+stół / meski /  / masa / Rezerwuję stolik na dwie osoby. / İki kişilik masa rezervasyonu yapıyorum.
+jeść / fiil /  / yemek yemek / Jem śniadanie każdego ranka. / Her sabah kahvaltı yiyorum.
+pić / fiil /  / içmek / Piję dużo wody w ciągu dnia. / Gün içinde çok su içiyorum.
+gotować / fiil /  / pişirmek / Gotuję obiad dla całej rodziny. / Tüm aile için öğle yemeği pişiriyorum.
+smakować / fiil /  / tadı olmak / Ta zupa bardzo mi smakuje. / Bu çorba çok lezzetli.
+zamawiać / fiil /  / sipariş etmek / Zamawiam jedzenie przez internet. / Yemek internetten sipariş ediyorum.
+komponować / fiil /  / oluşturmak / Lubię komponować własne sałatki. / Kendi salatalarımı oluşturmayı seviyorum.
+zdrowy / sifat /  / sağlıklı / Staram się jeść zdrowo. / Sağlıklı yemeye çalışıyorum.
+bezglutenowy / sifat /  / glutensiz / Kupuję chleb bezglutenowy. / Glutensiz ekmek alıyorum.
+warzywny / sifat /  / sebzeli / Zamówiłam zupę warzywną. / Sebze çorbası sipariş ettim.
+tłusty / sifat /  / yağlı / Unikam tłustych potraw. / Yağlı yemeklerden kaçınıyorum.
+ciepły / sifat /  / sıcak, ılık / Lubię ciepłe zupy w zimie. / Kışın sıcak çorba seviyorum.
+wyśmienity / sifat /  / leziz, mükemmel / Obiad był wyśmienity. / Öğle yemeği harikaydı.
+okulista / meski /  / göz doktoru / Zapisałam się do okulisty. / Göz doktoruna randevu aldım.
+gabinet / meski /  / muayenehane / Poczekaj w gabinecie lekarskim. / Doktor muayenehanesinde bekle.
+wizyta / meski /  / ziyaret, muayene / Mam wizytę u dentysty. / Dişçide randevum var.
+badanie / meski /  / muayene, inceleme / Wyniki badania są w normie. / Muayene sonuçları normal.
+wzrok / meski /  / görme, görüş / Mój wzrok się pogorszył. / Görme gücüm zayıfladı.
+choroba / meski /  / hastalık / Ta choroba jest bardzo zaraźliwa. / Bu hastalık çok bulaşıcı.
+lek / meski /  / ilaç / Biorę lek na ciśnienie. / Tansiyon için ilaç alıyorum.
+gorączka / meski /  / ateş / Mam gorączkę od wczoraj. / Dünden beri ateşim var.
+dreszcze / meski /  / titreme / Mam dreszcze i gorączkę. / Titriyorum ve ateşim var.
+ciśnienie / meski /  / tansiyon, basınç / Mam wysokie ciśnienie krwi. / Yüksek tansiyonum var.
+ochłodzenie / meski /  / soğuma / Ochłodzenie może wywołać przeziębienie. / Soğuma nezleye yol açabilir.
+diagnoza / meski /  / teşhis, tanı / Diagnoza lekarza jest poważna. / Doktorun teşhisi ciddi.
+kontuzja / meski /  / sakatlık / Doznałem kontuzji podczas meczu. / Maç sırasında sakatlık geçirdim.
+organizm / meski /  / organizma, vücut / Organizm potrzebuje odpoczynku. / Vücut dinlenmeye ihtiyaç duyuyor.
+minerał / meski /  / mineral / Woda mineralna zawiera wiele minerałów. / Maden suyu pek çok mineral içerir.
+zachorować / fiil /  / hastalanmak / Zachorowałam na grypę w zimie. / Kışın grip oldum.
+leczyć / fiil /  / tedavi etmek / Leczę przeziębienie herbatą z cytryną. / Nezleyi limonlu çayla tedavi ediyorum.
+odpoczywać / fiil /  / dinlenmek / Odpoczywam w weekend. / Hafta sonu dinleniyorum.
+diagnozować / fiil /  / teşhis koymak / Lekarz diagnozuje chorobę. / Doktor hastalığı teşhis ediyor.
+przyjmować / fiil /  / kabul etmek / Przyjmuję pacjentów do osiemnastej. / Saat on sekize kadar hasta kabul ediyorum.
+zażywać / fiil /  / almak (ilaç) / Zażywam leki dwa razy dziennie. / İlaçları günde iki kez alıyorum.
+boleć / fiil /  / ağrımak / Boli mnie głowa od rana. / Sabahtan beri başım ağrıyor.
+przeciwgorączkowy / sifat /  / ateş düşürücü / Wziąłem lek przeciwgorączkowy. / Ateş düşürücü ilaç aldım.
+nieczynny / sifat /  / kapalı, çalışmıyor / Gabinet jest nieczynny w weekendy. / Muayenehane hafta sonları kapalı.
+komputerowy / sifat /  / bilgisayarlı / Mam problem z komputerowym systemem. / Bilgisayar sistemiyle ilgili sorunum var.
+chory / sifat /  / hasta / Jestem chory i zostaję w domu. / Hastayım ve evde kalıyorum.
+nagle / zarf /  / aniden, birdenbire / Nagle poczułem silny ból. / Aniden şiddetli bir ağrı hissettim.
+zawód / meski /  / meslek / Mój zawód to inżynier. / Mesleğim mühendis.
+pracownik / meski /  / çalışan / Pracownik firmy dostał awans. / Şirket çalışanı terfi aldı.
+pracodawca / meski /  / işveren / Pracodawca oferuje dobre warunki. / İşveren iyi koşullar sunuyor.
+rekrutacja / meski /  / işe alım / Rekrutacja na to stanowisko trwa. / Bu pozisyon için işe alım sürüyor.
+rozmowa kwalifikacyjna / meski /  / iş görüşmesi / Mam rozmowę kwalifikacyjną jutro. / Yarın iş görüşmem var.
+umowa / meski /  / sözleşme / Podpisałem umowę o pracę. / İş sözleşmesi imzaladım.
+ogłoszenie / meski /  / ilan / Znalazłem ogłoszenie o pracę w internecie. / İnternette iş ilanı buldum.
+wykształcenie / meski /  / eğitim / Mam wyższe wykształcenie techniczne. / Teknik yükseköğrenim diplomam var.
+znajomość / meski /  / bilgi, yeterlilik / Znajomość języków obcych jest wymagana. / Yabancı dil bilgisi gereklidir.
+umiejętność / meski /  / beceri, yetenek / Umiejętność pracy w zespole jest ważna. / Ekip çalışması becerisi önemlidir.
+doświadczenie / meski /  / deneyim / Mam pięcioletnie doświadczenie w tej branży. / Bu sektörde beş yıllık deneyimim var.
+organizacja / meski /  / organizasyon / Dobra organizacja pracy jest kluczowa. / İyi iş organizasyonu çok önemlidir.
+punktualność / meski /  / dakiklik / Punktualność jest bardzo ważna w pracy. / Dakiklik iş yerinde çok önemlidir.
+komunikatywność / meski /  / iletişim becerisi / Komunikatywność to ważna cecha pracownika. / İletişim becerisi önemli bir çalışan özelliğidir.
+warunki / meski /  / koşullar, şartlar / Warunki pracy są bardzo dobre. / Çalışma koşulları çok iyi.
+zatrudnienie / meski /  / istihdam / Zatrudnienie w tej firmie to przywilej. / Bu şirkette istihdam bir ayrıcalıktır.
+koszt / meski /  / maliyet / Koszt utrzymania w Warszawie jest wysoki. / Varşova'da yaşam maliyeti yüksektir.
+hydraulik / meski /  / tesisatçı / Wezwałem hydraulika do naprawy rury. / Boruyu tamir için tesisatçı çağırdım.
+elektryk / meski /  / elektrikçi / Elektryk naprawił instalację elektryczną. / Elektrikçi elektrik tesisatını tamir etti.
+muzyk / meski /  / müzisyen / Muzyk gra w orkiestrze. / Müzisyen orkestrada çalıyor.
+programista / meski /  / programcı / Programista pisze kod do aplikacji. / Programcı uygulama için kod yazıyor.
+list motywacyjny / meski /  / motivasyon mektubu / Napisałem list motywacyjny do firmy. / Şirkete motivasyon mektubu yazdım.
+pracować / fiil /  / çalışmak / Pracuję w korporacji od pięciu lat. / Beş yıldır bir şirkette çalışıyorum.
+zatrudnić / fiil /  / işe almak / Firma zatrudniła nowych pracowników. / Şirket yeni çalışanlar işe aldı.
+zwolnić / fiil /  / işten çıkarmak / Zwolniono go z powodu restrukturyzacji. / Yeniden yapılanma nedeniyle işten çıkarıldı.
+zastąpić / fiil /  / yerine geçmek / Zastąpiłem kolegę podczas jego urlopu. / İzninde meslektaşımın yerine geçtim.
+wymagać / fiil /  / gerektirmek / To stanowisko wymaga doświadczenia. / Bu pozisyon deneyim gerektiriyor.
+spełniać / fiil /  / yerine getirmek / Spełniam wszystkie wymagania. / Tüm gereksinimleri karşılıyorum.
+podpisać / fiil /  / imzalamak / Podpisałem umowę o pracę. / İş sözleşmesini imzaladım.
+postanowić / fiil /  / karar vermek / Postanowiłem zmienić pracę. / İş değiştirmeye karar verdim.
+spróbować / fiil /  / denemek / Spróbuję wysłać CV do tej firmy. / Bu şirkete CV göndermeyi deneyeceğim.
+zrezygnować / fiil /  / vazgeçmek / Zrezygnowałem z pracy w korporacji. / Şirketteki işten vazgeçtim.
+opłacać się / fiil /  / kârlı olmak / Inwestowanie w edukację zawsze się opłaca. / Eğitime yatırım her zaman kârlıdır.
+proponować / fiil /  / teklif etmek / Proponuję wyższe wynagrodzenie. / Daha yüksek maaş teklif ediyorum.
+efektywny / sifat /  / verimli, etkili / Szukamy efektywnych rozwiązań. / Verimli çözümler arıyoruz.
+biegły / sifat /  / akıcı, uzman / Jest biegły w języku angielskim. / İngilizcede akıcıdır.
+zawodowy / sifat /  / mesleki / Rozwijam swoje umiejętności zawodowe. / Mesleki becerilerimi geliştiriyorum.
+lotniczy / sifat /  / havacılık / Pracuję w przemyśle lotniczym. / Havacılık sektöründe çalışıyorum.
+finansowy / sifat /  / finansal / Analizuję sytuację finansową firmy. / Şirketin mali durumunu analiz ediyorum.
+sztuczna inteligencja / meski /  / yapay zeka / Sztuczna inteligencja zmienia rynek pracy. / Yapay zeka iş piyasasını değiştiriyor.
+maszyna / meski /  / makine / Ta maszyna produkuje tysiąc sztuk dziennie. / Bu makine günde bin adet üretiyor.
+algorytm / meski /  / algoritma / Algorytm analizuje dane użytkowników. / Algoritma kullanıcı verilerini analiz ediyor.
+serwis / meski /  / servis, tamir / Oddałem telefon do serwisu. / Telefonu servise verdim.
+płyta główna / meski /  / anakart / Płyta główna komputera jest uszkodzona. / Bilgisayarın anakartı bozulmuş.
+technologia / meski /  / teknoloji / Technologia zmienia nasze życie. / Teknoloji hayatımızı değiştiriyor.
+analityk / meski /  / analist / Pracuję jako analityk danych. / Veri analisti olarak çalışıyorum.
+możliwość / meski /  / olanak, imkân / Mam możliwość pracy zdalnej. / Uzaktan çalışma imkânım var.
+porównanie / meski /  / karşılaştırma / W porównaniu z zeszłym rokiem wyniki są lepsze. / Geçen yılla karşılaştırıldığında sonuçlar daha iyi.
+zastępować / fiil /  / yerine geçmek / Sztuczna inteligencja zastępuje niektóre zawody. / Yapay zeka bazı mesleklerin yerini alıyor.
+korzystać / fiil /  / kullanmak, yararlanmak / Korzystam z aplikacji do nauki języków. / Dil öğrenme uygulamasını kullanıyorum.
+działać / fiil /  / çalışmak, işlemek / Program nie działa prawidłowo. / Program düzgün çalışmıyor.
+tworzyć / fiil /  / oluşturmak, yaratmak / Tworzę aplikacje mobilne. / Mobil uygulamalar geliştiriyorum.
+włączyć / fiil /  / açmak / Włącz komputer i zaloguj się. / Bilgisayarı aç ve giriş yap.
+wyłączyć / fiil /  / kapatmak / Wyłącz telefon przed spotkaniem. / Toplantıdan önce telefonu kapat.
+używać / fiil /  / kullanmak / Używam tego programu codziennie. / Bu programı her gün kullanıyorum.
+naprawić / fiil /  / tamir etmek / Naprawię błąd w kodzie. / Koddaki hatayı düzelteceğim.
+sztuczny / sifat /  / yapay / Sztuczna inteligencja uczy się sama. / Yapay zeka kendi kendine öğreniyor.
+cyfrowy / sifat /  / dijital / Żyjemy w cyfrowym świecie. / Dijital bir dünyada yaşıyoruz.
+elektroniczny / sifat /  / elektronik / Podpis elektroniczny jest prawnie wiążący. / Elektronik imza hukuken bağlayıcıdır.
+coraz częściej / zarf /  / giderek daha sık / Coraz częściej pracujemy zdalnie. / Giderek daha sık uzaktan çalışıyoruz.
+trening / meski /  / antrenman / Mam trening o szóstej rano. / Sabah altıda antrenmanım var.
+trener / meski /  / antrenör / Mój trener układa plan treningowy. / Antrenörüm antrenman planı hazırlıyor.
+bieganie / meski /  / koşu / Bieganie to moja pasja. / Koşu benim tutkum.
+kondycja / meski /  / kondisyon / Ćwiczę, żeby poprawić kondycję. / Kondisyonumu geliştirmek için egzersiz yapıyorum.
+mięsień / meski /  / kas / Po treningu bolą mnie mięśnie. / Antrenman sonrası kaslarım ağrıyor.
+rozgrzewka / meski /  / ısınma / Zawsze robię rozgrzewkę przed treningiem. / Antrenman öncesi her zaman ısınma yapıyorum.
+rozciąganie / meski /  / esneme / Rozciąganie zapobiega kontuzjom. / Esneme sakatlıkları önler.
+marsz / meski /  / yürüyüş / Marsz nordycki jest dobry dla kręgosłupa. / Nordic yürüyüş omurga için iyidir.
+zawody / meski /  / yarışma / Zawody pływackie odbędą się w sobotę. / Yüzme yarışması Cumartesi yapılacak.
+bramkarz / meski /  / kaleci / Bramkarz obronił rzut karny. / Kaleci penaltıyı kurtardı.
+siatkarz / meski /  / voleybolcu / Ten siatkarz jest reprezentantem Polski. / Bu voleybolcu Polonya milli takımında.
+forma / meski /  / form / Jest w świetnej formie przed zawodami. / Yarışmadan önce harika formda.
+ruch / meski /  / hareket / Regularny ruch jest zdrowy. / Düzenli hareket sağlıklıdır.
+powietrze / meski /  / hava / Świeże powietrze dobrze robi. / Taze hava iyi gelir.
+kijki / meski /  / sopalar (yürüyüş) / Chodzę z kijkami do nordic walking. / Nordic walking için sopalarla yürüyorum.
+biegać / fiil /  / koşmak / Biegam pięć kilometrów każdego ranka. / Her sabah beş kilometre koşuyorum.
+ćwiczyć / fiil /  / egzersiz yapmak / Ćwiczę jogę trzy razy w tygodniu. / Haftada üç kez yoga yapıyorum.
+trenować / fiil /  / antrenman yapmak / Trenuję do maratonu od trzech miesięcy. / Üç aydır maratona antrenman yapıyorum.
+pływać / fiil /  / yüzmek / Pływam w basenie co tydzień. / Her hafta yüzme havuzunda yüzüyorum.
+skakać / fiil /  / zıplamak / Skaczę na skakance dla rozgrzewki. / Isınmak için atlama ipiyle atlıyorum.
+rozgrzewać się / fiil /  / ısınmak / Rozgrzewam się przed każdym treningiem. / Her antrenman öncesinde ısınıyorum.
+poprawić / fiil /  / iyileştirmek / Chcę poprawić swoje wyniki w biegu. / Koşu sonuçlarımı iyileştirmek istiyorum.
+unikać / fiil /  / kaçınmak / Unikam intensywnych ćwiczeń przy kontuzji. / Sakatlıkta yoğun egzersizden kaçınıyorum.
+zachęcać / fiil /  / teşvik etmek / Zachęcam przyjaciół do aktywności. / Arkadaşlarımı aktiviteye teşvik ediyorum.
+aktywny / sifat /  / aktif / Staram się być aktywny fizycznie. / Fiziksel olarak aktif olmaya çalışıyorum.
+intensywny / sifat /  / yoğun / To był intensywny trening. / Yoğun bir antrenman oldu.
+fizyczny / sifat /  / fiziksel / Aktywność fizyczna jest kluczowa dla zdrowia. / Fiziksel aktivite sağlık için çok önemlidir.
+zewnętrzny / sifat /  / açık hava, dış / Preferuję ćwiczenia zewnętrzne. / Açık hava egzersizlerini tercih ediyorum.
+świeży / sifat /  / taze / Świeże powietrze jest dobre po treningu. / Antrenman sonrası taze hava iyi gelir.
+codziennie / zarf /  / her gün / Ćwiczę codziennie przez pół godziny. / Her gün yarım saat egzersiz yapıyorum.
+intensywnie / zarf /  / yoğun bir şekilde / Trenuję intensywnie przed zawodami. / Yarışmadan önce yoğun antrenman yapıyorum.
+mieszkanie / meski /  / daire / Wynajmuję mieszkanie w centrum. / Merkezde daire kiralıyorum.
+nieruchomość / meski /  / gayrimenkul / Ceny nieruchomości rosną. / Gayrimenkul fiyatları artıyor.
+renowacja / meski /  / restorasyon / Renowacja starego budynku trwała rok. / Eski binanın restorasyonu bir yıl sürdü.
+mieszkaniec / meski /  / sakin, oturan / Mieszkańcy protestują przeciwko nowej inwestycji. / Sakinler yeni yatırıma karşı protesto yapıyor.
+ściana / meski /  / duvar / Pomalowałem ściany na biało. / Duvarları beyaza boyadım.
+ławka / meski /  / bank, sıra / Usiedliśmy na ławce w parku. / Parkta bankta oturduk.
+biuro / meski /  / ofis, büro / Pracuję w biurze w centrum. / Merkezde ofiste çalışıyorum.
+klimat / meski /  / iklim, ortam / Klimat w tej firmie jest bardzo dobry. / Bu şirketteki ortam çok iyi.
+warunek / meski /  / koşul, şart / Warunkiem najmu jest depozyt. / Kiralama koşulu depozitodur.
+naprawa / meski /  / onarım / Naprawa dachu kosztuje dużo. / Çatı onarımı çok para tutuyor.
+kupić / fiil /  / satın almak / Chcę kupić mieszkanie w przyszłym roku. / Gelecek yıl daire satın almak istiyorum.
+wynajmować / fiil /  / kiralamak / Wynajmuję mieszkanie od pięciu lat. / Beş yıldır daire kiralıyorum.
+przeprowadzić się / fiil /  / taşınmak / Przeprowadziłem się do nowego domu. / Yeni eve taşındım.
+remontować / fiil /  / tadilat yapmak / Remontujemy kuchnię od miesiąca. / Bir aydır mutfağı yeniliyoruz.
+mieszkać / fiil /  / oturmak, yaşamak / Mieszkam w Warszawie od dziesięciu lat. / On yıldır Varşova'da yaşıyorum.
+oferować / fiil /  / teklif etmek / Ta agencja oferuje dobre mieszkania. / Bu ajans iyi daireler sunuyor.
+wystawiać / fiil /  / satışa çıkarmak / Wystawiają mieszkanie na sprzedaż. / Daireyi satışa çıkarıyorlar.
+tradycyjny / sifat /  / geleneksel / To tradycyjny polski dom. / Bu geleneksel bir Lehçe evidir.
+wolny / sifat /  / serbest, boş / Mam wolny pokój do wynajęcia. / Kiraya verecek boş odam var.
+popularny / sifat /  / popüler / To popularny dzielnica wśród studentów. / Burası öğrenciler arasında popüler bir semt.
+włoski / sifat /  / İtalyan / Mam włoski styl w mieszkaniu. / Dairemde İtalyan tarzı var.
+większy / sifat /  / daha büyük / Szukam większego mieszkania. / Daha büyük daire arıyorum.
+poważny / sifat /  / ciddi / To poważny problem z instalacją. / Tesisatta ciddi bir sorun var.
+tańszy / sifat /  / daha ucuz / Szukam tańszego lokalu. / Daha ucuz bir yer arıyorum.
+głównie / zarf /  / ağırlıklı olarak / Mieszkam głównie w centrum. / Ağırlıklı olarak merkezde yaşıyorum.
+zwłaszcza / zarf /  / özellikle / Lubię Warszawę, zwłaszcza Stare Miasto. / Varşova'yı seviyorum, özellikle Eski Şehir'i.
+uczeń / meski /  / öğrenci / Uczeń przygotowuje się do egzaminu. / Öğrenci sınava hazırlanıyor.
+lekcja / meski /  / ders / Lekcja matematyki zaczyna się o ósmej. / Matematik dersi saat sekizde başlıyor.
+zadanie / meski /  / ödev, görev / Odrobiłem zadanie domowe. / Ev ödevini yaptım.
+wykład / meski /  / ders, konferans / Wykład trwa dwie godziny. / Ders iki saat sürüyor.
+studia / meski /  / üniversite eğitimi / Studiuję informatykę na Politechnice. / Teknik Üniversite'de bilgisayar mühendisliği okuyorum.
+absolwent / meski /  / mezun / Jestem absolwentem Uniwersytetu Warszawskiego. / Varşova Üniversitesi mezunuyum.
+klasa / meski /  / sınıf / W mojej klasie jest trzydziestu uczniów. / Sınıfımda otuz öğrenci var.
+nauka / meski /  / bilim, öğrenim / Nauka języków obcych otwiera drzwi. / Yabancı dil öğrenimi kapılar açar.
+ocena / meski /  / not, değerlendirme / Dostałam bardzo dobrą ocenę z polskiego. / Lehçeden çok iyi not aldım.
+język obcy / meski /  / yabancı dil / Znajomość języka obcego jest dziś konieczna. / Bugün yabancı dil bilmek zorunludur.
+uczyć się / fiil /  / öğrenmek / Uczę się polskiego codziennie. / Her gün Lehçe öğreniyorum.
+uczyć / fiil /  / öğretmek / Uczę matematyki w liceum. / Lisede matematik öğretiyorum.
+odrabiać / fiil /  / yapmak (ödev) / Odrabiam lekcje po szkole. / Okuldan sonra ödevlerimi yapıyorum.
+zdać / fiil /  / geçmek (sınav) / Zdałam maturę z wyróżnieniem. / Lise bitirme sınavını üstünlük ödülüyle geçtim.
+spóźniać się / fiil /  / geç kalmak / Często spóźniam się na pierwsze lekcje. / Sık sık ilk derslere geç kalıyorum.
+uważać / fiil /  / dikkat etmek / Uważaj na lekcji matematyki. / Matematik dersinde dikkat et.
+domowy / sifat /  / ev (ödevi) / Zadanie domowe jest na jutro. / Ev ödevi yarın içindir.
+pisemny / sifat /  / yazılı / Mamy jutro test pisemny. / Yarın yazılı sınavımız var.
+pełnoletni / sifat /  / reşit / Musisz być pełnoletni, żeby głosować. / Oy kullanmak için reşit olman gerekir.
+akademicki / sifat /  / akademik / Rok akademicki zaczyna się w październiku. / Akademik yıl Ekim'de başlıyor.
+uważnie / zarf /  / dikkatli bir şekilde / Słuchaj uważnie nauczyciela. / Öğretmeni dikkatlice dinle.
+prognoza / meski /  / tahmin / Prognoza pogody zapowiada deszcz. / Hava tahmini yağmur bildiriyor.
+deszcz / meski /  / yağmur / Pada deszcz, weź parasol. / Yağmur yağıyor, şemsiye al.
+zima / meski /  / kış / Zima w Polsce bywa mroźna. / Polonya'da kış dondurucu olabilir.
+wiosna / meski /  / ilkbahar / Wiosna przyszła wcześniej tego roku. / Bu yıl ilkbahar erken geldi.
+lato / meski /  / yaz / W lato jedziemy nad morze. / Yazın denize gidiyoruz.
+jesień / meski /  / sonbahar / Jesień to moja ulubiona pora roku. / Sonbahar benim favori mevsimim.
+stopień / meski /  / derece / Dziś jest tylko pięć stopni. / Bugün sadece beş derece var.
+spadek / meski /  / düşüş / Prognozowany jest spadek temperatury. / Sıcaklık düşüşü tahmin ediliyor.
+padać / fiil /  / yağmak / Pada śnieg od wczoraj. / Dünden beri kar yağıyor.
+wiać / fiil /  / esmek / Wiatr wieje bardzo mocno. / Rüzgar çok kuvvetli esiyor.
+mocny / sifat /  / güçlü, şiddetli / Mocny wiatr powalił drzewa. / Şiddetli rüzgar ağaçları devirdi.
+zimny / sifat /  / soğuk / Dziś jest zimny dzień. / Bugün soğuk bir gün.
+naturalny / sifat /  / doğal / Produkt jest w stu procentach naturalny. / Ürün yüzde yüz doğaldır.
+ciepło / zarf /  / sıcak (bir şekilde) / Na zewnątrz jest ciepło. / Dışarısı sıcak.
+fryzjer / meski /  / kuaför / Umówiłam się do fryzjera. / Kuaföre randevu aldım.
+fryzura / meski /  / saç modeli / Zmieniłam fryzurę na krótką. / Saç modelimi kısa yaptırdım.
+imieniny / meski /  / isim günü / Jutro są imieniny Anny. / Yarın Anna'nın isim günü.
+niespodzianka / meski /  / sürpriz / Przygotowałam niespodziankę dla przyjaciółki. / Arkadaşım için sürpriz hazırladım.
+prezent / meski /  / hediye / Kupiłem prezent na urodziny. / Doğum günü için hediye aldım.
+rodzina / meski /  / aile / Moja rodzina mieszka w Krakowie. / Ailem Krakov'da yaşıyor.
+decyzja / meski /  / karar / Podjąłem ważną decyzję. / Önemli bir karar verdim.
+budzik / meski /  / çalar saat / Budzik zadzwonił o szóstej rano. / Çalar saat sabah altıda çaldı.
+korki / meski /  / trafik sıkışıklığı / Utknąłem w korkach przez godzinę. / Bir saat trafik sıkışıklığında kaldım.
+spóźnienie / meski /  / gecikme / Przepraszam za spóźnienie. / Geç kaldığım için özür dilerim.
+abonament / meski /  / abonelik / Płacę abonament za streaming. / Yayın platformu için abonelik ödüyorum.
+opłata / meski /  / ücret / Opłata za parkowanie wynosi pięć złotych. / Park ücreti beş zlotidir.
+musieć / fiil /  / zorunda olmak / Muszę jutro wstać wcześnie. / Yarın erken kalkmak zorundayım.
+móc / fiil /  / -ebilmek / Czy mogę ci pomóc? / Sana yardımcı olabilir miyim?
+chcieć / fiil /  / istemek / Chcę nauczyć się polskiego. / Lehçe öğrenmek istiyorum.
+potrzebować / fiil /  / ihtiyaç duymak / Potrzebuję pomocy z tym zadaniem. / Bu ödevde yardıma ihtiyacım var.
+wychodzić / fiil /  / çıkmak / Wychodzę z domu o ósmej. / Saat sekizde evden çıkıyorum.
+czekać / fiil /  / beklemek / Czekam na autobus od dziesięciu minut. / On dakikadır otobüs bekliyorum.
+zapomnieć / fiil /  / unutmak / Zapomniałem parasola w domu. / Şemsiyeyi evde unutdum.
+pamiętać / fiil /  / hatırlamak / Pamiętaj o spotkaniu o trzeciej. / Üçteki toplantıyı unutma.
+pomyśleć / fiil /  / düşünmek / Pomyśl zanim podejmiesz decyzję. / Karar vermeden önce düşün.
+odmówić / fiil /  / reddetmek / Odmówiłam zaproszenia na imprezę. / Partiye daveti reddettim.
+przepraszać / fiil /  / özür dilemek / Przepraszam za zamieszanie. / Karışıklık için özür dilerim.
+cieszyć się / fiil /  / sevinmek / Cieszę się z twoich sukcesów. / Başarıların için seviniyorum.
+marzyć / fiil /  / hayal etmek / Marzę o podróży do Japonii. / Japonya'ya seyahat etmeyi hayal ediyorum.
+zaspać / fiil /  / uyuyakalmak / Zasnąłem i spóźniłem się na pociąg. / Uyuyakaldım ve treni kaçırdım.
+wspólny / sifat /  / ortak / Mamy wspólne zainteresowania. / Ortak ilgi alanlarımız var.
+kolejny / sifat /  / bir sonraki / To kolejny problem w tym tygodniu. / Bu haftaki bir sonraki sorun.
+konkretny / sifat /  / belirli, somut / Potrzebuję konkretnej odpowiedzi. / Belirli bir cevaba ihtiyacım var.
+określony / sifat /  / belirlenmiş / Mam określony budżet na wakacje. / Tatil için belirlenmiş bütçem var.
+wreszcie / zarf /  / nihayet, sonunda / Wreszcie skończyłem projekt. / Nihayet projeyi bitirdim.
+znowu / zarf /  / yine, tekrar / Znowu spóźniłeś się na spotkanie. / Toplantıya yine geç kaldın.
+zawsze / zarf /  / her zaman / Zawsze myję ręce przed jedzeniem. / Yemekten önce her zaman ellerimi yıkarım.
+nigdy / zarf /  / asla, hiçbir zaman / Nigdy nie byłam w Australii. / Hiç Avustralya'ya gitmedim.
+jeszcze / zarf /  / hâlâ, daha / Jeszcze nie skończyłem raportu. / Raporu henüz bitirmedim.
+już / zarf /  / artık, zaten / Już skończyłem zadanie. / Görevi zaten bitirdim.
+dla / zarf /  / için / Kupiłem prezent dla mamy. / Annem için hediye aldım.
+do / zarf /  / -e/-a, -e kadar / Idę do sklepu. / Mağazaya gidiyorum.
+dzięki / zarf /  / sayesinde / Dzięki tobie zdałem egzamin. / Seni sayesinde sınavı geçtim.
+koło / zarf /  / yanında / Mieszkam koło parku. / Parkın yanında yaşıyorum.
+między / zarf /  / arasında / Między nami nie ma tajemnic. / Aramızda sır yok.
+mimo / zarf /  / -e rağmen / Mimo deszczu wyszłam na spacer. / Yağmura rağmen yürüyüşe çıktım.
+na / zarf /  / üzerinde, -e/-a / Czekam na autobus. / Otobüs bekliyorum.
+nad / zarf /  / üzerinde, üstünde / Dom stoi nad jeziorem. / Ev gölün üzerinde duruyor.
+obok / zarf /  / yanında / Siedzę obok okna. / Pencerenin yanında oturuyorum.
+od / zarf /  / -den/-dan / Uczę się polskiego od roku. / Bir yıldır Lehçe öğreniyorum.
+około / zarf /  / yaklaşık, civarında / Przyjdę około południa. / Öğlen civarı geleceğim.
+po / zarf /  / sonra, boyunca / Po pracy idę na siłownię. / İşten sonra spor salonuna gidiyorum.
+pod / zarf /  / altında / Kot śpi pod stołem. / Kedi masanın altında uyuyor.
+podczas / zarf /  / sırasında, esnasında / Podczas podróży czytam książki. / Yolculuk sırasında kitap okuyorum.
+ponad / zarf /  / üzerinde, -den fazla / Firma zatrudnia ponad sto osób. / Şirket yüzden fazla kişi çalıştırıyor.
+poza / zarf /  / dışında, haricinde / Poza pracą lubię gotować. / İş dışında yemek pişirmeyi seviyorum.
+przed / zarf /  / önünde, -den önce / Przed kolacją myję ręce. / Akşam yemeğinden önce ellerimi yıkarım.
+przez / zarf /  / boyunca, aracılığıyla / Jadę przez centrum. / Merkezden geçiyorum.
+przy / zarf /  / yanında, -de/-da / Siedzę przy oknie. / Pencerenin yanında oturuyorum.
+w / zarf /  / -de/-da, içinde / Mieszkam w Warszawie. / Varşova'da yaşıyorum.
+według / zarf /  / -e göre / Według mnie to dobry pomysł. / Bana göre bu iyi bir fikir.
+wokół / zarf /  / etrafında / Wokół domu jest ogród. / Evin etrafında bahçe var.
+wśród / zarf /  / arasında / Wśród uczniów jest wielu zdolnych. / Öğrenciler arasında pek çok yetenekli var.
+wzdłuż / zarf /  / boyunca / Spacerujemy wzdłuż rzeki. / Nehir boyunca yürüyoruz.
+z / zarf /  / -den/-dan, ile / Wróciłem z podróży. / Seyahatten döndüm.
+za / zarf /  / arkasında, için / Dziękuję za pomoc. / Yardımın için teşekkürler.
+zamiast / zarf /  / yerine / Zamiast kawy piję herbatę. / Kahve yerine çay içiyorum.
+a / zarf /  / ve, ama / Lubię herbatę, a ona kawę. / Ben çay seviyorum, o ise kahve.
+aby / zarf /  / -mek/-mak için / Uczę się, aby zdać egzamin. / Sınavı geçmek için çalışıyorum.
+albo / zarf /  / veya, ya da / Pójdziemy do kina albo do teatru. / Sinemaya ya da tiyatroya gideceğiz.
+ale / zarf /  / ama, fakat / Chciałem pojechać, ale zachorowałem. / Gitmek istedim ama hastalandım.
+ani / zarf /  / ne... ne de / Nie ma ani czasu, ani pieniędzy. / Ne zamanı ne de parası var.
+aż / zarf /  / -e kadar, ta ki / Czekałem aż do wieczora. / Akşama kadar bekledim.
+bo / zarf /  / çünkü / Nie przyszłam, bo byłam chora. / Hasta olduğum için gelmedim.
+chociaż / zarf /  / -e rağmen / Chociaż było zimno, wyszłam na spacer. / Soğuk olmasına rağmen yürüyüşe çıktım.
+choć / zarf /  / -e rağmen / Choć jest trudno, nie rezygnuję. / Zor olsa da vazgeçmiyorum.
+czy / zarf /  / mi, yoksa / Czy mówisz po polsku? / Lehçe biliyor musun?
+czyli / zarf /  / yani / Jestem lingwistą, czyli uczę się języków. / Dilbilimciyim, yani dil öğreniyorum.
+dlatego / zarf /  / bu yüzden / Pada deszcz, dlatego zostanę w domu. / Yağmur yağıyor, bu yüzden evde kalacağım.
+gdy / zarf /  / zaman, -dığında / Gdy przyjdziesz, zadzwoń. / Geldiğinde ara.
+gdyby / zarf /  / eğer, -seydi / Gdybyś chciał, możemy pojechać razem. / İsteseydin birlikte gidebilirdik.
+jednak / zarf /  / ancak, yine de / Chciałem iść, jednak byłem zmęczony. / Gitmek istedim, ancak yorgundum.
+jeśli / zarf /  / eğer / Jeśli chcesz, możemy pójść razem. / İstersen birlikte gidebiliriz.
+jeżeli / zarf /  / eğer, şayet / Jeżeli zdasz egzamin, pójdziemy świętować. / Sınavı geçersen kutlamaya gideceğiz.
+kiedy / zarf /  / ne zaman, -dığında / Kiedy wrócisz do domu? / Eve ne zaman döneceksin?
+lecz / zarf /  / ama, fakat / Chciałem pomóc, lecz nie wiedziałem jak. / Yardım etmek istedim, ama nasıl yapacağımı bilemedim.
+lub / zarf /  / veya / Zadzwoń lub napisz wiadomość. / Ara veya mesaj yaz.
+natomiast / zarf /  / ise, oysa / On lubi sport, natomiast ona woli czytać. / O sporu sever, o ise okumayı tercih eder.
+niż / zarf /  / -den/-dan (karşılaştırma) / Ona jest starsza niż ja. / O benden daha büyük.
+oraz / zarf /  / ve, ile / Kupię chleb oraz mleko. / Ekmek ve süt alacağım.
+ponieważ / zarf /  / çünkü, -dığı için / Nie przyszedłem, ponieważ byłem chory. / Hasta olduğum için gelmedim.
+również / zarf /  / ayrıca, de/da / Ona również mówi po polsku. / O da Lehçe biliyor.
+także / zarf /  / ayrıca, de/da / Uczę się polskiego, a także rosyjskiego. / Lehçe öğreniyorum, aynı zamanda Rusça da.
+więc / zarf /  / bu yüzden, dolayısıyla / Byłem zmęczony, więc poszedłem spać. / Yorgundum, bu yüzden uyudum.
+zarówno / zarf /  / hem... hem de / Lubię zarówno muzykę klasyczną, jak i jazz. / Hem klasik müziği hem de cazı seviyorum.
+że / zarf /  / ki, -dığını / Myślę, że masz rację. / Haklı olduğunu düşünüyorum.
+żeby / zarf /  / -mek/-mak için, diye / Mówię wolno, żebyś rozumiał. / Anlayasın diye yavaş konuşuyorum.
+chyba że / zarf /  / olmadıkça, meğer ki / Przyjdę, chyba że zachoruję. / Hasta olmazsam gelirim.
