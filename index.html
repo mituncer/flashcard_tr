@@ -1,0 +1,2833 @@
+<!DOCTYPE html>
+<html lang="tr" xml:lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolonceKart · Ders</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0e0e10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PolonceKart">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e10; --surface: #18181c; --surface2: #222228;
+      --border: #2e2e38; --text: #f0f0f2; --text-muted: #6e6e80;
+      --text-dim: #2e2e40; --gold: #c9a96e; --gold-soft: rgba(201,169,110,.12);
+      --red: #e05a5a; --green: #5abf8a;
+    }
+
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; overflow: hidden; user-select: none; }
+
+    .app { height: 100vh; height: 100dvh; display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; position: relative; }
+
+    .header { display: flex; flex-direction: column; padding: 16px 20px 10px; flex-shrink: 0; gap: 10px; }
+    .header-row1 { display: flex; align-items: center; justify-content: space-between; }
+    .header-row2 { display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo-badge { width: 30px; height: 30px; border: 1px solid var(--gold); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 12px; color: var(--gold); flex-shrink: 0; }
+    .logo-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); letter-spacing: -.5px; }
+    .counter-badge { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; }
+
+    .progress-wrap { padding: 0 24px 4px; flex-shrink: 0; }
+    .progress-track { height: 3px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #e8c98a); border-radius: 2px; transition: width .5s cubic-bezier(.4,0,.2,1); }
+    .progress-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 10px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
+
+    .stage { flex: 1; display: flex; align-items: center; justify-content: center; padding: 8px 20px; position: relative; overflow: hidden; }
+    .hint-arrow { position: absolute; font-size: 9px; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; pointer-events: none; display: flex; align-items: center; gap: 3px; }
+    .hint-arrow.top    { top: 20px; left: 50%; transform: translateX(-50%); flex-direction: column; }
+    .hint-arrow.bottom { bottom: 20px; left: 50%; transform: translateX(-50%); flex-direction: column-reverse; }
+    .hint-arrow.right  { right: 8px; top: 50%; transform: translateY(-50%); }
+
+    .card-container { width: 100%; perspective: 1200px; cursor: pointer; transform-style: preserve-3d; }
+    .card-inner { position: relative; width: 100%; transform-style: preserve-3d; transition: transform .55s cubic-bezier(.4,0,.2,1); }
+    .card-inner.flipped { transform: rotateY(180deg); }
+
+    /* Arka yüz içeriği animasyon yarısına kadar gizli */
+    .card-back .card-label,
+    .card-back .polish-small,
+    .card-back .turkish-word,
+    .card-back #back-polish,
+    .card-back #turkish-word,
+    .card-back #gender-badge-back,
+    .card-back #mini-back-polish,
+    .card-back #mini-turkish-word,
+    .card-back #mini-gender-badge-back,
+    .card-back .card-star-btn,
+    .card-back .divider {
+      opacity: 0;
+      transition: opacity 0s;
+    }
+    /* Ön yüz elemanlarını arka yüzde tamamen gizle */
+    .card-front .hint-btn,
+    .card-front .flip-hint,
+    .card-front .card-star-btn {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .card-inner.flipped .card-back .card-label,
+    .card-inner.flipped .card-back .polish-small,
+    .card-inner.flipped .card-back .turkish-word,
+    .card-inner.flipped .card-back #back-polish,
+    .card-inner.flipped .card-back #turkish-word,
+    .card-inner.flipped .card-back #gender-badge-back,
+    .card-inner.flipped .card-back #mini-back-polish,
+    .card-inner.flipped .card-back #mini-turkish-word,
+    .card-inner.flipped .card-back #mini-gender-badge-back,
+    .card-inner.flipped .card-back .divider {
+      opacity: 1;
+      transition: opacity .1s ease .2s;
+    }
+    .card-inner.flipped .card-back .card-star-btn {
+      opacity: .4;
+      transition: opacity .1s ease .2s;
+    }
+    .card-inner.flipped .card-back .card-star-btn.starred,
+    .card-inner.flipped .card-back .card-star-btn:hover {
+      opacity: 1;
+    }
+
+    .card-face {
+      width: 100%; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 28px; padding: 40px 32px 32px; text-align: center;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.04) inset;
+      position: relative; overflow: hidden;
+    }
+    .card-face::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 55%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.07), transparent); }
+    .card-face::after  { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.015) 1px, transparent 1px); background-size: 24px 24px; border-radius: 28px; pointer-events: none; }
+    .card-back { position: absolute; top: 0; left: 0; transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+    .card-front { transform: rotateY(0deg); -webkit-transform: rotateY(0deg); }
+    /* iOS Safari düzeltmesi: backface-visibility alt elemanlarda (z-index'li
+       .hint-btn vb.) güvenilir çalışmaz — ön yüz arkada aynalı görünür.
+       Yüzleri dönüşün ortasında (.55s animasyonun ~yarısı) visibility ile gizle. */
+    .card-front, .card-back { transition: visibility 0s linear .2s; }
+    .card-inner.flipped .card-front { visibility: hidden; }
+    .card-inner:not(.flipped) .card-back { visibility: hidden; }
+
+    .card-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 18px; font-family: 'DM Mono', monospace; }
+    .polish-word { font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; font-size: 48px; color: var(--text); letter-spacing: -2.5px; line-height: 1.15; margin-bottom: 14px; word-break: break-word; overflow-wrap: break-word; white-space: normal; hyphens: auto; -webkit-hyphens: auto; -ms-hyphens: auto; }
+
+    .gender-badge { display: inline-flex; align-items: center; padding: 5px 16px; border-radius: 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 14px; }
+    .gender-badge.meski  { background: rgba(106,171,247,.1); color: #6aabf7; border: 1px solid rgba(106,171,247,.2); }
+    .gender-badge.zenski { background: rgba(247,141,167,.1); color: #f78da7; border: 1px solid rgba(247,141,167,.2); }
+    .gender-badge.nijaki { background: rgba(168,216,168,.1); color: #a8d8a8; border: 1px solid rgba(168,216,168,.2); }
+    .gender-badge.cogul  { background: rgba(201,169,110,.1); color: var(--gold); border: 1px solid rgba(201,169,110,.2); }
+    .gender-badge.fiil   { background: rgba(180,130,255,.1); color: #b482ff; border: 1px solid rgba(180,130,255,.2); }
+    .gender-badge.sifat  { background: rgba(255,180,80,.1);  color: #ffb450; border: 1px solid rgba(255,180,80,.2); }
+    .gender-badge.zarf   { background: rgba(100,220,180,.1); color: #64dcb4; border: 1px solid rgba(100,220,180,.2); }
+
+    .hint-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 18px; border-radius: 20px; border: 1px solid var(--border);
+      background: var(--surface2); color: var(--text-muted);
+      font-size: 11px; letter-spacing: 1px; cursor: pointer;
+      transition: all .2s; font-family: 'Outfit', sans-serif; margin-top: 4px;
+      position: relative; z-index: 5;
+    }
+    .hint-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+
+    .flip-hint { font-size: 10px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 10px; }
+
+    .turkish-word { font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; font-size: 44px; color: var(--text); letter-spacing: -2px; line-height: 1.1; margin-bottom: 8px; }
+    .tr-sub { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 400; color: var(--text-muted); letter-spacing: .3px; display: block; margin-top: 6px; line-height: 1.4; }
+    .list-tr .tr-sub { font-size: 11px; display: inline; margin-top: 0; opacity: .75; }
+    .list-pl .tr-sub { font-size: 11px; display: block; margin-top: 2px; opacity: .6; letter-spacing: .3px; }
+    .polish-small { font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; font-size: 20px; color: var(--text-muted); letter-spacing: -1px; margin-bottom: 8px; }
+    .divider { width: 32px; height: 1px; background: var(--border); margin: 12px auto; }
+
+    .actions { display: flex; gap: 10px; padding: 8px 16px 12px; flex-shrink: 0; }
+    .btn { flex: 1; padding: 10px 8px; border-radius: 14px; border: none; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 500; cursor: pointer; transition: all .2s ease; display: flex; flex-direction: column; align-items: center; gap: 3px; letter-spacing: .3px; }
+    .btn-icon { font-size: 19px; }
+    .btn-wrong   { background: rgba(224,90,90,.1);  color: var(--red);   border: 1px solid rgba(224,90,90,.18); }
+    .btn-correct { background: rgba(90,191,138,.1); color: var(--green); border: 1px solid rgba(90,191,138,.18); }
+    .btn-save    { background: var(--gold-soft);    color: var(--gold);  border: 1px solid rgba(201,169,110,.2); }
+    .btn-wrong:hover   { background: rgba(224,90,90,.2);  transform: translateY(-2px); }
+    .btn-correct:hover { background: rgba(90,191,138,.2); transform: translateY(-2px); }
+    .btn-save:hover    { background: rgba(201,169,110,.2); transform: translateY(-2px); }
+    .actions-hidden .btn  { opacity: 0; pointer-events: none; transform: translateY(8px); transition: all .25s ease; }
+    .actions-visible .btn { opacity: 1; pointer-events: all; transform: translateY(0); transition: all .25s ease; }
+    .actions-visible .btn:nth-child(1) { transition-delay: .05s; }
+    .actions-visible .btn:nth-child(2) { transition-delay: .10s; }
+    .actions-visible .btn:nth-child(3) { transition-delay: .15s; }
+
+    .dot-nav { display: flex; justify-content: center; gap: 6px; padding: 0 24px 20px; flex-shrink: 0; }
+    .dot { width: 5px; height: 5px; border-radius: 3px; background: var(--border); transition: all .35s ease; cursor: pointer; }
+    .dot.current { width: 20px; background: var(--gold); }
+    .dot.learned { background: var(--green); opacity: .6; }
+    .dot.wrong   { background: var(--red); opacity: .6; }
+    .dot.saved   { background: var(--gold); opacity: .5; }
+
+    .swipe-feedback { position: absolute; inset: 0; border-radius: 28px; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 10; }
+    .swipe-feedback.right-glow { background: radial-gradient(ellipse at right, rgba(90,191,138,.15), transparent 70%); }
+    .swipe-feedback.left-glow  { background: radial-gradient(ellipse at left,  rgba(224,90,90,.15),  transparent 70%); }
+    .swipe-feedback.up-glow    { background: radial-gradient(ellipse at top,   rgba(201,169,110,.12), transparent 70%); }
+    .swipe-feedback.show       { opacity: 1; }
+
+    /* HINT OVERLAY */
+    .hint-overlay {
+      position: fixed; inset: 0; z-index: 80;
+      display: flex; align-items: flex-end; justify-content: center;
+      background: rgba(0,0,0,.65); backdrop-filter: blur(4px);
+      opacity: 0; pointer-events: none; transition: opacity .3s ease;
+      max-width: 480px; margin: 0 auto;
+    }
+    .hint-overlay.show { opacity: 1; pointer-events: all; }
+    .hint-sheet {
+      width: 100%; background: var(--surface); border: 1px solid var(--border);
+      border-top: 1px solid rgba(201,169,110,.2);
+      border-radius: 28px 28px 0 0; padding: 28px 28px 44px;
+      transform: translateY(40px); transition: transform .35s cubic-bezier(.4,0,.2,1); cursor: pointer;
+    }
+    .hint-overlay.show .hint-sheet { transform: translateY(0); }
+    .hint-sheet-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-family: 'DM Mono', monospace; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+    .hint-sheet-tag::before { content: ''; width: 24px; height: 1px; background: var(--gold); opacity: .4; }
+    .hint-word { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--text); letter-spacing: -1px; margin-bottom: 18px; }
+    .hint-word span { color: var(--gold); }
+    .hint-sentence-pl { font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 10px; font-style: italic; }
+    .hint-sentence-pl strong { color: var(--gold); font-style: normal; font-weight: 600; }
+    .hint-sentence-tr { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .hint-sentence-tr em { color: rgba(201,169,110,.7); font-style: normal; }
+    .hint-close-hint { text-align: center; margin-top: 24px; font-size: 10px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* COMPLETION */
+    .complete-screen {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 40px; opacity: 0; pointer-events: none; transition: opacity .5s ease; z-index: 50;
+      max-width: 480px; margin: 0 auto;
+    }
+    .complete-screen.show { opacity: 1; pointer-events: all; }
+    .complete-icon { font-size: 52px; margin-bottom: 16px; }
+    .complete-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--text); letter-spacing: -1.5px; margin-bottom: 6px; text-align: center; }
+    .complete-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; text-align: center; }
+    .complete-stats { display: flex; gap: 12px; margin-bottom: 20px; width: 100%; }
+    .c-stat { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px 10px; text-align: center; }
+    .c-stat.clickable { cursor: pointer; transition: all .2s; }
+    .c-stat.clickable:hover { border-color: var(--gold); background: var(--gold-soft); transform: translateY(-2px); }
+    .c-stat-num { font-family: 'DM Mono', monospace; font-size: 30px; font-weight: 300; margin-bottom: 4px; }
+    .c-stat-lbl { font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+    .c-stat-tap { font-size: 9px; color: var(--gold); letter-spacing: 1px; margin-top: 5px; }
+    .btn-restart { width: 100%; padding: 16px; background: var(--gold-soft); border: 1px solid rgba(201,169,110,.3); border-radius: 16px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; color: var(--gold); cursor: pointer; transition: all .2s; letter-spacing: .5px; margin-top: 8px; }
+    .btn-restart:hover { background: rgba(201,169,110,.2); }
+
+    .splash-help-btn { background: none; border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Outfit', sans-serif; font-size: 13px; padding: 8px 20px; cursor: pointer; margin-top: 12px; transition: all .2s; }
+    .splash-help-btn:hover { color: var(--text); border-color: var(--text-muted); }
+    .kofi-btn { display: block; text-align: center; margin-top: 10px; padding: 8px 20px; background: rgba(255,94,91,.1); border: 1px solid rgba(255,94,91,.3); border-radius: 20px; color: #ff5e5b; font-family: 'Outfit', sans-serif; font-size: 13px; text-decoration: none; transition: all .2s; }
+    .kofi-btn:hover { background: rgba(255,94,91,.2); }
+
+    /* HELP MODAL */
+    .help-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 200; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+    .help-overlay.show { opacity: 1; pointer-events: all; }
+    .help-modal { background: var(--surface); border: 1px solid var(--border); border-radius: 28px 28px 0 0; width: 100%; max-width: 480px; max-height: 85vh; display: flex; flex-direction: column; transform: translateY(20px); transition: transform .3s ease; }
+    .help-overlay.show .help-modal { transform: translateY(0); }
+    .help-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 12px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .help-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--gold); }
+    .help-body { overflow-y: auto; padding: 16px 24px 32px; }
+    .help-section { margin-bottom: 24px; }
+    .help-section-title { font-size: 12px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
+    .help-item { font-size: 13px; color: var(--text-muted); padding: 5px 0; display: flex; align-items: center; gap: 8px; line-height: 1.5; }
+    .help-key { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 2px 8px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text); white-space: nowrap; flex-shrink: 0; }
+    .help-badge { border-radius: 20px; padding: 2px 10px; font-size: 10px; font-weight: 600; letter-spacing: .5px; flex-shrink: 0; }
+    .help-badge.meski  { background: rgba(100,160,255,.1); color: #64a0ff; border: 1px solid rgba(100,160,255,.2); }
+    .help-badge.zenski { background: rgba(255,100,160,.1); color: #ff64a0; border: 1px solid rgba(255,100,160,.2); }
+    .help-badge.nijaki { background: rgba(100,200,150,.1); color: #64c896; border: 1px solid rgba(100,200,150,.2); }
+    .help-badge.cogul  { background: rgba(201,169,110,.1); color: #c9a96e; border: 1px solid rgba(201,169,110,.2); }
+    .help-badge.fiil   { background: rgba(160,100,255,.1); color: #a064ff; border: 1px solid rgba(160,100,255,.2); }
+    .help-badge.sifat  { background: rgba(255,180,80,.1);  color: #ffb450; border: 1px solid rgba(255,180,80,.2); }
+    .help-badge.zarf   { background: rgba(100,220,180,.1); color: #64dcb4; border: 1px solid rgba(100,220,180,.2); }
+    .splash {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 100; padding: 40px 32px; text-align: center;
+      max-width: 480px; margin: 0 auto;
+      opacity: 1; pointer-events: all; transition: opacity .5s ease;
+    }
+    .splash.hide { opacity: 0; pointer-events: none; }
+    .splash-badge { width: 72px; height: 72px; border: 1px solid var(--gold); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 20px; box-shadow: 0 0 40px rgba(201,169,110,.15); }
+    .splash-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--text); letter-spacing: -.5px; margin-bottom: 6px; }
+    .splash-sub { font-size: 12px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 48px; }
+    .splash-divider { width: 40px; height: 1px; background: var(--border); margin: 0 auto 32px; }
+    .splash-copy { font-size: 12px; color: var(--text-muted); line-height: 1.8; margin-bottom: 8px; }
+    .splash-copy-tr { font-size: 11px; color: var(--text-dim); line-height: 1.8; margin-bottom: 40px; letter-spacing: .3px; }
+    .splash-btn { width: 100%; padding: 16px; background: var(--gold-soft); border: 1px solid rgba(201,169,110,.3); border-radius: 16px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; color: var(--gold); cursor: pointer; transition: all .2s; letter-spacing: .5px; }
+    .splash-btn:hover { background: rgba(201,169,110,.2); }
+
+    .mini-tour {
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none; transition: opacity .4s ease; z-index: 60;
+      max-width: 480px; margin: 0 auto;
+    }
+    .mini-tour.show { opacity: 1; pointer-events: all; }
+    .mini-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 12px; flex-shrink: 0; }
+    .mini-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--gold); }
+    .mini-close-btn { font-size: 11px; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; cursor: pointer; font-family: 'Outfit', sans-serif; transition: all .2s; }
+    .mini-close-btn:hover { color: var(--text); }
+    .mini-done-wrap { padding: 0 24px 24px; flex-shrink: 0; }
+    .mini-actions { display: flex; gap: 12px; padding: 8px 24px 4px; flex-shrink: 0; }
+    /* Ana kart davranışıyla aynı: butonlar sadece kart çevrilince görünür.
+       .actions-hidden / .actions-visible class'ları mini-actions'a da uygulanır. */
+
+    .mode-btn {
+      font-size: 13px; font-family: 'Outfit', sans-serif;
+      border-radius: 20px; padding: 7px 14px; cursor: pointer;
+      transition: all .25s; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text-muted);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .mode-btn.tr-mode { border-color: rgba(106,171,247,.4); color: #6aabf7; background: rgba(106,171,247,.08); }
+    .back-btn {
+      font-size: 13px; color: var(--text-muted); background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px; padding: 7px 14px;
+      cursor: pointer; font-family: 'Outfit', sans-serif; transition: all .2s;
+      letter-spacing: .5px; white-space: nowrap; flex-shrink: 0;
+    }
+    .back-btn:hover { color: var(--gold); border-color: var(--gold); background: var(--gold-soft); }
+    .splash-dir-btn {
+      padding: 8px 24px; border-radius: 20px; border: 2px solid var(--gold);
+      background: var(--gold-soft); color: var(--gold);
+      font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: all .2s; letter-spacing: 1px;
+    }
+    .splash-dir-btn:hover { background: rgba(201,169,110,.25); }
+    .splash-set-btn {
+      width: 100%; padding: 14px 20px; border-radius: 14px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-muted); font-family: 'Outfit', sans-serif;
+      font-size: 15px; font-weight: 500; cursor: pointer; transition: all .2s;
+      text-align: left;
+    }
+    .splash-set-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+    .splash-set-btn.active { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); box-shadow: 0 0 0 1px var(--gold); }
+    .finish-btn {
+      font-size: 13px; color: var(--text-muted); background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px; padding: 7px 14px;
+      cursor: pointer; font-family: 'Outfit', sans-serif; transition: all .2s;
+      letter-spacing: .5px; white-space: nowrap; flex-shrink: 0;
+    }
+    .finish-btn:hover { color: var(--red); border-color: var(--red); background: rgba(224,90,90,.08); }
+    .card-star-btn {
+      position: absolute; top: 12px; right: 12px; z-index: 6;
+      background: none; border: none; font-size: 22px; cursor: pointer;
+      opacity: 0.4; transition: opacity .2s; line-height: 1;
+      padding: 4px;
+    }
+    .card-star-btn:hover { opacity: 1; }
+    .card-star-btn.starred { opacity: 1; }
+    .list-btn {
+      font-size: 15px; color: var(--text-muted); background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px; padding: 7px 12px;
+      cursor: pointer; font-family: 'Outfit', sans-serif; transition: all .2s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .list-btn:hover { color: var(--gold); border-color: var(--gold); background: var(--gold-soft); }
+    @keyframes slideInLeft  { from { opacity:0; transform: translateX(-40px); } to { opacity:1; transform: translateX(0); } }
+    @keyframes slideInUp    { from { opacity:0; transform: translateY(30px); }  to { opacity:1; transform: translateY(0); } }
+    .slide-right { animation: slideInRight .35s cubic-bezier(.4,0,.2,1) both; }
+    .slide-left  { animation: slideInLeft  .35s cubic-bezier(.4,0,.2,1) both; }
+    .slide-up    { animation: slideInUp    .35s cubic-bezier(.4,0,.2,1) both; }
+
+    /* LIST OVERLAY */
+    .list-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 150; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+    .list-overlay.show { opacity: 1; pointer-events: all; }
+    .list-modal { background: var(--surface); border: 1px solid var(--border); border-radius: 28px 28px 0 0; width: 100%; max-width: 480px; max-height: 88vh; display: flex; flex-direction: column; transform: translateY(20px); transition: transform .3s ease; }
+    .list-overlay.show .list-modal { transform: translateY(0); }
+    .list-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .list-modal-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--gold); }
+    .list-tabs { display: flex; gap: 6px; padding: 10px 16px; flex-shrink: 0; overflow-x: auto; }
+    .list-tab { flex-shrink: 0; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); color: var(--text-muted); font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer; transition: all .2s; }
+    .list-tab.active { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+    .list-sort-btn { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); color: var(--text-muted); font-family: 'Outfit', sans-serif; font-size: 11px; cursor: pointer; transition: all .2s; margin-right: 4px; }
+    .list-sort-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .active-chip { border-color: var(--gold) !important; color: var(--gold) !important; background: rgba(201,169,110,.14) !important; }
+    .filter-row { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:4px; align-items:center; }
+    #list-filter-bar { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    .wbadge { display:inline-block; font-size:10px; padding:1px 6px; border-radius:6px; margin-right:4px; font-weight:600; }
+    .wbadge-type { background: rgba(90,150,220,.18); color:#8fb8ff; }
+    .wbadge-tag { background: rgba(160,110,220,.18); color:#c9a6ff; }
+    .list-badges { width:100%; margin-top:2px; order:5; }
+    .list-group-header { color: var(--gold); font-weight:700; font-size:13px; padding:10px 4px 4px; }
+    .list-edit { cursor:pointer; opacity:.55; padding:2px 5px; font-size:14px; }
+    .list-edit:hover { opacity:1; }
+    .list-start-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid rgba(90,191,138,.4); background: rgba(90,191,138,.1); color: var(--green); font-family: 'Outfit', sans-serif; font-size: 12px; cursor: pointer; transition: all .2s; margin-right: 6px; }
+    .list-start-btn:hover { background: rgba(90,191,138,.2); }
+    .list-add-row { display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 4px; flex-shrink: 0; }
+    .list-input { flex: 1; min-width: 120px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; }
+    .list-input:focus { border-color: var(--gold); }
+    .list-add-btn { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(201,169,110,.3); background: var(--gold-soft); color: var(--gold); font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; }
+    .list-body { overflow-y: auto; padding: 8px 16px 32px; flex: 1; }
+    .list-item { display: flex; align-items: center; flex-wrap: wrap; padding: 10px 4px; border-bottom: 1px solid var(--border); gap: 8px; cursor: pointer; }
+    .list-item:last-child { border-bottom: none; }
+    .list-pl { font-family: 'IBM Plex Sans', sans-serif; font-weight: 400; font-size: 15px; color: var(--text); flex: 1; }
+    .list-tr { font-size: 13px; color: var(--text-muted); flex: 1; text-align: right; }
+    .list-star { font-size: 16px; cursor: pointer; flex-shrink: 0; opacity: 0.4; transition: opacity .2s; }
+    .list-remove { font-size: 14px; cursor: pointer; flex-shrink: 0; opacity: 0.4; transition: opacity .2s; }
+    .list-remove:hover { opacity: 1; }
+    .list-pin { font-size: 15px; cursor: pointer; flex-shrink: 0; filter: grayscale(1); opacity: 0.4; transition: filter .2s, opacity .2s; }
+    .list-pin.active { filter: grayscale(0); opacity: 1; }
+    .list-star.active { opacity: 1; }
+    .list-delete-btn { padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(224,90,90,.4); background: rgba(224,90,90,.1); color: var(--red); font-family: 'Outfit', sans-serif; font-size: 11px; cursor: pointer; transition: all .2s; margin-right: 4px; }
+    .list-delete-btn:hover { background: rgba(224,90,90,.2); }
+    .text-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.82); z-index: 300; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .25s; }
+    .text-modal-overlay.show { opacity: 1; pointer-events: all; }
+    .text-modal { background: var(--surface); border: 1px solid var(--border); border-radius: 24px 24px 0 0; width: 100%; max-width: 480px; max-height: 75vh; display: flex; flex-direction: column; transform: translateY(20px); transition: transform .25s; }
+    .text-modal-overlay.show .text-modal { transform: translateY(0); }
+    .text-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .text-modal-title { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; color: var(--text); }
+    .text-modal-body { flex: 1; overflow-y: auto; padding: 12px 16px; }
+    .text-modal-pre { font-family: monospace; font-size: 11px; color: var(--text-muted); white-space: pre-wrap; word-break: break-all; margin: 0; line-height: 1.5; }
+    .text-modal-footer { padding: 12px 16px 24px; flex-shrink: 0; border-top: 1px solid var(--border); }
+    .list-item.marked-delete { background: rgba(224,90,90,.07); border-radius: 8px; }
+    .list-item.marked-delete .list-pl { color: var(--red); }
+    .list-item.marked-delete .list-remove { opacity: 1; }
+    .list-item-example { width: 100%; padding: 5px 2px 2px; font-size: 12px; color: var(--text-muted); display: none; line-height: 1.7; border-top: 1px solid rgba(255,255,255,.05); margin-top: 2px; }
+    .list-item-example .ex-pl { font-style: italic; }
+    .list-item.expanded .list-item-example { display: block; }
+    .list-badge { font-size: 9px; padding: 1px 6px; border-radius: 8px; flex-shrink: 0; }
+    .list-empty { text-align: center; color: var(--text-muted); font-size: 13px; padding: 40px 0; }
+
+  </style>
+</head>
+<body>
+
+<div class="splash" id="splash">
+  <div class="splash-badge">PK</div>
+  <div class="splash-title">PolonceKart</div>
+  <div class="splash-sub">Polish · Turkish Flashcards</div>
+  <div style="font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-top:-40px;margin-bottom:40px;">VER 2.0</div>
+  <div class="splash-divider"></div>
+  <div class="splash-copy">
+    This application was developed by<br>
+    <strong style="color:var(--text)">Mustafa Tuncer</strong><br>
+    <span id="contact-email" style="color:var(--gold)"></span><br><br>
+    Commercial use is prohibited.
+  </div>
+  <div class="splash-copy-tr">
+    Bu uygulama Mustafa Tuncer tarafından hazırlanmıştır.<br>
+    Ticari kullanımı yasaktır.
+  </div>
+  <!-- Direction toggle -->
+  <div style="display:flex;justify-content:center;margin-bottom:12px;">
+    <button class="splash-dir-btn" id="splash-dir-btn" onclick="toggleSplashDir()">PL → TR</button>
+  </div>
+  <!-- Set selection -->
+  <div style="display:flex;flex-direction:column;gap:8px;width:100%;margin-bottom:12px;">
+    <button class="splash-set-btn" id="splash-btn-gunluk" onclick="startApp('gunluk')">📘 Günlük Cümleler</button>
+    <button class="splash-set-btn" id="splash-btn-b1" onclick="startApp('b1')">🎓 B1 Kelimeler</button>
+    <button class="splash-set-btn" id="splash-btn-diger" onclick="openDigerModal()">📂 Diğer</button>
+    <button class="splash-set-btn" id="splash-btn-calisma" onclick="startApp('calisma')">📌 Çalışma Seti</button>
+    <button class="splash-set-btn" id="splash-btn-gunlukset" onclick="startGunlukSet()">⭐ Günlük Set</button>
+  </div>
+  <div id="splash-empty-msg" style="display:none;color:var(--red);font-size:12px;text-align:center;padding:8px 0;background:rgba(224,90,90,.1);border:1px solid rgba(224,90,90,.3);border-radius:10px;margin-bottom:4px;">📌 Çalışma seti boş — diğer seçeneklerden başla</div>
+  <button class="splash-help-btn" onclick="openHelp()">? Nasıl Çalışır</button>
+  <a href="https://ko-fi.com/webbeee" target="_blank" class="kofi-btn">☕ Ko-fi'de Destek Ol</a>
+</div>
+
+<!-- HELP MODAL -->
+<div class="help-overlay" id="help-overlay">
+  <div class="help-modal">
+    <div class="help-header">
+      <div class="help-title">Nasıl Çalışır?</div>
+      <button class="mini-close-btn" onclick="closeHelp()">✕ Kapat</button>
+    </div>
+    <div class="help-body">
+
+      <div class="help-section">
+        <div id="build-info-line" style="font-size:12px;color:var(--text-muted);opacity:0.7;margin-bottom:10px;text-align:left;letter-spacing:0.3px">PolonceKart · v2.0 · build —</div>
+        <div class="help-section-title" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--text-muted);font-weight:400;margin-bottom:16px">PolonceKart, Lehçe-Türkçe kelime öğrenmek için hazırlanmış bir flash kart uygulamasıdır. Kartları çevirerek kelimeleri tekrarla, bilmediklerini işaretle, setlerinle çalış.</div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-title">📚 Kelime Setleri</div>
+        <div class="help-item"><span class="help-key">📘 Günlük Cümleler</span> Temel ifadeler ve günlük konuşmalar</div>
+        <div class="help-item"><span class="help-key">🎓 B1 Kelimeler</span> Orta seviye kelime listesi</div>
+        <div class="help-item"><span class="help-key">📌 Çalışma Seti</span> Bilmediğin, işaretlediğin kelimeler</div>
+        <div class="help-item"><span class="help-key">PL→TR / TR→PL</span> Yön tuşuyla soru yönünü değiştir</div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-title">🃏 Kart Ekranı</div>
+        <div class="help-item"><span class="help-key">→ kaydır / tıkla</span> Kartı çevir, çeviriyi gör</div>
+        <div class="help-item"><span class="help-key">↓ / ↑ kaydır</span> Sonraki / önceki kart</div>
+        <div class="help-item"><span class="help-key">✅ Doğru</span> Biliyorum — sonraki karta geç</div>
+        <div class="help-item"><span class="help-key">❌ Yanlış</span> Bilmiyorum — sonraki karta geç</div>
+        <div class="help-item"><span class="help-key">📌 Çalışma Setine Ekle</span> Kelimeyi çalışma setine ekle</div>
+        <div class="help-item"><span class="help-key">☆ / ⭐</span> Kartın iki yüzünde de — günlük sete ekle / çıkar</div>
+        <div class="help-item"><span class="help-key">💡 Örnek cümle</span> Kelimeyi cümle içinde gör</div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-title">📌 / ⭐ Çalışırken</div>
+        <div class="help-item"><span class="help-key">✅ Doğru / ❌ Yanlış</span> Oturum sonunda sayıları verilir</div>
+        <div class="help-item"><span class="help-key">🎓 Öğrendim — Çalışma'da</span> Kelimeyi çalışma setinden kalıcı çıkarır</div>
+        <div class="help-item"><span class="help-key">🎓 Öğrendim — Günlük'te</span> Sadece günlükten çıkarır (çalışmada kalır)</div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-title">☰ Liste Görünümü</div>
+        <div class="help-item">Tüm kelimeleri PL→TR olarak listele</div>
+        <div class="help-item"><span class="help-key">📌 Çalışma</span> Çalışma setindeki kelimeler — 🗑 ile çıkar</div>
+        <div class="help-item"><span class="help-key">⭐ Günlük</span> Günlük set — ⭐ tıklayarak çıkar</div>
+        <div class="help-item"><span class="help-key">✏️ Kelime Ekle</span> Kendi kelimenizi ekle — otomatik çalışma setine girer</div>
+        <div class="help-item"><span class="help-key">▶ Başlat</span> Seçili seti kart modunda başlat</div>
+        <div class="help-item"><span class="help-key">A→Z</span> Listeyi alfabetik / ters / rastgele sırala</div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-title">⭐ Günlük Set</div>
+        <div class="help-item">Çalışma setinden günlük odaklanmak istediğin kelimeleri seç</div>
+        <div class="help-item">Kart ekranında ☆ butonu ile ekle, listeden ⭐ ile çıkar</div>
+        <div class="help-item">Listeden ▶ Başlat ile sadece günlük setini çalış</div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-title">📌 Çalışma Seti</div>
+        <div class="help-item">📌 ile işaretlediğin kelimeler burada toplanır</div>
+        <div class="help-item"><span class="help-key">🎓 Öğrendim</span> Kelimeyi setten kalıcı olarak çıkarır</div>
+        <div class="help-item">Tüm veriler telefonda saklanır — kapanıp açılsa bile kaybolmaz</div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-title">🏷️ Rozet Renkleri</div>
+        <div class="help-item"><span class="help-badge meski">eril</span> Eril isim (ten / meski)</div>
+        <div class="help-item"><span class="help-badge zenski">dişil</span> Dişil isim (ta / żeński)</div>
+        <div class="help-item"><span class="help-badge nijaki">nötr</span> Nötr isim (to / nijaki)</div>
+        <div class="help-item"><span class="help-badge cogul">çoğul</span> Çoğul isim</div>
+        <div class="help-item"><span class="help-badge fiil">fiil</span> Fiil</div>
+        <div class="help-item"><span class="help-badge sifat">sıfat</span> Sıfat</div>
+        <div class="help-item"><span class="help-badge zarf">zarf</span> Zarf</div>
+      </div>
+
+      <div class="help-section">
+        <div class="help-section-title">⌨️ Klavye Kısayolları</div>
+        <div class="help-item"><span class="help-key">→ / Boşluk</span> Kartı çevir</div>
+        <div class="help-item"><span class="help-key">↓ / ↑</span> Sonraki / önceki kart</div>
+        <div class="help-item"><span class="help-key">Enter</span> Doğru</div>
+        <div class="help-item"><span class="help-key">Backspace</span> Yanlış</div>
+        <div class="help-item"><span class="help-key">Tab</span> Çalışma setine ekle</div>
+        <div class="help-item"><span class="help-key">Esc</span> Kapat / geri</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="app">
+  <div class="header">
+    <div class="header-row1">
+      <div class="logo">
+        <div class="logo-badge">PK</div>
+        <div class="logo-name">PolonceKart</div>
+      </div>
+      <div class="counter-badge" id="counter">1 / 34</div>
+    </div>
+    <div class="header-row2">
+      <button class="back-btn" id="back-btn" onclick="goToSplash()">◀ Başa Dön</button>
+      <button class="mode-btn" id="mode-btn">PL → TR</button>
+      <button class="list-btn" id="list-btn" onclick="openList()">☰</button>
+      <button class="finish-btn" id="finish-btn">■ Bitir</button>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:4%"></div></div>
+    <div class="progress-labels"><span id="lbl-learned">0 öğrenildi</span><span id="lbl-remain">23 kaldı</span></div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="hint-arrow top">▲<span>sonraki</span></div>
+    <div class="hint-arrow bottom">▼<span>önceki</span></div>
+    <div class="hint-arrow right">türkçe ▸</div>
+    <div class="card-container" id="card-container">
+      <div class="card-inner" id="card-inner">
+        <div class="card-face card-front">
+          <div class="swipe-feedback right-glow" id="fb-right"></div>
+          <div class="swipe-feedback left-glow"  id="fb-left"></div>
+          <div class="swipe-feedback up-glow"    id="fb-up"></div>
+          <button class="card-star-btn" id="main-star-btn" onclick="event.stopPropagation(); toggleMainStar()"><span id="main-star-icon">☆</span></button>
+          <div class="card-label">lehçe</div>
+          <div class="polish-word" id="polish-word">—</div>
+          <div id="gender-badge-front"></div>
+          <button class="hint-btn">💡 örnek cümle</button>
+          <div class="flip-hint">kaydır → türkçe gör</div>
+        </div>
+        <div class="card-face card-back">
+          <button class="card-star-btn" id="main-star-btn-back" onclick="event.stopPropagation(); toggleMainStar()"><span id="main-star-icon-back">☆</span></button>
+          <div class="card-label">türkçe</div>
+          <div class="polish-small" id="back-polish">—</div>
+          <div id="gender-badge-back"></div>
+          <div class="divider"></div>
+          <div class="turkish-word" id="turkish-word">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions actions-hidden" id="actions">
+    <button class="btn btn-wrong"   onclick="markWrong()">  <span class="btn-icon">❌</span>Yanlış</button>
+    <button class="btn btn-correct" onclick="markCorrect()"><span class="btn-icon">✅</span>Doğru</button>
+    <button class="btn btn-save"    id="main-third-btn" onclick="markMainThird()"><span class="btn-icon" id="main-third-icon">📌</span><span id="main-third-lbl">Çalışma Setine Ekle</span></button>
+  </div>
+  <div class="dot-nav" id="dot-nav"></div>
+</div>
+
+<!-- HINT OVERLAY -->
+<div class="hint-overlay" id="hint-overlay" onclick="closeHint()">
+  <div class="hint-sheet">
+    <div class="hint-sheet-tag">örnek cümle</div>
+    <div class="hint-sentence-pl" id="hint-sentence-pl"></div>
+    <div class="hint-sentence-tr" id="hint-sentence-tr"></div>
+    <div class="hint-close-hint">dokunarak kapat · lehçeye dön</div>
+  </div>
+</div>
+
+<!-- COMPLETION -->
+<div class="complete-screen" id="complete-screen">
+  <div class="complete-icon">🎉</div>
+  <div class="complete-title">Tebrikler!</div>
+  <div class="complete-sub">Tüm kelimeleri tamamladın.</div>
+  <div class="complete-stats">
+    <div class="c-stat clickable" onclick="openResultList('correct')"><div class="c-stat-num" id="c-correct" style="color:var(--green)">0</div><div class="c-stat-lbl">Doğru</div><div class="c-stat-tap">☰ listele</div></div>
+    <div class="c-stat clickable" onclick="openResultList('wrong')"><div class="c-stat-num" id="c-wrong" style="color:var(--red)">0</div><div class="c-stat-lbl">Yanlış</div><div class="c-stat-tap">☰ listele</div></div>
+  </div>
+  <div class="complete-stats" id="complete-restart-row" style="margin-top:-8px;">
+    <div class="c-stat clickable" id="c-stat-saved" onclick="startSavedTour()">
+      <div class="c-stat-num" id="c-saved" style="color:var(--gold)">0</div>
+      <div class="c-stat-lbl">📌 Çalışma</div>
+      <div class="c-stat-tap">▶ tekrar çalış</div>
+    </div>
+    <div class="c-stat clickable" id="c-stat-star" onclick="startStarTour()">
+      <div class="c-stat-num" id="c-star" style="color:var(--gold)">0</div>
+      <div class="c-stat-lbl">⭐ Günlük</div>
+      <div class="c-stat-tap">▶ tekrar çalış</div>
+    </div>
+  </div>
+  <button class="btn-restart" onclick="restart()">🔄 Tüm Listeyi Tekrar Başla</button>
+</div>
+
+<!-- RESULT LIST OVERLAY -->
+<div class="list-overlay" id="result-list-overlay">
+  <div class="list-modal">
+    <div class="list-modal-header">
+      <div class="list-modal-title" id="result-list-title">Kelimeler</div>
+      <button class="list-sort-btn" id="result-sort-btn" onclick="cycleResultSort()" style="display:none">Sırasız</button>
+      <button class="list-delete-btn" id="result-delete-btn" style="display:none" onclick="confirmBatchDelete('result')">🗑 0 sil</button>
+      <button class="list-start-btn" id="result-start-btn" onclick="restartFromResult()">▶ Başlat</button>
+      <button class="mini-close-btn" onclick="closeResultList()">✕ Kapat</button>
+    </div>
+    <div class="list-body" id="result-list-body"></div>
+  </div>
+</div>
+
+<!-- MINI TOUR -->
+<div class="mini-tour" id="mini-tour">
+  <div class="mini-header">
+    <button class="back-btn" onclick="closeMiniTour(); goToSplash()">◀ Başa Dön</button>
+    <button class="mode-btn" id="mini-mode-btn" onclick="toggleMode()">PL → TR</button>
+    <button class="list-btn" onclick="openList()">☰</button>
+    <button class="finish-btn" onclick="closeMiniTour()">■ Kapat</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="mini-progress-fill" style="width:0%"></div></div>
+    <div class="progress-labels"><span id="mini-counter">1 / ?</span><span id="mini-remain"></span></div>
+  </div>
+  <div class="stage" id="mini-stage">
+    <div class="hint-arrow top">▲<span>sonraki</span></div>
+    <div class="hint-arrow bottom">▼<span>önceki</span></div>
+    <div class="hint-arrow right">türkçe ▸</div>
+    <div class="card-container" id="mini-card-container">
+      <div class="card-inner" id="mini-card-inner">
+        <div class="card-face card-front">
+          <button class="card-star-btn" id="mini-star-btn" onclick="event.stopPropagation(); toggleStar()"><span id="mini-star-icon">☆</span></button>
+          <div class="card-label">📌 seçili set</div>
+          <div class="polish-word" id="mini-polish-word">—</div>
+          <div id="mini-gender-badge"></div>
+          <button class="hint-btn">💡 örnek cümle</button>
+          <div class="flip-hint">kaydır → türkçe gör</div>
+        </div>
+        <div class="card-face card-back">
+          <button class="card-star-btn" id="mini-star-btn-back" onclick="event.stopPropagation(); toggleStar()"><span id="mini-star-icon-back">☆</span></button>
+          <div class="card-label">türkçe · seçili set</div>
+          <div class="polish-small" id="mini-back-polish">—</div>
+          <div id="mini-gender-badge-back"></div>
+          <div class="divider"></div>
+          <div class="turkish-word" id="mini-turkish-word">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dot-nav" id="mini-dot-nav"></div>
+  <div class="mini-actions actions-hidden" id="mini-actions">
+    <button class="btn btn-wrong"   onclick="miniMarkWrong()"><span class="btn-icon">❌</span>Yanlış</button>
+    <button class="btn btn-correct" onclick="miniMarkCorrect()"><span class="btn-icon">✅</span>Doğru</button>
+    <button class="btn btn-save"    onclick="miniMastered()"><span class="btn-icon">🎓</span>Öğrendim</button>
+  </div>
+  <div class="mini-done-wrap">
+    <div id="mini-session-stats" style="display:flex;justify-content:center;gap:24px;padding:8px 0 10px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:1.5px;color:var(--text-muted);">
+      <span style="color:var(--green)">✅ <span id="mini-correct-count">0</span></span>
+      <span style="color:var(--red)">❌ <span id="mini-wrong-count">0</span></span>
+    </div>
+    <button class="btn-restart" onclick="closeMiniTour()">✓ Bitir · Sonuçlara Dön</button>
+  </div>
+</div>
+
+<!-- DİĞER MODAL -->
+<div class="list-overlay" id="diger-overlay">
+  <div class="list-modal" style="max-height:80vh;">
+    <div class="list-modal-header" style="flex-shrink:0;">
+      <div class="list-modal-title">📂 Diğer Kelime Setleri</div>
+      <button class="mini-close-btn" onclick="closeDigerModal()">✕ Kapat</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:8px 16px 32px;" id="diger-body">
+      <div class="list-empty">Yükleniyor...</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT OVERLAY -->
+<div class="list-overlay" id="export-overlay" style="z-index:160">
+  <div class="list-modal" style="max-height:70vh;">
+    <div class="list-modal-header">
+      <div class="list-modal-title" id="export-title">📤 Dışa Aktar</div>
+      <button class="list-start-btn" id="export-copy-btn" onclick="copyExport()">📋 Kopyala</button>
+      <button class="mini-close-btn" onclick="closeExportModal()">✕ Kapat</button>
+    </div>
+    <div style="padding:10px 16px 20px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;">
+      <div style="font-size:11px;color:var(--text-muted);line-height:1.6;">CSV formatı: <code style="color:var(--gold)">pl|g|ex_pl|tr|ex_tr</code></div>
+      <textarea id="export-textarea" readonly style="flex:1;min-height:220px;width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:'DM Mono',monospace;font-size:10px;padding:10px;resize:none;line-height:1.5;"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- LIST OVERLAY -->
+<div class="list-overlay" id="list-overlay">
+  <div class="list-modal">
+    <div class="list-modal-header">
+      <div class="list-modal-title" id="list-modal-title">☰ Kelime Listesi</div>
+      <button class="list-sort-btn" id="list-sort-btn" onclick="cycleSortOrder()">Sırasız</button>
+      <button class="list-sort-btn" id="list-export-btn" style="display:none" onclick="exportList(currentListTab)">📤</button>
+      <button class="list-delete-btn" id="list-delete-btn" style="display:none" onclick="confirmBatchDelete('list')">🗑 0 sil</button>
+      <button class="list-start-btn" id="list-start-btn" style="display:none" onclick="startFromList()">▶ Başlat</button>
+      <button class="mini-close-btn" onclick="closeList()">✕ Kapat</button>
+    </div>
+    <div class="list-tabs">
+      <button class="list-tab active" id="tab-all" onclick="switchListTab('all')" id="tab-all-btn">Liste</button>
+      <button class="list-tab" id="tab-saved" onclick="switchListTab('saved')">📌 Çalışma</button>
+      <button class="list-tab" id="tab-star" onclick="switchListTab('star')">⭐ Günlük</button>
+      <button class="list-tab" id="tab-add" onclick="switchListTab('add')">✏️ Kelime Ekle</button>
+      <button class="list-tab" id="tab-backup" onclick="switchListTab('backup')">💾 Yedek</button>
+    </div>
+    <div class="list-backup-row" id="list-backup-row" style="display:none;flex-direction:column;gap:10px;padding:16px;">
+      <button class="list-add-btn" onclick="syncFromOther(true)" style="background:rgba(201,169,110,.12);border-color:rgba(201,169,110,.4);color:var(--gold)">🔄 PolishVocab'dan Günlük'e çek</button>
+      <div style="font-size:11px;color:var(--text-dim);text-align:center;margin-top:-4px;">Sadece bu butona basınca çalışır. PolishVocab'ın kelimelerini Günlük listene ekler (dosya/İnternet yok, aynı telefon).</div>
+      <div style="display:flex;gap:8px;">
+        <button class="list-add-btn" onclick="exportTxt('download')" style="flex:1;background:rgba(90,191,138,.1);border-color:rgba(90,191,138,.4);color:var(--green)">📥 İndir</button>
+        <button class="list-add-btn" onclick="exportTxt('share')" style="flex:1;background:rgba(90,120,220,.1);border-color:rgba(90,120,220,.4);color:#7b9fff">📤 Paylaş</button>
+        <button class="list-add-btn" onclick="exportTxt('view')" style="flex:1;background:rgba(201,169,110,.07);border-color:rgba(201,169,110,.3);color:var(--gold)">👁 Görüntüle</button>
+      </div>
+      <label class="list-add-btn" style="display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;">
+        📂 TXT Geri Yükle
+        <input type="file" id="import-file" accept=".txt,text/plain" style="display:none" onchange="importData(this)">
+      </label>
+      <div id="backup-status" style="font-size:12px;color:var(--text-muted);text-align:center;min-height:18px;"></div>
+    </div>
+    <div class="list-add-row" id="list-add-row" style="display:none">
+      <div style="display:flex;gap:8px;width:100%">
+        <input type="text" id="custom-pl" placeholder="Lehçe kelime" class="list-input" onkeydown="if(event.key==='Enter')document.getElementById('custom-tr').focus()">
+        <input type="text" id="custom-tr" placeholder="Türkçe karşılık" class="list-input" onkeydown="if(event.key==='Enter')document.getElementById('custom-g').focus()">
+      </div>
+      <div style="display:flex;gap:8px;width:100%">
+        <input type="text" id="custom-g" placeholder="Tür (fiil, sıfat, edat…)" class="list-input">
+        <input type="text" id="custom-tag" placeholder="Tag (isteğe bağlı)" class="list-input">
+      </div>
+      <input type="text" id="custom-hint" placeholder="İpucu / örnek cümle (isteğe bağlı)" class="list-input" style="width:100%" onkeydown="if(event.key==='Enter')addCustomWord()">
+      <button class="list-add-btn" onclick="addCustomWord()">+ Ekle</button>
+    </div>
+    <div id="list-filter-bar" style="display:none"></div>
+    <div class="list-body" id="list-body"></div>
+  </div>
+</div>
+
+<!-- Kelime düzenle (tür / tag / çeviri / örnek) -->
+<div class="list-overlay" id="edit-overlay">
+  <div class="list-modal" style="max-width:440px">
+    <div class="list-modal-header">
+      <div class="list-modal-title">✏️ Kelimeyi Düzenle</div>
+      <button class="mini-close-btn" onclick="closeEditModal()">✕ Kapat</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;padding:16px;">
+      <input type="text" id="edit-pl" class="list-input" placeholder="Lehçe kelime">
+      <div style="display:flex;gap:8px;">
+        <input type="text" id="edit-g" class="list-input" placeholder="Tür (fiil, sıfat, edat…)">
+        <input type="text" id="edit-tag" class="list-input" placeholder="Tag">
+      </div>
+      <input type="text" id="edit-tr" class="list-input" placeholder="Türkçe karşılık">
+      <input type="text" id="edit-expl" class="list-input" placeholder="Örnek cümle (Lehçe)">
+      <input type="text" id="edit-extr" class="list-input" placeholder="Örnek çeviri (Türkçe)">
+      <button class="list-add-btn" onclick="saveEditWord()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<div class="text-modal-overlay" id="text-modal-overlay" onclick="if(event.target===this)closeTextModal()">
+  <div class="text-modal">
+    <div class="text-modal-header">
+      <span class="text-modal-title">📄 Yedek İçeriği</span>
+      <button class="mini-close-btn" onclick="closeTextModal()">✕</button>
+    </div>
+    <div class="text-modal-body">
+      <pre class="text-modal-pre" id="text-modal-content"></pre>
+    </div>
+    <div class="text-modal-footer">
+      <button class="list-add-btn" id="copy-btn" onclick="copyBackupText()" style="width:100%">📋 Panoya Kopyala</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  // ═══ BEGIN EMBEDDED DATA ═══
+  // APK/offline için gömülü veriler. scripts/regenerate-embedded.py tarafından
+  // otomatik üretildi. Elle değiştirmeyin — data/ altındaki CSV'leri düzenleyip
+  // scripti çalıştırın.
+  const BUILD_INFO = "2026-04-19 20:35";
+  const EMBEDDED_GUNLUK_CSV = "pl|g|ex_pl|tr|ex_tr\nDzień dobry|zarf|Dzień dobry! Jak się pan miewa?|Günaydın / İyi günler|Günaydın! Nasılsınız?\nDobry wieczór|zarf|Dobry wieczór! Miło panią widzieć.|İyi akşamlar|İyi akşamlar! Sizi görmek güzel.\nCześć|zarf|Cześć! Co słychać?|Merhaba / Selam|Merhaba! Ne haber?\nDo widzenia|zarf|Do widzenia! Do zobaczenia jutro.|Hoşça kalın / Güle güle|Hoşça kalın! Yarın görüşürüz.\nDo zobaczenia|zarf|Do zobaczenia w piątek!|Görüşürüz|Cuma günü görüşürüz!\nDobranoc|zarf|Dobranoc! Śpij dobrze.|İyi geceler|İyi geceler! Güzel uyu.\nNa razie|zarf|Na razie! Zadzwoń do mnie.|Görüşmek üzere / Bayaa|Görüşmek üzere! Beni ara.\nWitam|zarf|Witam wszystkich na spotkaniu.|Hoş geldiniz / Merhaba|Toplantıya herkesi hoş geldiniz.\nDziękuję|zarf|Dziękuję bardzo za pomoc.|Teşekkür ederim|Yardımın için çok teşekkür ederim.\nDziękuję bardzo|zarf|Dziękuję bardzo, to bardzo miłe.|Çok teşekkür ederim|Çok teşekkür ederim, bu çok nazik.\nProszę|zarf|Proszę, wejdź.|Lütfen / Buyurun / Rica ederim|Buyurun, içeri girin.\nPrzepraszam|zarf|Przepraszam za spóźnienie.|Özür dilerim / Pardon|Geç kaldığım için özür dilerim.\nNie ma problemu|zarf|Nie ma problemu, spokojnie.|Sorun değil|Sorun değil, rahat ol.\nNie ma za co|zarf|Dziękuję! Nie ma za co.|Rica ederim / Bir şey değil|Teşekkürler! Bir şey değil.\nProszę bardzo|zarf|Proszę bardzo, oto herbata.|Buyurun / Rica ederim|Buyurun, işte çayınız.\njeden|zarf|Mam jeden brat.|bir|Bir erkek kardeşim var.\ndwa|zarf|Proszę dwa bilety.|iki|İki bilet lütfen.\ntrzy|zarf|Mam trzy koty.|üç|Üç kedim var.\ncztery|zarf|Czekam od czterech godzin.|dört|Dört saattir bekliyorum.\npięć|zarf|Pięć minut, proszę.|beş|Beş dakika lütfen.\ndziesięć|zarf|Dziesięć złotych, proszę.|on|On zloti lütfen.\nsto|zarf|To kosztuje sto złotych.|yüz|Bu yüz zlotiye mal oluyor.\npierwszy|sıfat|Jestem na pierwszym piętrze.|birinci|Birinci kattayım.\nczerwony|sıfat|Mam czerwony samochód.|kırmızı|Kırmızı bir arabam var.\nniebieski|sıfat|Niebo jest niebieskie.|mavi|Gökyüzü mavidir.\nzielony|sıfat|Trawa jest zielona.|yeşil|Çimen yeşildir.\nżółty|sıfat|Słońce jest żółte.|sarı|Güneş sarıdır.\nbiały|sıfat|Śnieg jest biały.|beyaz|Kar beyazdır.\nczarny|sıfat|Mam czarnego kota.|siyah|Siyah bir kedim var.\nszary|sıfat|Mam szary płaszcz.|gri|Gri bir paltom var.\nróżowy|sıfat|Lubię różowe kwiaty.|pembe|Pembe çiçekleri severim.\nponiedziałek|meski|W poniedziałek mam spotkanie.|Pazartesi|Pazartesi günü toplantım var.\nwtorek|meski|We wtorek idę do lekarza.|Salı|Salı günü doktora gidiyorum.\nśroda|zenski|W środę mam kurs języka.|Çarşamba|Çarşamba günü dil kursun var.\nczwartek|meski|W czwartek wyjeżdżam do Warszawy.|Perşembe|Perşembe günü Varşova'ya gidiyorum.\npiątek|meski|W piątek kończymy wcześniej.|Cuma|Cuma günü erken bitiriyoruz.\nsobota|zenski|W sobotę idę na zakupy.|Cumartesi|Cumartesi günü alışverişe gidiyorum.\nniedziela|zenski|W niedzielę odpoczywam w domu.|Pazar|Pazar günü evde dinleniyorum.\ndzisiaj|zarf|Dzisiaj jest ładna pogoda.|bugün|Bugün hava güzel.\njutro|zarf|Jutro mam egzamin.|yarın|Yarın sınavım var.\nwczoraj|zarf|Wczoraj byłem w kinie.|dün|Dün sinemadaydım.\nGdzie|zarf|Gdzie jest dworzec?|Nerede|İstasyon nerede?\nKiedy|zarf|Kiedy przyjeżdżasz?|Ne zaman|Ne zaman geliyorsun?\nJak|zarf|Jak się nazywasz?|Nasıl|Adın ne?\nIle|zarf|Ile to kosztuje?|Ne kadar / Kaç tane|Bu ne kadar?\nCo|zarf|Co to jest?|Ne|Bu ne?\nKto|zarf|Kto to jest?|Kim|Bu kim?\nDlaczego|zarf|Dlaczego się śmiejesz?|Neden|Neden gülüyorsun?\nCzy mówi pan po angielsku|zarf|Przepraszam, czy mówi pan po angielsku?|İngilizce biliyor musunuz?|Pardon, İngilizce biliyor musunuz?\nNie rozumiem|zarf|Przepraszam, nie rozumiem.|Anlamıyorum|Özür dilerim, anlamıyorum.\nProszę powtórzyć|zarf|Proszę powtórzyć, nie zrozumiałem.|Lütfen tekrar edin|Lütfen tekrar edin, anlamadım.\nIle kosztuje|zarf|Ile kosztuje ten sweter?|Ne kadar?|Bu kazak ne kadar?\nCzy jest|zarf|Czy jest wolny stolik?|Var mı?|Boş masa var mı?\nPoproszę|zarf|Poproszę kawę i ciasto.|Rica ediyorum / Alabilir miyim|Bir kahve ve pasta alabilir miyim lütfen.\nGdzie jest sklep|zarf|Przepraszam, gdzie jest sklep?|Dükkan nerede?|Pardon, dükkan nerede?\nChciałbym|zarf|Chciałbym zarezerwować stolik.|İstiyorum (erkek)|Masa rezervasyonu yaptırmak istiyorum.\nChciałabym|zarf|Chciałabym przymierzyć tę sukienkę.|İstiyorum (kadın)|Bu elbiseyi denemek istiyorum.\nCzy mogę zapłacić|zarf|Czy mogę zapłacić kartą?|Ödeyebilir miyim?|Kartla ödeyebilir miyim?\nparagon|meski|Czy mogę prosić o paragon?|fiş, makbuz|Fiş alabilir miyim lütfen?\nkasa|zenski|Proszę zapłacić przy kasie.|kasa|Lütfen kasada ödeyiniz.\nwoda|zenski|Poproszę szklankę wody.|su|Bir bardak su lütfen.\nkawa|zenski|Czy jest dobra kawa?|kahve|İyi kahve var mı?\nherbata|zenski|Poproszę herbatę z cytryną.|çay|Limonlu çay lütfen.\npiwo|nijaki|Poproszę jedno piwo.|bira|Bir bira lütfen.\nchleb|meski|Czy jest świeży chleb?|ekmek|Taze ekmek var mı?\nser|meski|Poproszę sto gramów sera.|peynir|Yüz gram peynir lütfen.\nmięso|nijaki|Nie jem mięsa.|et|Et yemiyorum.\nryba|zenski|Lubię jeść rybę.|balık|Balık yemeyi seviyorum.\nwarzywa|cogul|Jem dużo warzyw.|sebzeler|Çok sebze yerim.\nowoce|cogul|Codziennie jem owoce.|meyveler|Her gün meyve yerim.\nśniadanie|nijaki|O której jest śniadanie?|kahvaltı|Kahvaltı saat kaçta?\nobiad|meski|Obiad jest o trzynastej.|öğle yemeği / akşam yemeği|Öğle yemeği saat birde.\nkolacja|zenski|Zapraszam na kolację.|akşam yemeği|Sizi akşam yemeğine davet ediyorum.\nsmacznego|zarf|Smacznego! Dobry apetyt.|Afiyet olsun|Afiyet olsun!\n";
+  const EMBEDDED_B1_CSV = "pl|g|ex_pl|tr|ex_tr\nmiejsce|nijaki|To jest piękne miejsce na piknik.|yer, mekan|Bu piknik için güzel bir yer.\nrozumienie|nijaki|Rozumienie ze słuchu jest ważne w nauce języka.|anlama|Dil öğrenmede anlama becerisi çok önemlidir.\nsłuch|meski|Mam dobry słuch muzyczny.|işitme, duyma|İyi bir müzikal işitme yeteneğim var.\npisanie|nijaki|Pisanie po polsku jest trudne, ale możliwe.|yazma|Lehçe yazma zordur ama mümkündür.\nmówienie|nijaki|Mówienie w obcym języku wymaga odwagi.|konuşma|Yabancı bir dilde konuşmak cesaret ister.\nwynik|meski|Jaki jest wynik egzaminu?|sonuç|Sınavın sonucu ne?\nzadanie|nijaki|To zadanie jest bardzo trudne.|görev, ödev|Bu ödev çok zor.\nliczba|zenski|Liczba studentów w klasie wynosi dwadzieścia.|sayı|Sınıftaki öğrenci sayısı yirmi.\nnagranie|nijaki|Proszę wysłuchać tego nagrania dwa razy.|kayıt|Lütfen bu kaydı iki kez dinleyin.\nprzykład|meski|Podaj mi przykład użycia tego słowa.|örnek|Bana bu kelimenin kullanımına dair bir örnek ver.\nwypowiedź|zenski|Twoja wypowiedź była bardzo ciekawa.|ifade, söylem|Senin ifaden çok ilgi çekiciydi.\nsmutek|meski|W jego oczach widać było smutek.|üzüntü|Gözlerinde üzüntü okunuyordu.\nradość|zenski|Jej twarz wyrażała wielką radość.|sevinç, mutluluk|Yüzü büyük bir sevinç ifade ediyordu.\nrozmowa|zenski|Mieliśmy długą rozmowę przy kawie.|konuşma, sohbet|Kahve başında uzun bir sohbet ettik.\nżyczenia|cogul|Składam ci serdeczne życzenia urodzinowe.|dilekler, tebrikler|Sana içten doğum günü dileklerimi sunuyorum.\nurodziny|cogul|Dzisiaj są moje urodziny.|doğum günü|Bugün doğum günüm.\ndziecko|nijaki|To dziecko jest bardzo grzeczne.|çocuk|Bu çocuk çok terbiyeli.\nmieszkanie|nijaki|Wynajmuję mieszkanie w centrum miasta.|daire, konut|Şehir merkezinde bir daire kiralıyorum.\nprzedszkole|nijaki|Moje dziecko chodzi do przedszkola.|anaokulu|Çocuğum anaokuluna gidiyor.\nkonkurs|meski|Wzięłam udział w konkursie językowym.|yarışma|Dil yarışmasına katıldım.\nzaproszenie|nijaki|Dostałem zaproszenie na ślub.|davet|Düğüne davet aldım.\nrodzice|cogul|Moi rodzice mieszkają w Warszawie.|ebeveynler, anne-baba|Anne-babam Varşova'da yaşıyor.\nrocznica|zenski|Dzisiaj obchodzimy rocznicę ślubu.|yıldönümü|Bugün düğün yıldönümümüzü kutluyoruz.\nślub|meski|Ich ślub odbył się w maju.|düğün, evlilik|Onların düğünü Mayıs ayında gerçekleşti.\nprzyjęcie|nijaki|Urządzamy przyjęcie z okazji rocznicy.|parti, kabul|Yıldönümü için bir parti düzenliyoruz.\ninicjatywa|zenski|To świetna inicjatywa dla lokalnej społeczności.|girişim|Bu yerel toplum için harika bir girişim.\ngmina|zenski|Nasza gmina organizuje festyn.|belediye, ilçe|Belediyemiz şenlik düzenliyor.\nmiasteczko|nijaki|Wychowałem się w małym miasteczku.|kasaba|Küçük bir kasabada büyüdüm.\nmieszkaniec|meski|Mieszkańcy miasta protestowali przeciwko decyzji.|sakin, oturan|Şehrin sakinleri karara karşı protesto yaptı.\nwarunek|meski|Jedynym warunkiem jest punktualność.|koşul, şart|Tek şart dakiklilik.\nmiejscowość|zenski|Ta miejscowość jest znana z historii.|yerleşim yeri|Bu yerleşim yeri tarihi ile ünlüdür.\nturysta|meski|Ten turysta pyta o drogę do zamku.|turist|Bu turist kaleye giden yolu soruyor.\nnieruchomość|zenski|Kupili nieruchomość nad morzem.|gayrimenkul, mülk|Deniz kenarında bir mülk satın aldılar.\npopołudnie|nijaki|Spotkajmy się dziś popołudniu.|öğleden sonra|Bugün öğleden sonra buluşalım.\njezioro|nijaki|Spędziliśmy wakacje nad jeziorem.|göl|Göl kenarında tatil geçirdik.\nprzyjaciel|meski|On jest moim najlepszym przyjacielem.|arkadaş, dost|O benim en iyi arkadaşım.\nkoc|meski|Wzięłam koc na piknik.|battaniye|Pikniğe battaniye aldım.\nkolega|meski|Mój kolega z pracy jest bardzo pomocny.|erkek arkadaş, meslektaş|İş arkadaşım çok yardımsever.\nprzekąska|zenski|Przygotowałam kilka przekąsek na wieczór.|atıştırmalık|Akşam için birkaç atıştırmalık hazırladım.\nkosz|meski|Włóż zakupy do kosza.|sepet|Alışverişleri sepete koy.\nkoleżanka|zenski|Moja koleżanka z klasy jest bardzo mądra.|kadın arkadaş|Sınıf arkadaşım çok zeki.\nzawody|cogul|Wzięłam udział w zawodach pływackich.|yarışma, meslek|Yüzme yarışmasına katıldım.\nmecz|meski|Oglądaliśmy mecz piłki nożnej razem.|maç|Birlikte futbol maçı izledik.\nsiatkarz|meski|Ten siatkarz jest bardzo wysoki.|voleybolcu|Bu voleybolcu çok uzun boylu.\nortopeda|meski|Umówiłem się na wizytę do ortopedy.|ortopedist|Ortopediste randevu aldım.\nuroda|zenski|Jej uroda zachwyca wszystkich.|güzellik|Onun güzelliği herkesi hayran bırakıyor.\nsala|zenski|Lekcja odbywa się w dużej sali.|salon, sınıf|Ders büyük bir salonda yapılıyor.\ngimnastyczna|zenski|Ćwiczymy w sali gimnastycznej.|jimnastik (salonu)|Jimnastik salonunda egzersiz yapıyoruz.\npowietrze|nijaki|Powietrze w górach jest świeże i czyste.|hava|Dağlardaki hava taze ve temiz.\ntaksówkarz|meski|Taksówkarz zawiózł mnie na lotnisko.|taksici|Taksici beni havalimanına götürdü.\nkrytyka|zenski|Przyjąłem krytykę z pokorą.|eleştiri|Eleştiriyi alçakgönüllülükle kabul ettim.\nkomplement|meski|Dostałam piękny komplement od szefa.|iltifat|Patrondan güzel bir iltifat aldım.\nrada|zenski|Daj mi radę, co mam zrobić.|tavsiye, öneri|Bana ne yapacağım konusunda tavsiye ver.\nrodzic|meski|Każdy rodzic chce dla dziecka jak najlepiej.|ebeveyn|Her ebeveyn çocuğu için en iyisini ister.\npielęgniarka|zenski|Pielęgniarka zmierzyła mi ciśnienie.|hemşire|Hemşire kan basıncımı ölçtü.\nrozmiar|meski|Jaki jest twój rozmiar butów?|beden, boyut|Ayakkabı bedeniniz ne?\nsąsiad|meski|Mój sąsiad gra głośno muzykę w nocy.|komşu|Komşum gece yüksek sesle müzik çalıyor.\ntytuł|meski|Jaki jest tytuł tej książki?|başlık, unvan|Bu kitabın başlığı ne?\nkoniec|meski|Koniec semestru jest w czerwcu.|son, bitiş|Sömestr sonu Haziran'da.\nrola|zenski|Grał główną rolę w tym filmie.|rol|Bu filmde başrol oynadı.\nmiesiąc|meski|Za miesiąc jadę do Warszawy.|ay|Bir ay sonra Varşova'ya gidiyorum.\nżycie|nijaki|Życie jest pełne niespodzianek.|hayat, yaşam|Hayat sürprizlerle dolu.\nnoc|zenski|W tę noc nie mogłam spać.|gece|Bu gece uyuyamadım.\nrano|nijaki|Wstaję wcześnie rano.|sabah|Sabah erken kalkıyorum.\ngodzina|zenski|Spotkanie trwało dwie godziny.|saat|Toplantı iki saat sürdü.\nzmęczenie|nijaki|Czuję ogromne zmęczenie po pracy.|yorgunluk|İşten sonra büyük bir yorgunluk hissediyorum.\npowrót|meski|Cieszę się na powrót do domu.|dönüş|Eve dönüşü dört gözle bekliyorum.\nspacer|meski|Codziennie chodzę na spacer po parku.|yürüyüş|Her gün parkta yürüyüş yapıyorum.\nmaluch|meski|Ten maluch już zaczyna chodzić.|bebek, küçük çocuk|Bu bebek yürümeye başlıyor.\nchwila|zenski|Poczekaj chwilę, zaraz wracam.|an, kısa süre|Bir an bekle, hemen dönüyorum.\nspokój|meski|Szukam spokoju po ciężkim dniu.|huzur, sakinlik|Yorucu bir günün ardından huzur arıyorum.\nukochana|zenski|Napisał list do swojej ukochanej.|sevgili (kadın)|Sevgilisine mektup yazdı.\ntenisistka|zenski|Ta tenisistka wygrała turniej.|tenisçi (kadın)|Bu tenisçi turnuvayı kazandı.\nrywalka|zenski|Jej rywalka grała bardzo dobrze.|rakip (kadın)|Rakibi çok iyi oynadı.\nturniej|meski|Wygrała ważny turniej w tym roku.|turnuva|Bu yıl önemli bir turnuva kazandı.\npowód|meski|Jaki jest powód twojej nieobecności?|neden, sebep|Devamsızlığının nedeni ne?\nzwycięstwo|nijaki|To zwycięstwo było bardzo ważne dla drużyny.|zafer, galibiyet|Bu zafer takım için çok önemliydi.\npaździernik|meski|W październiku liście zmieniają kolor.|ekim (ay)|Ekim'de yapraklar renk değiştirir.\nbadanie|nijaki|Mam jutro badanie krwi.|muayene, araştırma|Yarın kan tahlilim var.\nemocje|cogul|Trudno kontrolować emocje w stresie.|duygular|Stres altında duyguları kontrol etmek zor.\nzdrowie|nijaki|Zdrowie jest najważniejsze w życiu.|sağlık|Sağlık hayatta en önemli şey.\npsychika|zenski|Sport pozytywnie wpływa na psychikę.|ruh hali, psikoloji|Spor ruh haline olumlu etki eder.\nrodzeństwo|nijaki|Mam troje rodzeństwa.|kardeşler|Üç kardeşim var.\nróżnica|zenski|Jaka jest różnica między tymi dwoma słowami?|fark|Bu iki kelime arasındaki fark nedir?\nwiek|meski|W jakim wieku nauczyłeś się czytać?|yaş, çağ|Okumayı hangi yaşta öğrendin?\nstan|meski|Jaki jest stan twojego zdrowia?|durum, hal|Sağlık durumun nasıl?\nludzie|cogul|Ludzie na całym świecie mówią różnymi językami.|insanlar|Dünyanın dört bir yanındaki insanlar farklı diller konuşur.\nzmiana|zenski|Zmiana klimatu to poważny problem.|değişim|İklim değişimi ciddi bir sorun.\nskutek|meski|To lekarstwo nie dało żadnego skutku.|sonuç, etki|Bu ilaç hiçbir sonuç vermedi.\nocieplenie|nijaki|Ocieplenie klimatu wpływa na całą planetę.|ısınma|İklim ısınması tüm gezegeni etkiliyor.\nstyczeń|meski|W styczniu jest bardzo zimno w Polsce.|ocak|Polonya'da Ocak'ta çok soğuk olur.\nluty|meski|Luty to najkrótszy miesiąc w roku.|şubat|Şubat yılın en kısa ayıdır.\nmarzec|meski|W marcu zaczyna się wiosna.|mart|Mart'ta ilkbahar başlar.\nkwiecień|meski|W kwietniu kwitną tulipany.|nisan|Nisan'da lâleler çiçek açar.\nmaj|meski|Maj to piękny miesiąc, jest ciepło.|mayıs|Mayıs güzel bir ay, hava sıcak.\nczerwiec|meski|W czerwcu kończą się zajęcia w szkole.|haziran|Haziran'da okul dersleri biter.\nlipiec|meski|Lipiec jest najcieplejszym miesiącem w roku.|temmuz|Temmuz yılın en sıcak ayıdır.\nsierpień|meski|W sierpniu jedziemy na wakacje.|ağustos|Ağustos'ta tatile gidiyoruz.\nwrzesień|meski|W wrześniu dzieci wracają do szkoły.|eylül|Eylül'de çocuklar okula geri döner.\nlistopad|meski|Listopad to szary i deszczowy miesiąc.|kasım|Kasım gri ve yağmurlu bir aydır.\ngrudzień|meski|W grudniu pada dużo śniegu.|aralık|Aralık'ta çok kar yağar.\nwiosna|zenski|Wiosna to moja ulubiona pora roku.|ilkbahar|İlkbahar en sevdiğim mevsim.\nlato|nijaki|Latem jeździmy nad morze.|yaz|Yazın denize gidiyoruz.\njesień|zenski|Jesień w Polsce jest piękna i kolorowa.|sonbahar|Polonya'da sonbahar güzel ve renklidir.\nzima|zenski|Zima w Warszawie bywa bardzo mroźna.|kış|Varşova'da kış çok soğuk olabiliyor.\nzaczynać|fiil|Zaczynam naukę polskiego od początku.|başlamak|Lehçe öğrenmeye baştan başlıyorum.\nopiekować się|fiil|Ona opiekuje się starszymi rodzicami.|bakmak, ilgilenmek|O yaşlı anne-babasına bakıyor.\nzajmować się|fiil|Czym się zajmujesz w wolnym czasie?|uğraşmak, ilgilenmek|Boş zamanında ne ile uğraşırsın?\nzapominać|fiil|Często zapominam słówek po polsku.|unutmak|Lehçe kelimeleri sık sık unutuyorum.\nkrótki|sıfat|To jest krótki tekst, łatwy do przeczytania.|kısa|Bu okumak için kolay kısa bir metin.\nniski|sıfat|Ten budynek jest bardzo niski.|alçak, kısa (boy)|Bu bina çok alçak.\nwysoki|sıfat|On jest bardzo wysoki, ma dwa metry.|yüksek, uzun (boy)|O çok uzun boylu, iki metre.\ndługi|sıfat|Mieliśmy długą rozmowę przy kawie.|uzun|Kahve başında uzun bir sohbet ettik.\nbrzeg|meski|Siedzieliśmy na brzegu morza.|kıyı, kenar|Deniz kıyısında oturduk.\npamięć|zenski|Mam dobrą pamięć do języków.|hafıza, bellek|Diller için iyi bir hafızam var.\nrzeczy|cogul|Spakuj swoje rzeczy, wyjeżdżamy jutro.|şeyler, eşyalar|Eşyalarını topla, yarın yola çıkıyoruz.\nzawsze|zarf|Zawsze piję kawę rano.|her zaman|Sabahları her zaman kahve içerim.\nzwykle|zarf|Zwykle chodzę spać o dziesiątej.|genellikle|Genellikle saat onda uyurum.\nczęsto|zarf|Często jeżdżę do Warszawy w pracy.|sık sık|İş için sık sık Varşova'ya gidiyorum.\nrzadko|zarf|Rzadko oglądam telewizję.|nadiren|Televizyon nadiren izlerim.\nnigdy|zarf|Nigdy nie zapominam o ważnych spotkaniach.|hiçbir zaman|Önemli toplantıları hiçbir zaman unutmam.\ntrudny|sıfat|Ten egzamin był bardzo trudny.|zor|Bu sınav çok zordu.\nłatwy|sıfat|To ćwiczenie jest łatwe dla mnie.|kolay|Bu alıştırma benim için kolay.\nbrudny|sıfat|Te buty są bardzo brudne.|kirli|Bu ayakkabılar çok kirli.\nczysty|sıfat|Pranie jest czyste i świeże.|temiz|Çamaşırlar temiz ve taze.\nPolska|zenski|Polska leży w sercu Europy.|Polonya|Polonya, Avrupa'nın kalbinde yer alır.\nopad|meski|Prognoza zapowiada opady deszczu przez cały tydzień.|yağış|Tahmin tüm hafta boyunca yağmur yağışını bildiriyor.\ndeszcz|meski|Pada deszcz, weź ze sobą parasolkę.|yağmur|Yağmur yağıyor, şemsiyeni yanına al.\nupał|meski|W tym roku lato przyniosło wielki upał.|sıcak hava, kavurucu sıcak|Bu yıl yaz büyük bir sıcak hava getirdi.\ncena|zenski|Cena tego mieszkania jest bardzo wysoka.|fiyat|Bu dairenin fiyatı çok yüksek.\nżywność|zenski|Ceny żywności wzrosły w ostatnim roku.|gıda, yiyecek|Geçen yıl gıda fiyatları arttı.\nśrodowisko|nijaki|Musimy chronić środowisko naturalne dla przyszłych pokoleń.|çevre|Gelecek nesiller için doğal çevreyi korumalıyız.\npark|meski|Codziennie chodzę na spacer do pobliskiego parku.|park|Her gün yakındaki parka yürüyüşe gidiyorum.\nlegenda|zenski|Legenda o Smoku Wawelskim jest znana w całej Polsce.|efsane|Vavel Ejderi efsanesi tüm Polonya'da bilinir.\nwycieczka|zenski|Zorganizowaliśmy wycieczkę szkolną do Krakowa.|gezi, tur|Krakov'a bir okul gezisi düzenledik.\nszkoła|zenski|Moja córka chodzi do szkoły podstawowej.|okul|Kızım ilkokula gidiyor.\ntechnika|zenski|Nowoczesna technika zmienia nasze życie codzienne.|teknik|Modern teknoloji günlük hayatımızı değiştiriyor.\nwydarzenie|nijaki|To wydarzenie kulturalne przyciągnęło tysiące ludzi.|etkinlik, olay|Bu kültürel etkinlik binlerce insanı çekti.\natrakcja|zenski|Główną atrakcją miasta jest stary zamek.|cazibe, ilgi çekici yer|Şehrin ana cazibesi eski kaledir.\nprzeszłość|zenski|Nie można żyć tylko przeszłością, trzeba patrzeć w przyszłość.|geçmiş|Sadece geçmişte yaşanmaz, geleceğe bakmak gerekir.\nsposób|meski|Znalazłem nowy sposób na naukę słówek.|yol, yöntem|Kelime öğrenmek için yeni bir yöntem buldum.\naplikacja|zenski|Ta aplikacja pomaga mi uczyć się polskiego.|uygulama|Bu uygulama Lehçe öğrenmeme yardımcı oluyor.\nrozwiązanie|nijaki|Znaleźliśmy dobre rozwiązanie tego problemu.|çözüm|Bu sorun için iyi bir çözüm bulduk.\ncel|meski|Moim celem jest zdanie egzaminu B2 w tym roku.|amaç, hedef|Bu yılki hedefim B2 sınavını geçmek.\ndane|cogul|Dane osobowe są chronione przez prawo.|veriler|Kişisel veriler yasa tarafından korunmaktadır.\npłeć|zenski|Formularz wymaga podania imienia, nazwiska i płci.|cinsiyet|Form ad, soyad ve cinsiyet bilgisi gerektiriyor.\nwzrost|meski|Mój wzrost to metr osiemdziesiąt pięć.|boy, büyüme|Boyum bir metre seksen beş.\nwaga|zenski|Lekarz sprawdził moją wagę i ciśnienie.|ağırlık, kilo|Doktor kilomu ve tansiyonumu kontrol etti.\nurodzenie|nijaki|Data urodzenia jest potrzebna do wypełnienia formularza.|doğum|Doğum tarihi formu doldurmak için gereklidir.\nżywienie|nijaki|Zdrowe żywienie jest podstawą dobrego samopoczucia.|beslenme|Sağlıklı beslenme iyi hissetmenin temelidir.\nilość|zenski|Proszę podać ilość osób na rezerwację.|miktar|Rezervasyon için kişi sayısını belirtiniz.\nwysiłek|meski|Nauka języka wymaga dużego wysiłku i cierpliwości.|çaba, efor|Dil öğrenmek büyük çaba ve sabır gerektirir.\nkondycja|zenski|Muszę poprawić swoją kondycję fizyczną.|kondisyon, durum|Fiziksel kondisyonumu geliştirmem gerekiyor.\niść|fiil|Idę do sklepu.|gitmek (yürüyerek)|Markete gidiyorum.\njechać|fiil|Jadę do Warszawy pociągiem.|gitmek (araçla)|Varşova'ya trenle gidiyorum.\nprzychodzić|fiil|Przychodzę do pracy o ósmej.|gelmek|İşe saat sekizde geliyorum.\nprzyjeżdżać|fiil|Przyjeżdżam z Turcji.|gelmek (araçla)|Türkiye'den geliyorum.\notwierać|fiil|Otwieram okno, bo jest gorąco.|açmak|Sıcak olduğu için pencereyi açıyorum.\nzamykać|fiil|Zamykam drzwi na klucz.|kapamak|Kapıyı anahtarla kapatıyorum.\nczytać|fiil|Czytam książkę przed snem.|okumak|Uyumadan önce kitap okuyorum.\npisać|fiil|Piszę wiadomość do przyjaciela.|yazmak|Arkadaşıma mesaj yazıyorum.\nsłuchać|fiil|Słucham muzyki w drodze do pracy.|dinlemek|İşe giderken müzik dinliyorum.\nrozmawiać|fiil|Rozmawiamy o projekcie.|konuşmak|Proje hakkında konuşuyoruz.\nmówić|fiil|Mówię po polsku trochę.|söylemek|Biraz Lehçe konuşuyorum.\nrobić|fiil|Co robisz w weekend?|yapmak, etmek|Haftasonu ne yapıyorsun?\nbyć|fiil|Jestem zmęczony po pracy.|olmak|İşten sonra yorgunum.\nchcieć|fiil|Chcę nauczyć się polskiego.|istemek|Lehçe öğrenmek istiyorum.\nwiedzieć|fiil|Wiem, gdzie jest dworzec.|bilmek (bilgi)|İstasyonun nerede olduğunu biliyorum.\numieć|fiil|Umiem mówić po angielsku.|bilmek (beceri)|İngilizce konuşmasını biliyorum.\nwidzieć|fiil|Widzę piękny widok z okna.|görmek|Pencereden güzel bir manzara görüyorum.\npatrzeć|fiil|Patrzę na ekran komputera.|bakmak|Bilgisayar ekranına bakıyorum.\noglądać|fiil|Oglądam film wieczorem.|izlemek, seyretmek|Akşam film seyrediyorum.\nbrać|fiil|Biorę parasolkę, bo pada.|almak (elde etmek)|Yağmur yağdığı için şemsiye alıyorum.\nkupować|fiil|Kupuję bilety online.|satın almak|Biletleri çevrimiçi satın alıyorum.\ndawać|fiil|Daję ci moją wizytówkę.|vermek|Sana kartvizitimi veriyorum.\njeść|fiil|Jem śniadanie o siódmej.|yemek (yemek yemek)|Saat yedide kahvaltı ediyorum.\npić|fiil|Piję kawę każdego ranka.|içmek|Her sabah kahve içiyorum.\nspać|fiil|Śpię osiem godzin dziennie.|uyumak|Günde sekiz saat uyuyorum.\nwstawać|fiil|Wstaję o szóstej rano.|kalkmak|Sabah altıda kalkıyorum.\nsiedzieć|fiil|Siedzę przy biurku cały dzień.|oturmak|Bütün gün masada oturuyorum.\nwracać|fiil|Wracam do domu o osiemnastej.|dönmek|Saat on sekizde eve dönüyorum.\ndzwonić|fiil|Dzwonię do ciebie jutro.|aramak (telefon)|Yarın seni arıyorum.\nczekać|fiil|Czekam na autobus już pół godziny.|beklemek|Otobüsü yarım saattir bekliyorum.\nrozumieć|fiil|Nie rozumiem tego zdania.|anlamak|Bu cümleyi anlamıyorum.\nmyśleć|fiil|Myślę, że to dobry pomysł.|düşünmek|Bence bu iyi bir fikir.\nkochać|fiil|Kocham swoją rodzinę.|sevmek (aşkla)|Ailemi seviyorum.\nlubić|fiil|Lubię polską kuchnię.|sevmek (beğenmek)|Lehçe mutfağını seviyorum.\npracować|fiil|Pracuję w firmie budowlanej.|çalışmak (işte)|İnşaat şirketinde çalışıyorum.\nuczyć się|fiil|Uczę się polskiego każdego dnia.|öğrenmek|Her gün Lehçe öğreniyorum.\npłacić|fiil|Płacę kartą kredytową.|ödemek|Kredi kartıyla ödüyorum.\npomagać|fiil|Pomagam kolegom w pracy.|yardım etmek|İş arkadaşlarıma yardım ediyorum.\nzaczynać|fiil|Zaczynam pracę o dziewiątej.|başlamak|İşe saat dokuzda başlıyorum.\nkończyć|fiil|Kończę spotkanie o południu.|bitirmek|Toplantıyı öğleyin bitiriyorum.\nwchodzić|fiil|Wchodzę do biura z kartą.|girmek|Ofise kartla giriyorum.\nwychodzić|fiil|Wychodzę z domu o siódmej.|çıkmak|Evden saat yedide çıkıyorum.\npoznanie|nijaki|Poznanie języka wymaga czasu.|tanıma, öğrenme|Bir dili öğrenmek zaman alır.\nznajomi|cogul|Mam wielu znajomych w Warszawie.|tanıdıklar|Varşova'da pek çok tanıdığım var.\nmoment|meski|Poczekaj chwilę, za moment wracam.|an|Bekle, bir an içinde dönüyorum.\nkąpiel|zenski|Biorę kąpiel po długim dniu.|banyo|Uzun bir günün ardından banyo yapıyorum.\nmuzyka|zenski|Słucham muzyki klasycznej.|müzik|Klasik müzik dinliyorum.\nsatysfakcja|zenski|Praca daje mi dużo satysfakcji.|tatmin, memnuniyet|İş bana çok tatmin veriyor.\nwyszukiwarka|zenski|Używam wyszukiwarki do znalezienia informacji.|arama motoru|Bilgi bulmak için arama motoru kullanıyorum.\npotrawa|zenski|To tradycyjna polska potrawa.|yemek, yiyecek|Bu geleneksel bir Lehçe yemeği.\nochota|zenski|Mam ochotę na kawę.|istek, arzu|Kahve içmek istiyorum.\nprodukt|meski|Ten produkt jest wysokiej jakości.|ürün|Bu ürün yüksek kaliteli.\ninformacja|zenski|Potrzebuję więcej informacji.|bilgi|Daha fazla bilgiye ihtiyacım var.\nskaner|meski|Używam skanera do dokumentów.|tarayıcı|Belgeler için tarayıcı kullanıyorum.\nkod|meski|Wpisuję kod dostępu.|kod|Erişim kodunu giriyorum.\nzdjęcie|nijaki|Robię zdjęcie na pamiątkę.|fotoğraf|Hatıra fotoğrafı çekiyorum.\naktywność|zenski|Aktywność fizyczna jest ważna dla zdrowia.|aktivite, etkinlik|Fiziksel aktivite sağlık için önemlidir.\nćwiczenia|cogul|Robię ćwiczenia każdego ranka.|egzersizler|Her sabah egzersiz yapıyorum.\nbaza|zenski|Mamy dużą bazę danych klientów.|temel, veri tabanı|Büyük bir müşteri veri tabanımız var.\nopcja|zenski|Jest kilka opcji do wyboru.|seçenek|Seçmek için birkaç seçenek var.\nprędkość|zenski|Prędkość internetu jest bardzo dobra.|hız|İnternet hızı çok iyi.\nintensywność|zenski|Intensywność treningu wzrosła.|yoğunluk|Antrenmanın yoğunluğu arttı.\nobsługa|zenski|Obsługa klienta jest na wysokim poziomie.|hizmet, kullanım|Müşteri hizmeti yüksek düzeyde.\nekran|meski|Ekran komputera jest zbyt jasny.|ekran|Bilgisayar ekranı çok parlak.\nreklama|zenski|Ta reklama jest bardzo kreatywna.|reklam|Bu reklam çok yaratıcı.\nfunkcja|zenski|Ta funkcja ułatwia pracę.|işlev, fonksiyon|Bu işlev çalışmayı kolaylaştırıyor.\nkonto|nijaki|Zakładam nowe konto bankowe.|hesap|Yeni bir banka hesabı açıyorum.\nrobot|meski|Robot wykonuje powtarzalne zadania.|robot|Robot tekrarlayan görevleri yerine getirir.\ntechnologia|zenski|Technologia zmienia nasz świat.|teknoloji|Teknoloji dünyamızı değiştiriyor.\ninteligencja|zenski|Inteligencja emocjonalna jest kluczowa.|zeka|Duygusal zeka çok önemlidir.\npracownik|meski|Nowy pracownik zaczyna w poniedziałek.|çalışan, işçi|Yeni çalışan Pazartesi başlıyor.\nurlop|meski|Idę na urlop w sierpniu.|izin, tatil|Ağustos'ta tatile gidiyorum.\ntajemnica|zenski|To jest tajemnica firmy.|sır, gizem|Bu şirketin sırrıdır.\npamięć|zenski|Mam dobrą pamięć do liczb.|hafıza, bellek|Sayılar için iyi bir hafızam var.\nsprawdzian|meski|Jutro mam sprawdzian z języka.|sınav, test|Yarın dil sınavım var.\ntest|meski|Zdałem test na prawo jazdy.|test|Ehliyet testini geçtim.\nproblem|meski|Mamy problem z dostawą.|sorun|Teslimatla ilgili bir sorunumuz var.\nczłowiek|meski|Każdy człowiek popełnia błędy.|insan|Her insan hata yapar.\nkontakt|meski|Jestem w stałym kontakcie z klientem.|iletişim, temas|Müşteriyle sürekli iletişim halindeyim.\nmotywacja|zenski|Motywacja zespołu jest bardzo wysoka.|motivasyon|Takımın motivasyonu çok yüksek.\nnauka|zenski|Nauka języków otwiera drzwi.|bilim, öğrenme|Dil öğrenmek kapılar açar.\nelement|meski|To ważny element projektu.|unsur, öğe|Bu projenin önemli bir unsurudur.\nmłodzież|zenski|Młodzież jest przyszłością kraju.|gençlik, gençler|Gençlik ülkenin geleceğidir.\nzaleta|zenski|Główną zaletą jest niska cena.|avantaj, üstünlük|Temel avantaj düşük fiyattır.\nkorzyść|zenski|Jakie są korzyści z tego rozwiązania?|fayda, kazanım|Bu çözümün faydaları nelerdir?\nmeble|cogul|Kupujemy nowe meble do biura.|mobilya|Ofise yeni mobilya satın alıyoruz.\nklient|meski|Klient zawsze ma rację.|müşteri|Müşteri her zaman haklıdır.\njakość|zenski|Jakość produktu jest bardzo dobra.|kalite|Ürünün kalitesi çok iyi.\nwygląd|meski|Wygląd aplikacji jest nowoczesny.|görünüm|Uygulamanın görünümü modern.\nlider|meski|Ona jest naturalnym liderem zespołu.|lider|O, ekibin doğal lideridir.\nrynek|meski|Wchodzimy na nowy rynek.|pazar|Yeni bir pazara giriyoruz.\nproducent|meski|Producent gwarantuje jakość.|üretici|Üretici kaliteyi garanti eder.\nporada|zenski|Potrzebuję porady prawnej.|tavsiye|Hukuki tavsiyeye ihtiyacım var.\nkierownik|meski|Kierownik zatwierdził budżet.|yönetici|Yönetici bütçeyi onayladı.\ndziedzina|zenski|Specjalizuję się w tej dziedzinie.|alan, saha|Bu alanda uzmanlaşıyorum.\nopinia|zenski|Chciałbym poznać pańską opinię.|görüş, fikir|Görüşünüzü öğrenmek isterim.\ntemat|meski|Temat spotkania to nowy projekt.|konu|Toplantının konusu yeni proje.\nwspółpraca|zenski|Współpraca między działami jest kluczowa.|işbirliği|Departmanlar arası işbirliği çok önemli.\nszef|meski|Szef zatwierdził mój wniosek.|patron, amir|Amiri başvurumu onayladı.\nkariera|zenski|Buduję swoją karierę od podstaw.|kariyer|Kariyerimi sıfırdan inşa ediyorum.\nprojekt|meski|Projekt zakończy się w marcu.|proje|Proje Mart'ta tamamlanacak.\nekspert|meski|Zaproszono eksperta z Niemiec.|uzman|Almanya'dan bir uzman davet edildi.\nzespół|meski|Nasz zespół liczy dwadzieścia osób.|takım, ekip|Ekibimiz yirmi kişiden oluşuyor.\nmenadżer|meski|Menadżer organizuje pracę zespołu.|yönetici|Yönetici ekibin çalışmasını organize eder.\nstanowisko|nijaki|Ubiegam się o stanowisko kierownika.|pozisyon, görev|Müdür pozisyonuna başvuruyorum.\nodpowiedzialność|zenski|Biorę odpowiedzialność za ten błąd.|sorumluluk|Bu hata için sorumluluğu üstleniyorum.\nawans|meski|Dostałem awans po dwóch latach.|terfi|İki yıl sonra terfi aldım.\nstrona|zenski|Otwieram nową stronę internetową.|sayfa, taraf|Yeni bir web sayfası açıyorum.\nobowiązek|meski|Mam wiele obowiązków w pracy.|yükümlülük, görev|İşte çok sayıda görevim var.\nkoncentracja|zenski|Koncentracja jest kluczowa podczas negocjacji.|konsantrasyon|Müzakerelerde konsantrasyon çok önemlidir.\nkonflikt|meski|Rozwiązujemy konflikt w zespole.|çatışma, anlaşmazlık|Ekipteki çatışmayı çözüyoruz.\n";
+  const EMBEDDED_EXTRA_0_CSV = "pl|g|ex_pl|tr|ex_tr\ndom|meski|Mieszkam w dużym domu.|ev|Büyük bir evde yaşıyorum.\nmieszkanie|nijaki|Wynajmuję mieszkanie w centrum.|daire|Şehir merkezinde daire kiralıyorum.\npokój|meski|Mam trzy pokoje w mieszkaniu.|oda|Dairemde üç oda var.\nsalon|meski|Salon jest największym pokojem.|oturma odası|Oturma odası en büyük odadır.\nsypialnia|zenski|Sypialnia jest cicha i spokojna.|yatak odası|Yatak odası sessiz ve sakin.\nkuchnia|zenski|Kuchnia jest nowoczesna i funkcjonalna.|mutfak|Mutfak modern ve işlevsel.\nłazienka|zenski|Łazienka ma wannę i prysznic.|banyo|Banyoda küvet ve duş var.\ntoaleta|zenski|Toaleta jest na końcu korytarza.|tuvalet|Tuvalet koridorun sonunda.\nkorytarz|meski|Korytarz prowadzi do wszystkich pokoi.|koridor|Koridor tüm odalara açılıyor.\nprzedpokój|meski|W przedpokoju wieszamy płaszcze.|giriş holü|Giriş holünde paltolarımızı asıyoruz.\npiwnica|zenski|Piwnica służy jako magazyn.|bodrum|Bodrum depo olarak kullanılıyor.\nbalkon|meski|Na balkonie mamy kwiaty.|balkon|Balkonda çiçeklerimiz var.\ntaras|meski|Taras jest idealny na letnie wieczory.|teras|Teras yaz akşamları için ideal.\nogród|meski|Ogród jest pięknie urządzony.|bahçe|Bahçe güzel düzenlenmiş.\ngaraż|meski|Garaż mieści dwa samochody.|garaj|Garaj iki araba alıyor.\nbiuro|nijaki|Pracuję w domowym biurze.|ofis|Ev ofisimde çalışıyorum.\nkanapa|zenski|Kanapa jest wygodna i miękka.|kanepe|Kanepe rahat ve yumuşak.\nsofa|zenski|Na sofie możemy spać dwoje.|koltuk|Koltuğa ikimiz oturabiliyoruz.\nfotel|meski|Fotel przy oknie jest moim ulubionym miejscem.|koltuk (tekli)|Pencere başındaki koltuk benim favori yerim.\nkrzesło|nijaki|Przy stole stoi sześć krzeseł.|sandalye|Masanın etrafında altı sandalye var.\nstół|meski|Stół jadalniany jest z drewna.|masa|Yemek masası ahşaptan.\nstolik|meski|Stolik kawowy stoi przed kanapą.|sehpa|Sehpa kanepenin önünde duruyor.\nbiurko|nijaki|Biurko jest przy oknie.|çalışma masası|Çalışma masası pencerenin yanında.\nłóżko|nijaki|Łóżko jest wygodne i szerokie.|yatak|Yatak rahat ve geniş.\nszafa|zenski|Szafa jest pełna ubrań.|dolap|Dolap kıyafet dolu.\nkomoda|zenski|Komoda ma pięć szuflad.|şifonyer|Şifonyerin beş çekmeceği var.\npółka|zenski|Na półce stoją książki i rośliny.|raf|Rafta kitaplar ve bitkiler duruyor.\nregał|meski|Regał zajmuje całą ścianę.|kitaplık|Kitaplık bütün duvarı kaplıyor.\nszafka|zenski|Szafka nocna stoi przy łóżku.|komodin|Komodin yatağın yanında duruyor.\nlustro|nijaki|Lustro w łazience jest duże.|ayna|Banyodaki ayna büyük.\ndywan|meski|Dywan w salonie jest perski.|halı|Oturma odasındaki halı İran halısı.\nzasłony|cogul|Zasłony są z ciężkiej tkaniny.|perdeler|Perdeler ağır kumaştan.\nrolety|cogul|Rolety blokują światło słoneczne.|stor perde|Stor perde güneş ışığını engelliyor.\nlampa|zenski|Lampa stojąca oświetla cały pokój.|lamba|Zemin lambası odanın tamamını aydınlatıyor.\nżyrandol|meski|Żyrandol wisi nad stołem jadalnym.|avize|Avize yemek masasının üzerinde asılı.\nkinkiet|meski|Kinkiet przy łóżku jest regulowany.|aplik|Yatak başı apliği ayarlanabilir.\npoduszka|zenski|Poduszka jest z pierzem.|yastık|Yastık tüy dolgu.\nkołdra|zenski|Kołdra jest ciepła na zimę.|yorgan|Yorgan kış için sıcak.\npościel|zenski|Pościel jest świeżo uprana.|çarşaf takımı|Çarşaf takımı yeni yıkandı.\nzlew|meski|Zlew w kuchni jest ze stali nierdzewnej.|eviye|Mutfak evelyesi paslanmaz çelikten.\nzlewozmywak|meski|Zlewozmywak ma dwie komory.|çift gözlü eviye|Çift gözlü eviye pratik.\nlodówka|zenski|Lodówka jest pełna jedzenia.|buzdolabı|Buzdolabı yiyecek dolu.\nzamrażarka|zenski|Zamrażarka jest pod lodówką.|dondurucu|Dondurucu buzdolabının altında.\nkuchenka|zenski|Kuchenka ma cztery palniki.|ocak|Ocağın dört gözü var.\npiekarnik|meski|Piekarnik nagrzewa się do 250 stopni.|fırın|Fırın 250 dereceye kadar ısınıyor.\nmikrofalówka|zenski|Mikrofalówka podgrzewa jedzenie w minutę.|mikrodalga|Mikrodalga yemeği bir dakikada ısıtıyor.\nzmywarka|zenski|Zmywarka myje naczynia automatycznie.|bulaşık makinesi|Bulaşık makinesi tabakları otomatik yıkıyor.\npralka|zenski|Pralka jest w łazience.|çamaşır makinesi|Çamaşır makinesi banyoda.\nsuszarka|zenski|Suszarka do ubrań jest na balkonie.|kurutma makinesi|Kurutma makinesi balkonda.\nodkurzacz|meski|Odkurzacz sprząta dywany i podłogi.|elektrik süpürgesi|Elektrik süpürgesi halı ve zeminleri temizliyor.\nklimatyzacja|zenski|Klimatyzacja chłodzi pokój latem.|klima|Klima yazın odayı serinletiyor.\ngrzejnik|meski|Grzejnik ogrzewa pokój zimą.|radyatör|Radyatör kışın odayı ısıtıyor.\nwentylator|meski|Wentylator stoi na biurku.|fan|Fan masanın üzerinde duruyor.\ntelewizor|meski|Telewizor wisi na ścianie.|televizyon|Televizyon duvara asılı.\ngłośnik|meski|Głośnik bluetooth gra muzykę.|hoparlör|Bluetooth hoparlör müzik çalıyor.\nrouter|meski|Router zapewnia internet w całym domu.|yönlendirici|Yönlendirici tüm evde internet sağlıyor.\nobraz|meski|Obraz wisi nad kanapą.|tablo|Tablo kanepenin üzerinde asılı.\nroślina doniczkowa|zenski|Roślina doniczkowa stoi przy oknie.|saksı bitkisi|Saksı bitkisi pencerenin yanında.\nświeca|zenski|Świeca pachnie lawendą.|mum|Mum lavanta kokuyor.\n";
+  const EMBEDDED_EXTRA_1_CSV = "pl|g|ex_pl|tr|ex_tr\nwłosy|cogul|Moje włosy są krótkie.|saç|Saçlarım kısa.\nczoło|nijaki|Masz wysokie czoło.|alın|Yüksek bir alnın var.\nbrew|zenski|Lewa brew mnie swędzi.|kaş|Sol kaşım kaşınıyor.\nucho|nijaki|Boli mnie ucho.|kulak|Kulağım ağrıyor.\nrzęsa|zenski|Masz długie rzęsy.|kirpik|Uzun kirpiklerin var.\noko|nijaki|Niebieskie oczy są piękne.|göz|Mavi gözler güzeldir.\nnos|meski|Mam zatkany nos.|burun|Burnum tıkalı.\npoliczek|meski|Masz czerwone policzki.|yanak|Yanakların kırmızı.\nwąs|meski|Mój dziadek ma wąsy.|bıyık|Dedemin bıyığı var.\nusta|cogul|Masz uśmiechnięte usta.|ağız|Gülümseyen bir ağzın var.\njęzyk|meski|Pokaż język.|dil|Dilini göster.\nząb|meski|Muszę umyć zęby.|diş|Dişlerimi fırçalamalıyım.\nwarga|zenski|Moje wargi są suche.|dudak|Dudaklarım kuru.\nbroda|zenski|On ma gęstą brodę.|çene / sakal|Onun gür bir sakalı var.\nczaszka|zenski|To jest ludzka czaszka.|kafatası|Bu bir insan kafatasıdır.\nobojczyk|meski|Złamał obojczyk.|köprücük kemiği|Köprücük kemiğini kırdı.\nmostek|meski|Boli mnie w mostku.|göğüs kemiği|Göğüs kemiğimde ağrı var.\nżebro|nijaki|Ile mamy żeber?|kaburga|Kaç kaburgamız var?\nkręgosłup|meski|Dbaj o kręgosłup.|omurga|Omurgana dikkat et.\nmiednica|zenski|Miednica jest szeroka.|leğen kemiği|Leğen kemiği geniştir.\nkość|zenski|To mocna kość.|kemik|Bu güçlü bir kemik.\nmózg|meski|Mózg jest skomplikowany.|beyin|Beyin karmaşıktır.\npłuco|nijaki|Płuca są zdrowe.|akciğer|Akciğerler sağlıklıdır.\nserce|nijaki|Moje serce bije szybko.|kalp|Kalbim hızlı çarpıyor.\nmięsień|meski|Mam zakwasy w mięśniach.|kas|Kaslarımda ağrı var.\ntętnica|zenski|Tętnica transportuje krew.|atar damar|Atar damar kan taşır.\nkrew|zenski|Krew jest czerwona.|kan|Kan kırmızıdır.\nwątroba|zenski|Wątroba jest ważna.|karaciğer|Karaciğer önemlidir.\nżołądek|meski|Boli mnie żołądek.|mide|Midem ağrıyor.\njelito|nijaki|Jelita trawią jedzenie.|bağırsak|Bağırsaklar yemeği sindirir.\nnerka|zenski|Nerki oczyszczają krew.|böbrek|Böbrekler kanı temizler.\npęcherz|meski|Mam pełny pęcherz.|mesane|Mesanem dolu.\nżyła|zenski|Widać mu żyły.|toplar damar|Damarları görünüyor.\ngłowa|zenski|Boli mnie głowa.|baş / kafa|Başım ağrıyor.\nszyja|zenski|Mam długą szyję.|boyun|Uzun bir boynum var.\ngardło|nijaki|Gardło mnie boli.|boğaz|Boğazım ağrıyor.\nręka|zenski|Podaj mi rękę.|el / kol|Elini bana ver.\nramię|nijaki|Mam szerokie ramiona.|omuz|Geniş omuzlarım var.\nłokieć|meski|Uderzyłem się w łokieć.|dirsek|Dirseğimi çarptım.\ndłoń|zenski|Twoje dłonie są ciepłe.|avuç içi / el|Ellerin sıcak.\npalec|meski|Mam pięć palców.|parmak|Beş parmağım var.\npaznokieć|meski|Obcinam paznokcie.|tırnak|Tırnaklarımı kesiyorum.\npacha|zenski|Używam dezodorantu pod pachy.|koltuk altı|Koltuk altıma deodorant sürüyorum.\ntułów|meski|Tułów jest częścią ciała.|gövde|Gövde vücudun bir parçasıdır.\nbrzuch|meski|Mam pełny brzuch.|karın|Karnım tok.\nbiodro|nijaki|Ręce na biodra.|kalça|Eller kalçaya.\nnoga|zenski|Bolą mnie nogi.|bacak|Bacaklarım ağrıyor.\nudo|nijaki|Udo to część nogi.|uyluk|Uyluk bacağın bir kısmıdır.\nkolano|nijaki|Upadłem na kolana.|diz|Dizlerimin üzerine düştüm.\nłydka|zenski|Mam skurcz w łydce.|baldır|Baldırımda kramp var.\nstopa|zenski|Moja stopa jest duża.|ayak|Ayağım büyük.\nkostka|zenski|Skręciłem kostkę.|ayak bileği|Ayak bileğimi burktum.\npięta|zenski|Boli mnie pięta.|topuk|Topuğum ağrıyor.\nkark|meski|Boli mnie kark.|ense|Ensem ağrıyor.\npierś|zenski|Pierś się unosi.|göğüs|Göğüs kafesi yükseliyor.\nplecy|cogul|Proszę umyć mi plecy.|sırt|Lütfen sırtımı yıka.\ntalia|zenski|Ona ma wąską talię.|bel|Onun ince bir beli var.\npośladek|meski|Zastrzyk w pośladek.|kalça / popo|Kalçadan iğne.\n";
+
+  // Uygulamayla gömülü gelen (dahili) "Diğer Setler"
+  const BUILTIN_DIGER_SETS = [
+    { title: "Mobilya", icon: "🪑", _builtin: true, _csv: EMBEDDED_EXTRA_0_CSV },
+    { title: "Vucudumuz", icon: "🫀", _builtin: true, _csv: EMBEDDED_EXTRA_1_CSV },
+  ];
+
+  // Kullanıcının uygulama içinden eklediği setlerin localStorage anahtarı
+  const LS_USER_SETS = 'polonceKart_userSets';
+  function loadUserSets(){
+    try { return JSON.parse(localStorage.getItem(LS_USER_SETS) || '[]'); }
+    catch(e){ return []; }
+  }
+  function saveUserSets(arr){
+    try { localStorage.setItem(LS_USER_SETS, JSON.stringify(arr)); return true; }
+    catch(e){ alert('Set kaydedilemedi: ' + (e && e.message ? e.message : e)); return false; }
+  }
+  // ═══ END EMBEDDED DATA ═══
+
+
+  // words will be loaded from CSV
+  let words = [];
+
+  let deck=[], current=0, flipped=false, results={}, learnedCount=0;
+  let miniDeck=[], miniCurrent=0, miniFlipped=false;
+  // Mini tour hangi listeyi çalışıyor: 'saved' (Çalışma) | 'star' (Günlük) | 'readonly' (kaynak liste)
+  // "Öğrendim" butonu bu moda göre davranır (bkz. miniMastered)
+  let miniMode = 'saved';
+  // Oturum sayaçları — her yeni mini tour başlangıcında sıfırlanır
+  let miniSessionCorrect = 0, miniSessionWrong = 0;
+  let lastCorrectWords = [], lastWrongWords = [];   // Doğru/Yanlış listesi için
+  let miniCorrectWords = [], miniWrongWords = [];
+  let resultListType  = 'correct';  // açık olan liste türü
+  let resultSortOrder = 'none';     // 'none' | 'az' | 'za' — Yanlışlar listesi sıralama
+  let pendingDeletes  = new Set();  // toplu silme için işaretlenen kelimeler (pl string)
+  let deleteContext   = 'list';     // 'list' | 'result'
+  let pendingUnstar   = new Set();  // Günlük sekmesinde yıldızı sönültülmüş, liste kapanınca çıkarılacaklar
+  let reverseMode = false;
+
+  // ── localStorage helpers ──
+  const LS_KEY = 'polonceKart_saved';
+  const LS_SAVED_DATA = 'polonceKart_saved_data'; // tam kelime nesneleri — hangi set yüklü olursa olsun kaybolmaz
+  function loadSaved(){ try { return (JSON.parse(localStorage.getItem(LS_KEY)||'[]')).map(s=>s.trim()); } catch(e){ return []; } }
+  function saveSaved(arr){ try { localStorage.setItem(LS_KEY, JSON.stringify(arr)); } catch(e){} }
+  function loadSavedData(){ try { return JSON.parse(localStorage.getItem(LS_SAVED_DATA)||'[]'); } catch(e){ return []; } }
+  function saveSavedData(arr){ try { localStorage.setItem(LS_SAVED_DATA, JSON.stringify(arr)); } catch(e){} }
+  let savedWords = loadSaved();
+  let savedData = loadSavedData(); // [{pl, g, ex_pl, tr, ex_tr}, ...] — kalıcı tam veri
+
+  function getPool(){
+    const cw = (typeof customWords !== 'undefined') ? customWords : [];
+    const dw = (typeof digerWords !== 'undefined') ? digerWords : [];
+    const all = wordsB1.concat(wordsGunluk).concat(cw).concat(dw);
+    const seen = new Set();
+    return all.filter(w => { if(seen.has(w.pl)) return false; seen.add(w.pl); return true; });
+  }
+
+  // ── CSV LOADER ──
+  function parseCSV(text){
+    const lines = text.trim().split('\n');
+    const result = [];
+    for(let i=0; i<lines.length; i++){
+      const line = lines[i];
+      if(!line || !line.trim()) continue;
+      let o = null;
+      if(line.indexOf('|') !== -1){
+        // Eski/gömülü format: pl|g|ex_pl|tr|ex_tr (opsiyonel 6. sütun: tag)
+        const parts = line.split('|');
+        if(parts.length >= 5){
+          if(parts[0].trim().toLowerCase() === 'pl') continue; // başlık
+          o = { pl:parts[0].trim(), g:parts[1].trim(), ex_pl:parts[2].trim(), tr:parts[3].trim(), ex_tr:parts[4].trim(), tag:(parts[5]||'').trim() };
+        }
+      } else if(line.indexOf('/') !== -1){
+        // Yeni format: pl / type / tag / tr / exPl / exTr
+        let p = line.replace(/\r$/,'').split(' / '); if(p.length < 2) p = line.split('/');
+        p = p.map(s => s.trim());
+        if(p[0] && p[0].toLowerCase() !== 'pl'){
+          o = { pl:p[0], g:p[1]||'', tag:p[2]||'', tr:p[3]||'', ex_pl:p[4]||'', ex_tr:p[5]||'' };
+        }
+      }
+      if(o && o.pl) result.push(o);
+    }
+    return result;
+  }
+
+  let wordsGunluk = [];
+  let wordsB1 = [];
+
+  async function fetchCSV(path){
+    try {
+      const resp = await fetch(path);
+      if(!resp.ok) throw new Error('HTTP ' + resp.status);
+      const text = await resp.text();
+      const parsed = parseCSV(text);
+      console.log(path + ' yüklendi: ' + parsed.length + ' kelime');
+      return parsed;
+    } catch(e) {
+      console.error(path + ' yüklenemedi:', e);
+      return [];
+    }
+  }
+
+  async function loadWords(){
+    // OFFLINE-FIRST: Önce gömülü verileri kullan (APK için bu her zaman çalışır).
+    // Eğer gömülü veri boş gelirse (geliştirme/browser modu), CSV dosyalarını fetch ile dene.
+    try {
+      if (typeof EMBEDDED_GUNLUK_CSV !== 'undefined' && EMBEDDED_GUNLUK_CSV.length > 20) {
+        wordsGunluk = parseCSV(EMBEDDED_GUNLUK_CSV);
+        wordsB1 = parseCSV(EMBEDDED_B1_CSV);
+        console.log('Gömülü veriden yüklendi: günlük', wordsGunluk.length, '· b1', wordsB1.length);
+      } else {
+        [wordsGunluk, wordsB1] = await Promise.all([
+          fetchCSV('./kelimeler-basic-tr.csv'),
+          fetchCSV('./kelimeler.csv')
+        ]);
+      }
+    } catch(e) {
+      console.error('Kelime yükleme hatası:', e);
+      [wordsGunluk, wordsB1] = [[], []];
+    }
+    words = wordsB1; // default
+    await loadManifest();
+    // En son seçilen diger seti otomatik yükle (hangi set aktif olursa olsun)
+    const lastDigerTitle = localStorage.getItem('polonceKart_diger_title');
+    if(lastDigerTitle && digerSets.length) {
+      const lastDigerSet = digerSets.find(s => s.title === lastDigerTitle);
+      if(lastDigerSet) {
+        try {
+          let text;
+          if (lastDigerSet._csv) {
+            // Gömülü (dahili) veya kullanıcı tarafından eklenmiş set — CSV doğrudan nesnenin içinde
+            text = lastDigerSet._csv;
+          } else if (lastDigerSet.file) {
+            // Eski tarz (manifest.json referanslı) set
+            const resp = await fetch('./' + lastDigerSet.file);
+            if(resp.ok) text = await resp.text();
+          }
+          if (text) {
+            digerWords = parseCSV(text);
+            console.log('Diger set otomatik yüklendi:', lastDigerSet.title, digerWords.length, 'kelime');
+          }
+        } catch(e) { console.warn('Diger set yüklenemedi:', e); }
+      }
+    }
+    if(!wordsGunluk.length && !wordsB1.length){
+      const msg = document.getElementById('splash-empty-msg');
+      if(msg){
+        msg.textContent = '⚠️ Kelime dosyası yüklenemedi — sayfayı yenile';
+        msg.style.display = 'block';
+        msg.style.color = 'var(--red)';
+        msg.style.background = 'rgba(224,90,90,.1)';
+        msg.style.border = '1px solid rgba(224,90,90,.3)';
+      }
+    }
+    initApp();
+  }
+
+  function initApp(){
+    // Migration: eski kayıtlardan *Data depolarını doldur (ilk çalıştırmada)
+    const migratePool = getPool();
+    if(savedWords.length && !savedData.length){
+      savedWords.forEach(pl => {
+        const found = migratePool.find(w => w.pl.trim() === pl);
+        if(found && !savedData.find(w => w.pl.trim() === pl)) savedData.push(found);
+      });
+      if(savedData.length) saveSavedData(savedData);
+    }
+    if(starWords.length && !starData.length){
+      starWords.forEach(pl => {
+        const found = migratePool.find(w => w.pl.trim() === pl);
+        if(found && !starData.find(w => w.pl.trim() === pl)) starData.push(found);
+      });
+      if(starData.length) saveStarData(starData);
+    }
+    // Restore saved direction
+    reverseMode = localStorage.getItem('polonceKart_dir') === '1';
+    if(reverseMode){
+      ['mode-btn','mini-mode-btn'].forEach(id => {
+        const mb = document.getElementById(id);
+        if(mb){ mb.textContent='TR → PL'; mb.classList.add('tr-mode'); }
+      });
+    }
+    updateSplashActive();
+    // Do NOT auto-start deck — user picks from splash
+    document.getElementById('mode-btn').addEventListener('click', toggleMode);
+    document.getElementById('finish-btn').addEventListener('click', showComplete);
+    document.getElementById('hint-overlay').addEventListener('click', closeHint);
+    document.querySelector('#stage .hint-btn').addEventListener('click', e=>{ e.stopPropagation(); showHint(e); });
+    document.querySelector('#mini-stage .hint-btn').addEventListener('click', e=>{ e.stopPropagation(); showMiniHint(e); });
+    // Senkron OTOMATİK DEĞİL — yalnızca kullanıcı butona basınca çalışır.
+    // Burada sadece Günlük aynasını tazeliyoruz ki diğer uygulama istediğinde çekebilsin.
+    try { publishSync(); } catch(e){}
+  }
+
+  function gBadge(g){
+    const map = {'çoğul':'cogul','fiil':'fiil','sıfat':'sifat'};
+    const cls = map[g] || g;
+    return `<span class="gender-badge ${cls}">${g}</span>`;
+  }
+  function flash(id){ const e=document.getElementById(id); if(!e)return; e.classList.add('show'); setTimeout(()=>e.classList.remove('show'),300); }
+
+  // ── MAIN DECK ──
+  function buildDots(){
+    const nav=document.getElementById('dot-nav'); nav.innerHTML='';
+    deck.forEach((_,i)=>{ const d=document.createElement('div'); d.className='dot'+(i===0?' current':''); d.onclick=()=>goTo(i); nav.appendChild(d); });
+  }
+  function updateDots(){
+    document.querySelectorAll('#dot-nav .dot').forEach((d,i)=>{
+      d.className='dot';
+      if(i===current) d.classList.add('current');
+      else if(results[i]==='correct') d.classList.add('learned');
+      else if(results[i]==='wrong')   d.classList.add('wrong');
+      else if(results[i]==='save')    d.classList.add('saved');
+    });
+  }
+  function updateHeader(){
+    document.getElementById('counter').textContent=`${current+1} / ${deck.length}`;
+    document.getElementById('progress-fill').style.width=((current+1)/deck.length*100).toFixed(1)+'%';
+    document.getElementById('lbl-learned').textContent=learnedCount+' öğrenildi';
+    document.getElementById('lbl-remain').textContent=(deck.length-learnedCount)+' kaldı';
+  }
+  function showCard(dir){
+    if(!deck || !deck[current]) return;
+    const w=deck[current];
+    // front face — Türkçe modda cinsiyet rozeti gösterme
+    const pw = reverseMode ? w.tr : w.pl;
+    const pwEl = document.getElementById('polish-word');
+    const pwR = cardHtml(pw);
+    pwEl.innerHTML = pwR.html;
+    pwEl.lang = reverseMode ? 'tr' : 'pl';
+    adjustFontSize('polish-word', pwR.main);
+    document.getElementById('gender-badge-front').innerHTML = reverseMode ? '' : gBadge(w.g);
+    document.querySelector('#card-container .card-front .card-label').textContent = reverseMode ? 'türkçe' : 'lehçe';
+    document.querySelector('.flip-hint').textContent = reverseMode ? 'kaydır → lehçe gör' : 'kaydır → türkçe gör';
+    // back face
+    document.getElementById('back-polish').innerHTML  = cardHtml(reverseMode ? w.tr : w.pl).html;
+    document.getElementById('turkish-word').innerHTML = cardHtml(reverseMode ? w.pl : w.tr).html;
+    document.getElementById('gender-badge-back').innerHTML = reverseMode ? gBadge(w.g) : '';
+    document.querySelector('#card-container .card-back .card-label').textContent = reverseMode ? 'lehçe' : 'türkçe';
+    document.getElementById('card-inner').classList.remove('flipped');
+    flipped=false;
+    document.getElementById('actions').className='actions actions-hidden';
+    const c=document.getElementById('card-container');
+    c.classList.remove('slide-right','slide-left','slide-up'); void c.offsetWidth;
+    if(dir==='next') c.classList.add('slide-up');
+    else if(dir==='prev') c.classList.add('slide-left');
+    else c.classList.add('slide-right');
+    updateDots(); updateHeader(); updateMainStarBtn();
+  }
+  function flipCard(){
+    const inn=document.getElementById('card-inner');
+    if(!flipped){ inn.classList.add('flipped'); flipped=true; document.getElementById('actions').className='actions actions-visible'; }
+    else { inn.classList.remove('flipped'); flipped=false; document.getElementById('actions').className='actions actions-hidden'; }
+  }
+  function goTo(i){ current=i; showCard('right'); }
+  function nextCard(){ if(current<deck.length-1){ current++; showCard('next'); } else showComplete(); }
+  function prevCard(){ if(current>0){ current--; showCard('prev'); } }
+  function markCorrect(){ if(!results[current]) learnedCount++; results[current]='correct'; updateDots(); flash('fb-right'); setTimeout(nextCard,300); }
+  function markWrong(){   results[current]='wrong';   updateDots(); flash('fb-left');  setTimeout(nextCard,300); }
+  function markSave(){
+    if(!results[current]) learnedCount++;
+    results[current]='save';
+    const word = deck[current];
+    const pl = word.pl.trim();
+    if(!savedWords.includes(pl)){
+      savedWords.push(pl); saveSaved(savedWords);
+      if(!savedData.find(w => w.pl.trim() === pl)){ savedData.push(word); saveSavedData(savedData); }
+    }
+    updateDots(); flash('fb-up'); setTimeout(nextCard,300);
+  }
+  // Çalışma (calisma) setinde çalışırken "Öğrendim": kelimeyi Çalışma ve Günlük'ten çıkarır.
+  function markMainLearned(){
+    if(!deck||!deck[current]) return;
+    const pl = deck[current].pl.trim();
+    savedWords = loadSaved().filter(w => w !== pl);
+    saveSaved(savedWords);
+    savedData = savedData.filter(w => w.pl.trim() !== pl);
+    saveSavedData(savedData);
+    starWords = loadStar().filter(w => w !== pl);
+    saveStar(starWords);
+    starData = starData.filter(w => w.pl.trim() !== pl);
+    saveStarData(starData);
+    if(!results[current]) learnedCount++;
+    results[current]='learned';
+    updateDots(); flash('fb-up'); setTimeout(nextCard,300);
+  }
+  // Ana deck üçüncü buton: aktif sete göre markSave veya markMainLearned çalışır.
+  function markMainThird(){
+    const sel = localStorage.getItem('polonceKart_set') || 'gunluk';
+    if(sel === 'calisma') markMainLearned();
+    else markSave();
+  }
+  // Butonun yazı/ikonu aktif sete göre değişir.
+  function updateMainThirdBtn(){
+    const sel = localStorage.getItem('polonceKart_set') || 'gunluk';
+    const icon = document.getElementById('main-third-icon');
+    const lbl  = document.getElementById('main-third-lbl');
+    if(!icon || !lbl) return;
+    if(sel === 'calisma'){
+      icon.textContent = '🎓';
+      lbl.textContent  = 'Öğrendim';
+    } else {
+      icon.textContent = '📌';
+      lbl.textContent  = 'Çalışma Setine Ekle';
+    }
+  }
+
+  // ── HINT ──
+  function showHint(e){ e.stopPropagation(); if(!deck||!deck[current]) return; const w=deck[current]; _showHintOverlay(w); }
+  function showMiniHint(e){
+    e.stopPropagation();
+    if(!miniDeck||!miniDeck.length||miniCurrent===undefined) return;
+    const w=miniDeck[miniCurrent];
+    if(!w) return;
+    _showHintOverlay(w);
+  }
+  function _showHintOverlay(w){
+    if(!w) return;
+    document.getElementById('hint-sentence-pl').textContent=w.ex_pl||'';
+    const trEl = document.getElementById('hint-sentence-tr');
+    if(trEl) trEl.textContent=w.ex_tr||'';
+    document.getElementById('hint-overlay').classList.add('show');
+  }
+  function closeHint(){ document.getElementById('hint-overlay').classList.remove('show'); }
+
+  // ── COMPLETION ──
+  function showComplete(){
+    lastCorrectWords = deck.filter((_,i) => results[i]==='correct');
+    lastWrongWords   = deck.filter((_,i) => results[i]==='wrong');
+    const cor = lastCorrectWords.length;
+    const wrg = lastWrongWords.length;
+    document.getElementById('c-correct').textContent=cor;
+    document.getElementById('c-wrong').textContent=wrg;
+    // Çalışma ve Günlük "tekrar çalış" kart-butonlarını tazele
+    refreshCompleteRestartRow();
+    document.getElementById('complete-screen').classList.add('show');
+  }
+  function restart(){
+    // Son seçili seti yeniden başlat
+    const lastSet = localStorage.getItem('polonceKart_set') || 'b1';
+    document.getElementById('complete-screen').classList.remove('show');
+    startApp(lastSet);
+  }
+
+  // ── RESULT LIST (Doğru / Yanlış listeleme) ──
+  function openResultList(type){
+    resultListType = type;
+    resultSortOrder = 'none';
+    pendingDeletes.clear();
+    deleteContext = 'result';
+    starWords = loadStar();
+    savedWords = loadSaved();
+    const title = type === 'correct' ? '✅ Doğrular' : '❌ Yanlışlar';
+    document.getElementById('result-list-title').textContent = title;
+    // Doğru listesinde Başlat = tüm listeyi yeniden başlat; Yanlış listesinde Başlat = sadece yanlışları çalış
+    const startBtn = document.getElementById('result-start-btn');
+    if(startBtn) startBtn.textContent = type === 'correct' ? '▶ Baştan Başlat' : '▶ Bu Listeyi Çalış';
+    // Sıralama butonu yalnızca Yanlışlar listesinde görünür
+    const sortBtn = document.getElementById('result-sort-btn');
+    if(sortBtn){ sortBtn.style.display = type === 'wrong' ? '' : 'none'; sortBtn.textContent = 'Sırasız'; }
+    renderResultList();
+    document.getElementById('result-list-overlay').classList.add('show');
+  }
+
+  function getSortedResultItems(){
+    const items = resultListType === 'correct' ? lastCorrectWords : lastWrongWords;
+    if(resultSortOrder === 'az') return [...items].sort((a,b) => a.pl.localeCompare(b.pl));
+    if(resultSortOrder === 'za') return [...items].sort((a,b) => b.pl.localeCompare(a.pl));
+    return items;
+  }
+
+  function cycleResultSort(){
+    const next = {'none':'az','az':'za','za':'none'};
+    const labels = {'none':'Sırasız','az':'A→Z','za':'Z→A'};
+    resultSortOrder = next[resultSortOrder];
+    const btn = document.getElementById('result-sort-btn');
+    if(btn) btn.textContent = labels[resultSortOrder];
+    renderResultList();
+  }
+
+  function renderResultList(){
+    starWords = loadStar();
+    savedWords = loadSaved();
+    const items = getSortedResultItems();
+    const body = document.getElementById('result-list-body');
+    if(!items.length){
+      body.innerHTML = '<div class="list-empty">Kelime yok</div>';
+      return;
+    }
+    let headerHtml = '';
+    if(resultListType === 'wrong'){
+      const wrongPls = new Set(items.map(w => w.pl.trim()));
+      const otherStarred = starWords.filter(pl => !wrongPls.has(pl));
+      const clearPart = otherStarred.length > 0
+        ? `<div onclick="clearNonWrongStars()" style="flex:1;display:flex;align-items:center;gap:6px;padding:8px 10px;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.2);border-radius:10px;cursor:pointer;">
+            <span style="font-size:12px;color:var(--gold)">⭐ Diğerlerini çıkar</span>
+            <span style="font-size:11px;color:var(--text-muted);margin-left:auto">${otherStarred.length} ✕</span>
+           </div>`
+        : '';
+      headerHtml = `<div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
+        ${clearPart}
+        <div onclick="addTenToGunluk()" style="display:flex;align-items:center;padding:8px 12px;background:rgba(201,169,110,.08);border:1px solid rgba(201,169,110,.2);border-radius:10px;cursor:pointer;">
+          <span style="font-size:12px;color:var(--gold)">+10 Günlük'e Ekle</span>
+        </div>
+      </div>`;
+    }
+    const rows = items.map(w => {
+      const pl = w.pl.trim();
+      const plSafe = pl.replace(/'/g,"\\'");
+      const isStarred = starWords.includes(pl);
+      const trDisplay = w.tr.replace(/\[([^\]]+)\]/g, '($1)');
+      const exHtml = (w.ex_pl||w.ex_tr)
+        ? `<div class="list-item-example"><div class="ex-pl">${w.ex_pl||''}</div><div class="ex-tr">${w.ex_tr||''}</div></div>`
+        : '';
+      return `<div class="list-item" onclick="toggleExample(this)">
+        <span class="list-pl">${cardHtml(w.pl).html}</span>
+        <span class="list-tr">${trDisplay}</span>
+        <span class="list-star ${isStarred?'active':''}" onclick="toggleStarFromList('${plSafe}',this,event)">${isStarred?'⭐':'☆'}</span>
+        <span class="list-remove" onclick="toggleDeleteMark('${plSafe}',this,event)">🗑</span>
+        ${exHtml}
+      </div>`;
+    }).join('');
+    body.innerHTML = headerHtml + rows;
+  }
+
+  // ── DIŞA AKTARMA (CSV) ──
+  function exportList(tab){
+    const isStar  = tab === 'star';
+    const isSaved = tab === 'saved';
+    if(!isStar && !isSaved) return;
+    const data  = isStar ? loadStarData() : loadSavedData();
+    const words = isStar ? loadStar() : loadSaved();
+    const title = isStar ? 'Günlük' : 'Çalışma';
+    if(!words.length){ alert(title + ' listesi boş, dışa aktarılacak kelime yok.'); return; }
+    const norm = s => (s||'').trim();
+    const txt = words.map(pl => {
+      const w = data.find(x => norm(x.pl) === norm(pl)) || {};
+      return [norm(pl), w.g||'', w.tag||'', w.tr||'', w.ex_pl||'', w.ex_tr||''].join(' / ');
+    }).join('\n') + '\n';
+    const filename = (isStar ? 'gunluk-' : 'calisma-') + new Date().toISOString().slice(0,10) + '.txt';
+    // Android JavascriptInterface varsa doğrudan Downloads'a kaydet
+    if(window.Android && typeof window.Android.saveCSV === 'function'){
+      window.Android.saveCSV(filename, txt);
+    } else {
+      const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename; a.click();
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  function showExportModal(title, csv){
+    document.getElementById('export-title').textContent = `📤 ${title}`;
+    document.getElementById('export-textarea').value = csv;
+    document.getElementById('export-copy-btn').textContent = '📋 Kopyala';
+    document.getElementById('export-overlay').classList.add('show');
+  }
+
+  function closeExportModal(){
+    document.getElementById('export-overlay').classList.remove('show');
+  }
+
+  function copyExport(){
+    const ta  = document.getElementById('export-textarea');
+    const btn = document.getElementById('export-copy-btn');
+    const txt = ta.value;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(() => {
+        btn.textContent = '✓ Kopyalandı'; setTimeout(() => btn.textContent = '📋 Kopyala', 2500);
+      }).catch(() => fallbackCopy(ta, btn));
+    } else {
+      fallbackCopy(ta, btn);
+    }
+  }
+
+  function fallbackCopy(ta, btn){
+    ta.select(); ta.setSelectionRange(0, 99999);
+    try { document.execCommand('copy'); btn.textContent = '✓ Kopyalandı'; }
+    catch(e){ btn.textContent = '✗ Hata'; }
+    setTimeout(() => btn.textContent = '📋 Kopyala', 2500);
+  }
+
+  // ── TOPLU SİLME ──
+  function toggleDeleteMark(pl, trashEl, event){
+    if(event) event.stopPropagation();
+    pl = pl.trim();
+    const row = trashEl.closest('.list-item');
+    if(pendingDeletes.has(pl)){
+      pendingDeletes.delete(pl);
+      row.classList.remove('marked-delete');
+      trashEl.textContent = '🗑';
+    } else {
+      pendingDeletes.add(pl);
+      row.classList.add('marked-delete');
+      trashEl.textContent = '✕';
+    }
+    updateDeleteBtn();
+  }
+
+  function updateDeleteBtn(){
+    const btnId = deleteContext === 'list' ? 'list-delete-btn' : 'result-delete-btn';
+    const btn = document.getElementById(btnId);
+    if(!btn) return;
+    if(pendingDeletes.size > 0){
+      btn.style.display = '';
+      btn.textContent = `🗑 ${pendingDeletes.size} sil`;
+    } else {
+      btn.style.display = 'none';
+    }
+  }
+
+  function confirmBatchDelete(context){
+    if(!pendingDeletes.size) return;
+    const n = pendingDeletes.size;
+    const ok = confirm(`${n} kelime silinecek. Emin misin?`);
+    if(!ok) return;
+    const pls = [...pendingDeletes];
+    pendingDeletes.clear();
+    if(context === 'result'){
+      // Yanlışlar / Doğrular listesinden: Çalışma ve Günlük'ten çıkar
+      for(const pl of pls){
+        savedWords = savedWords.filter(w => w !== pl);
+        savedData  = savedData.filter(w => w.pl.trim() !== pl);
+        if(starWords.includes(pl)){
+          starWords = starWords.filter(w => w !== pl);
+          starData  = starData.filter(w => w.pl.trim() !== pl);
+        }
+      }
+      saveSaved(savedWords); saveSavedData(savedData);
+      saveStar(starWords);   saveStarData(starData);
+      renderResultList();
+    } else {
+      if(currentListTab === 'star'){
+        // Günlük'ten çıkar (Çalışma'da kalır)
+        for(const pl of pls){
+          starWords = starWords.filter(w => w !== pl);
+          starData  = starData.filter(w => w.pl.trim() !== pl);
+        }
+        saveStar(starWords); saveStarData(starData);
+      } else if(currentListTab === 'saved'){
+        // Çalışma'dan çıkar (invaryant gereği Günlük'ten de)
+        for(const pl of pls){
+          savedWords = savedWords.filter(w => w !== pl);
+          savedData  = savedData.filter(w => w.pl.trim() !== pl);
+          if(starWords.includes(pl)){
+            starWords = starWords.filter(w => w !== pl);
+            starData  = starData.filter(w => w.pl.trim() !== pl);
+          }
+        }
+        saveSaved(savedWords); saveSavedData(savedData);
+        saveStar(starWords);   saveStarData(starData);
+      }
+      const tabStar = document.getElementById('tab-star');
+      if(tabStar) tabStar.textContent = starWords.length > 0 ? `⭐ Günlük (${starWords.length})` : '⭐ Günlük';
+      renderList(currentListTab);
+    }
+    updateDeleteBtn();
+  }
+
+  // ── +10 GÜNLÜK'E EKLE ──
+  function addTenToGunluk(){
+    starWords = loadStar();
+    const allSaved = loadSavedData();   // Çalışma setinin tamamı — kaynak havuz
+    const notStarred = allSaved.filter(w => !starWords.includes(w.pl.trim()));
+    const toAdd = [...notStarred].sort(()=>Math.random()-.5).slice(0, 10);
+    if(!toAdd.length){ alert('Çalışma setinde Günlük\'e eklenmemiş kelime kalmadı!'); return; }
+    const ok = confirm(`${toAdd.length} kelime Günlük sete eklenecek. Devam edilsin mi?`);
+    if(!ok) return;
+    savedWords = loadSaved();
+    savedData  = loadSavedData();
+    for(const w of toAdd){
+      const pl = w.pl.trim();
+      starWords.push(pl);
+      if(!starData.find(s => s.pl.trim() === pl)) starData.push(w);
+      if(!savedWords.includes(pl)){
+        savedWords.push(pl);
+        if(!savedData.find(s => s.pl.trim() === pl)) savedData.push(w);
+      }
+    }
+    saveStar(starWords); saveStarData(starData);
+    saveSaved(savedWords); saveSavedData(savedData);
+    const tabStar = document.getElementById('tab-star');
+    if(tabStar) tabStar.textContent = starWords.length > 0 ? `⭐ Günlük (${starWords.length})` : '⭐ Günlük';
+    renderResultList();
+  }
+
+  // ── ÖRNEK CÜMLE (satır genişletme) ──
+  function toggleExample(row){
+    row.classList.toggle('expanded');
+  }
+
+  function clearNonWrongStars(){
+    const items = getSortedResultItems();
+    const wrongPls = new Set(items.map(w => w.pl.trim()));
+    starWords = loadStar();
+    const otherStarred = starWords.filter(pl => !wrongPls.has(pl));
+    if(!otherStarred.length) return;
+    const ok = confirm(
+      `Bu listede olmayan ${otherStarred.length} yıldızlı kelime Günlük setten çıkarılacak.\n` +
+      `Çalışma setinde kalmaya devam edecekler.\n\nDevam edilsin mi?`
+    );
+    if(!ok) return;
+    starWords = starWords.filter(pl => wrongPls.has(pl));
+    saveStar(starWords);
+    const newStarData = loadStarData().filter(o => wrongPls.has(o.pl.trim()));
+    saveStarData(newStarData);
+    starData = newStarData;
+    renderResultList();
+    const tabStar = document.getElementById('tab-star');
+    if(tabStar) tabStar.textContent = starWords.length > 0 ? `⭐ Günlük (${starWords.length})` : '⭐ Günlük';
+  }
+  function closeResultList(){
+    pendingDeletes.clear();
+    document.getElementById('result-list-overlay').classList.remove('show');
+  }
+  function restartFromResult(){
+    closeResultList();
+    let wordsToUse;
+    if(resultListType === 'wrong'){
+      // Listedeki sıralama düzenini koru; sırasız ise karıştır
+      wordsToUse = getSortedResultItems();
+      if(resultSortOrder === 'none') wordsToUse = [...wordsToUse].sort(()=>Math.random()-.5);
+    } else {
+      // Doğru listesinden Başlat → oturumdaki tüm kelimeler (Doğru + Yanlış)
+      wordsToUse = [...lastCorrectWords, ...lastWrongWords].sort(()=>Math.random()-.5);
+    }
+    if(!wordsToUse.length){ restart(); return; }
+    miniMode = 'readonly';
+    miniDeck = [...wordsToUse];
+    miniCurrent=0; miniFlipped=false;
+    miniCorrectWords = []; miniWrongWords = [];
+    resetMiniSessionStats();
+    document.getElementById('complete-screen').classList.remove('show');
+    buildMiniDots(); showMiniCard('right');
+    document.getElementById('mini-tour').classList.add('show');
+  }
+
+  // ── MINI TOUR ──
+  function startSavedTour(){
+    currentListTab = 'saved'; lastDataTab = 'saved';
+    savedWords = loadSaved();
+    savedData = loadSavedData();
+    miniMode = 'saved';  // Çalışma modunda çalışıyoruz
+    miniDeck = [...savedData].sort(()=>Math.random()-.5);
+    if(!miniDeck.length) return;
+    miniCurrent=0; miniFlipped=false;
+    miniCorrectWords = []; miniWrongWords = [];
+    resetMiniSessionStats();
+    document.getElementById('complete-screen').classList.remove('show');
+    buildMiniDots(); showMiniCard('right');
+    document.getElementById('mini-tour').classList.add('show');
+  }
+  // Tebrikler ekranındaki ⭐ Günlük butonu — Günlük setini mini-tour olarak başlatır.
+  function startGunlukSet(){
+    starData = loadStarData();
+    if(!starData.length){
+      const msg = document.getElementById('splash-empty-msg');
+      if(msg){
+        msg.textContent = '⭐ Günlük set boş — önce yıldızlı kelime ekle';
+        msg.style.display='block';
+        setTimeout(()=>{ msg.style.display='none'; }, 3000);
+      }
+      return;
+    }
+    const splash = document.getElementById('splash');
+    splash.classList.add('hide');
+    setTimeout(() => { splash.style.display = 'none'; }, 300);
+    startStarTour();
+  }
+
+  function startStarTour(){
+    currentListTab = 'star'; lastDataTab = 'star';
+    starWords = loadStar();
+    starData = loadStarData();
+    miniMode = 'star';
+    miniDeck = [...starData].sort(()=>Math.random()-.5);
+    if(!miniDeck.length) return;
+    miniCurrent=0; miniFlipped=false;
+    miniCorrectWords = []; miniWrongWords = [];
+    resetMiniSessionStats();
+    document.getElementById('complete-screen').classList.remove('show');
+    buildMiniDots(); showMiniCard('right');
+    document.getElementById('mini-tour').classList.add('show');
+  }
+  // Tebrikler ekranındaki iki restart kart-butonunu (Çalışma ve Günlük) güncelle.
+  // Count 0 olan gizlenir; ikisi de 0 ise tüm satır gizlenir.
+  function refreshCompleteRestartRow(){
+    savedWords = loadSaved();
+    starWords = loadStar();
+    const cSaved = document.getElementById('c-saved');
+    const cStar  = document.getElementById('c-star');
+    if(cSaved) cSaved.textContent = savedWords.length;
+    if(cStar)  cStar.textContent  = starWords.length;
+    const sSaved = document.getElementById('c-stat-saved');
+    const sStar  = document.getElementById('c-stat-star');
+    if(sSaved) sSaved.style.display = savedWords.length > 0 ? '' : 'none';
+    if(sStar)  sStar.style.display  = starWords.length  > 0 ? '' : 'none';
+    const row = document.getElementById('complete-restart-row');
+    if(row) row.style.display = (savedWords.length + starWords.length) > 0 ? '' : 'none';
+  }
+  function closeMiniTour(){
+    document.getElementById('mini-tour').classList.remove('show');
+    // Oturum sayaçlarını ana Tebrikler ekranına aktar (varsa)
+    if(miniSessionCorrect > 0 || miniSessionWrong > 0){
+      lastCorrectWords = [...miniCorrectWords];
+      lastWrongWords   = [...miniWrongWords];
+      const cCor = document.getElementById('c-correct');
+      const cWrg = document.getElementById('c-wrong');
+      if(cCor) cCor.textContent = miniSessionCorrect;
+      if(cWrg) cWrg.textContent = miniSessionWrong;
+    }
+    // Çalışma ve Günlük "tekrar çalış" kart-butonlarını tazele
+    refreshCompleteRestartRow();
+    document.getElementById('complete-screen').classList.add('show');
+  }
+  function buildMiniDots(){
+    const nav=document.getElementById('mini-dot-nav'); nav.innerHTML='';
+    miniDeck.forEach((_,i)=>{ const d=document.createElement('div'); d.className='dot'+(i===0?' current':''); nav.appendChild(d); });
+  }
+  function updateMiniDots(){
+    document.querySelectorAll('#mini-dot-nav .dot').forEach((d,i)=>{ d.className='dot'+(i===miniCurrent?' current':''); });
+  }
+  function showMiniCard(dir){
+    const w=miniDeck[miniCurrent];
+    // same mode logic as main deck
+    const mpw = reverseMode ? w.tr : w.pl;
+    const mpwEl = document.getElementById('mini-polish-word');
+    const mpwR = cardHtml(mpw);
+    mpwEl.innerHTML = mpwR.html;
+    mpwEl.lang = reverseMode ? 'tr' : 'pl';
+    adjustFontSize('mini-polish-word', mpwR.main);
+    document.getElementById('mini-gender-badge').innerHTML  = reverseMode ? '' : gBadge(w.g);
+    document.querySelector('#mini-card-container .card-front .card-label').textContent = reverseMode ? 'türkçe · seçili set' : 'lehçe · seçili set';
+    document.getElementById('mini-back-polish').innerHTML  = cardHtml(reverseMode ? w.tr : w.pl).html;
+    document.getElementById('mini-turkish-word').innerHTML = cardHtml(reverseMode ? w.pl : w.tr).html;
+    document.getElementById('mini-gender-badge-back').innerHTML = reverseMode ? gBadge(w.g) : '';
+    document.querySelector('#mini-card-container .card-back .card-label').textContent = reverseMode ? 'lehçe · seçili set' : 'türkçe · seçili set';
+    document.getElementById('mini-card-inner').classList.remove('flipped');
+    miniFlipped=false;
+    const miniActs = document.getElementById('mini-actions');
+    if(miniActs){ miniActs.classList.remove('actions-visible'); miniActs.classList.add('actions-hidden'); }
+    const c=document.getElementById('mini-card-container');
+    c.classList.remove('slide-right','slide-left','slide-up'); void c.offsetWidth;
+    if(dir==='next') c.classList.add('slide-up');
+    else if(dir==='prev') c.classList.add('slide-left');
+    else c.classList.add('slide-right');
+    document.getElementById('mini-counter').textContent=`${miniCurrent+1} / ${miniDeck.length}`;
+    document.getElementById('mini-remain').textContent=`${miniDeck.length-miniCurrent-1} kaldı`;
+    document.getElementById('mini-progress-fill').style.width=((miniCurrent+1)/miniDeck.length*100)+'%';
+    updateMiniDots();
+    updateStarBtn();
+  }
+  function flipMiniCard(){
+    const inn=document.getElementById('mini-card-inner');
+    const acts = document.getElementById('mini-actions');
+    if(!miniFlipped){
+      inn.classList.add('flipped'); miniFlipped=true;
+      if(acts){ acts.classList.remove('actions-hidden'); acts.classList.add('actions-visible'); }
+    } else {
+      inn.classList.remove('flipped'); miniFlipped=false;
+      if(acts){ acts.classList.remove('actions-visible'); acts.classList.add('actions-hidden'); }
+    }
+  }
+  function nextMiniCard(){ if(miniCurrent<miniDeck.length-1){ miniCurrent++; showMiniCard('next'); } }
+  function prevMiniCard(){ if(miniCurrent>0){ miniCurrent--; showMiniCard('prev'); } }
+
+  function miniSkip(){ nextMiniCard(); }
+
+  function resetMiniSessionStats(){
+    miniSessionCorrect = 0;
+    miniSessionWrong = 0;
+    updateMiniSessionStatsDisplay();
+  }
+  function updateMiniSessionStatsDisplay(){
+    const c = document.getElementById('mini-correct-count');
+    const w = document.getElementById('mini-wrong-count');
+    if(c) c.textContent = miniSessionCorrect;
+    if(w) w.textContent = miniSessionWrong;
+  }
+  function miniFlashFeedback(dir){
+    // dir: 'right' | 'left' — ana kartta olduğu gibi kısa bir glow
+    // Mini kartta swipe-feedback öğeleri yok; basit bir hafif scale efekti veriyoruz
+    const c = document.getElementById('mini-card-container');
+    if(!c) return;
+    c.style.transition = 'transform .12s ease';
+    c.style.transform = dir==='right' ? 'scale(1.02)' : 'scale(0.98)';
+    setTimeout(()=>{ c.style.transform=''; c.style.transition=''; }, 140);
+  }
+  function miniAdvanceOrFinish(){
+    // Eğer son karttaysak, turu bitir; değilsek sıradakine geç.
+    if(miniCurrent >= miniDeck.length - 1){
+      setTimeout(closeMiniTour, 280);
+    } else {
+      setTimeout(nextMiniCard, 280);
+    }
+  }
+  function miniMarkCorrect(){
+    if(!miniDeck||!miniDeck[miniCurrent]) return;
+    miniCorrectWords.push(miniDeck[miniCurrent]);
+    miniSessionCorrect++;
+    updateMiniSessionStatsDisplay();
+    miniFlashFeedback('right');
+    miniAdvanceOrFinish();
+  }
+  function miniMarkWrong(){
+    if(!miniDeck||!miniDeck[miniCurrent]) return;
+    miniWrongWords.push(miniDeck[miniCurrent]);
+    miniSessionWrong++;
+    updateMiniSessionStatsDisplay();
+    miniFlashFeedback('left');
+    miniAdvanceOrFinish();
+  }
+
+  function miniMastered(){
+    // Hangi listede çalışıyorsak "Öğrendim" ona göre davranır.
+    const pl = miniDeck[miniCurrent].pl.trim();
+    savedWords = loadSaved();
+    starWords = loadStar();
+
+    if(miniMode === 'star'){
+      // ⭐ Günlük modunda "Öğrendim": sadece Günlük'ten çıkar.
+      // Kelime Çalışma'da kalmaya devam eder (invaryant: Günlük ⊆ Çalışma,
+      // yani Günlük'te olan zaten Çalışma'da). Bir kademe demote.
+      starWords = starWords.filter(w => w !== pl);
+      saveStar(starWords);
+      starData = starData.filter(w => w.pl.trim() !== pl);
+      saveStarData(starData);
+    } else if(miniMode === 'saved'){
+      // 📌 Çalışma modunda "Öğrendim": Çalışma'dan VE Günlük'ten çıkar (mezun).
+      savedWords = savedWords.filter(w => w !== pl);
+      saveSaved(savedWords);
+      savedData = savedData.filter(w => w.pl.trim() !== pl);
+      saveSavedData(savedData);
+      if(starWords.includes(pl)){
+        starWords = starWords.filter(w => w !== pl);
+        saveStar(starWords);
+        starData = starData.filter(w => w.pl.trim() !== pl);
+        saveStarData(starData);
+      }
+    } else {
+      // 'readonly' — kaynak listeyi tekrar çalışıyoruz (B1/Günlük Cümleler/Diğer).
+      // Ana liste sabit kalır: dokunma, sadece bu turdan çıkar.
+    }
+
+    // Sonuç ekranındaki "tekrar çalış" kart-butonlarını tazele (Çalışma + Günlük)
+    refreshCompleteRestartRow();
+    // Liste sekmesindeki Günlük sayısını güncelle (açıksa)
+    const tabStar = document.getElementById('tab-star');
+    if(tabStar) tabStar.textContent = starWords.length > 0 ? '⭐ Günlük (' + starWords.length + ')' : '⭐ Günlük';
+
+    // Turdaki decisten çıkar
+    miniDeck.splice(miniCurrent, 1);
+    if(miniDeck.length === 0){ closeMiniTour(); return; }
+    if(miniCurrent >= miniDeck.length) miniCurrent = miniDeck.length - 1;
+    buildMiniDots();
+    showMiniCard('right');
+  }
+
+  // ── INTERACTIONS ──
+  function addSwipe(stageId, flipFn, nextFn, prevFn, getFlipped, setFlipped, actionsId){
+    const stage=document.getElementById(stageId);
+    stage.querySelector('.card-container').addEventListener('click',e=>{
+      if(e.target.closest('.hint-btn')) return;
+      flipFn();
+    });
+    let tx=0,ty=0,tTarget=null;
+    stage.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;tTarget=e.target;},{passive:true});
+    stage.addEventListener('touchend',e=>{
+      if(tTarget&&tTarget.closest('.hint-btn')) return;
+      const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+      const adx=Math.abs(dx),ady=Math.abs(dy);
+      if(Math.max(adx,ady)<30) return;
+      if(adx>ady){ if(dx<0) flipFn(); else { const inn=stage.querySelector('.card-inner'); inn.classList.remove('flipped'); setFlipped(false); if(actionsId){ const ae=document.getElementById(actionsId); if(ae){ ae.classList.remove('actions-visible'); ae.classList.add('actions-hidden'); } } } }
+      else { if(dy<0) nextFn(); else prevFn(); }
+    },{passive:true});
+    let mx=0,my=0,dr=false,mTarget=null;
+    stage.addEventListener('mousedown',e=>{mx=e.clientX;my=e.clientY;dr=true;mTarget=e.target;});
+    stage.addEventListener('mouseup',e=>{
+      if(!dr) return; dr=false;
+      if(mTarget&&mTarget.closest('.hint-btn')) return;
+      const dx=e.clientX-mx,dy=e.clientY-my;
+      const adx=Math.abs(dx),ady=Math.abs(dy);
+      if(Math.max(adx,ady)<30) return;
+      if(adx>ady){ if(dx<0) flipFn(); else { const inn=stage.querySelector('.card-inner'); inn.classList.remove('flipped'); setFlipped(false); if(actionsId){ const ae=document.getElementById(actionsId); if(ae){ ae.classList.remove('actions-visible'); ae.classList.add('actions-hidden'); } } } }
+      else { if(dy<0) nextFn(); else prevFn(); }
+    });
+  }
+
+  addSwipe('stage',     flipCard,     nextCard,     prevCard,     ()=>flipped,     v=>{flipped=v;},     'actions');
+  addSwipe('mini-stage',flipMiniCard, nextMiniCard, prevMiniCard, ()=>miniFlipped, v=>{miniFlipped=v;}, 'mini-actions');
+
+  // Mouse wheel navigation
+  document.getElementById('stage').addEventListener('wheel', e=>{
+    e.preventDefault();
+    if(e.deltaY < 0) prevCard();
+    else nextCard();
+  }, {passive:false});
+
+  document.getElementById('mini-stage').addEventListener('wheel', e=>{
+    e.preventDefault();
+    if(e.deltaY < 0) prevMiniCard();
+    else nextMiniCard();
+  }, {passive:false});
+
+  document.addEventListener('keydown',e=>{
+    if(document.getElementById('hint-overlay').classList.contains('show')){ if(e.key==='Escape') closeHint(); return; }
+    if(document.getElementById('mini-tour').classList.contains('show')){
+      if(e.key==='ArrowRight'||e.key===' ') flipMiniCard();
+      else if(e.key==='ArrowDown') nextMiniCard();
+      else if(e.key==='ArrowUp')   prevMiniCard();
+      else if(e.key==='Enter'&&miniFlipped)     miniMarkCorrect();
+      else if(e.key==='Backspace'&&miniFlipped) miniMarkWrong();
+      else if(e.key==='Escape')    closeMiniTour();
+      return;
+    }
+    if(e.key==='ArrowRight'||e.key===' ') flipCard();
+    else if(e.key==='ArrowLeft'){ document.getElementById('card-inner').classList.remove('flipped'); flipped=false; document.getElementById('actions').className='actions actions-hidden'; }
+    else if(e.key==='ArrowDown') nextCard();
+    else if(e.key==='ArrowUp')   prevCard();
+    else if(e.key==='Enter'&&flipped)     markCorrect();
+    else if(e.key==='Backspace'&&flipped) markWrong();
+    else if(e.key==='Tab'){ e.preventDefault(); if(deck&&deck[current]) markSave(); }
+  });
+
+  // [] içindeki kısmı alt satırda küçük font ile göster
+  function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function cardHtml(text){
+    const m = text.match(/^(.*?)\s*\[([^\]]+)\]\s*(.*)$/s);
+    if(!m) return { main: text, html: escHtml(text) };
+    const main = (m[1] + (m[3] ? ' ' + m[3] : '')).trim() || text;
+    return { main, html: escHtml(main) + '<span class="tr-sub">' + escHtml(m[2]) + '</span>' };
+  }
+
+  function adjustFontSize(elId, word){
+    const el = document.getElementById(elId);
+    if(!el) return;
+    const len = word.length;
+    const hasSpace = word.includes(' ');
+    // İki kelimeli ifadeler için daha küçük font
+    if(hasSpace){
+      const longest = Math.max(...word.split(' ').map(w=>w.length));
+      if(longest <= 8)       el.style.fontSize = '36px';
+      else if(longest <= 12) el.style.fontSize = '30px';
+      else                   el.style.fontSize = '24px';
+    } else {
+      if(len <= 10)      el.style.fontSize = '48px';
+      else if(len <= 14) el.style.fontSize = '40px';
+      else if(len <= 18) el.style.fontSize = '32px';
+      else if(len <= 22) el.style.fontSize = '26px';
+      else               el.style.fontSize = '22px';
+    }
+  }
+
+  function toggleMode(){
+    reverseMode = !reverseMode;
+    localStorage.setItem('polonceKart_dir', reverseMode ? '1' : '0');
+    ['mode-btn','mini-mode-btn'].forEach(id => {
+      const btn = document.getElementById(id);
+      if(!btn) return;
+      if(reverseMode){ btn.textContent='TR → PL'; btn.classList.add('tr-mode'); }
+      else            { btn.textContent='PL → TR'; btn.classList.remove('tr-mode'); }
+    });
+    if(document.getElementById('mini-tour').classList.contains('show')) showMiniCard('right');
+    else showCard('right');
+  }
+
+  function toggleSplashDir(){
+    reverseMode = !reverseMode;
+    localStorage.setItem('polonceKart_dir', reverseMode ? '1' : '0');
+    const btn = document.getElementById('splash-dir-btn');
+    btn.textContent = reverseMode ? 'TR → PL' : 'PL → TR';
+  }
+
+  function goToSplash(){
+    document.getElementById('splash').classList.remove('hide');
+    document.getElementById('splash').style.display = '';
+    document.getElementById('splash').style.opacity = '1';
+    document.getElementById('splash').style.pointerEvents = 'all';
+    updateSplashActive();
+  }
+
+  function updateSplashActive(){
+    const sel = localStorage.getItem('polonceKart_set') || 'gunluk';
+    ['gunluk','b1','calisma','diger'].forEach(s => {
+      const b = document.getElementById('splash-btn-'+s);
+      if(b) b.classList.toggle('active', s===sel);
+    });
+    const dir = localStorage.getItem('polonceKart_dir');
+    const db = document.getElementById('splash-dir-btn');
+    if(db) db.textContent = reverseMode ? 'TR → PL' : 'PL → TR';
+  }
+
+  function openHelp(){
+    try {
+      var bi = document.getElementById('build-info-line');
+      if(bi){
+        var stamp = (typeof BUILD_INFO !== 'undefined' && BUILD_INFO) ? BUILD_INFO : '—';
+        bi.textContent = 'PolonceKart · v2.0 · build ' + stamp;
+      }
+    } catch(e){}
+    document.getElementById('help-overlay').classList.add('show');
+  }
+  function closeHelp(){ document.getElementById('help-overlay').classList.remove('show'); }
+
+  function startApp(set){
+    if(set) localStorage.setItem('polonceKart_set', set);
+    const sel = set || localStorage.getItem('polonceKart_set') || 'gunluk';
+    // filter words by set
+    let filtered;
+    if(sel === 'gunluk'){
+      filtered = wordsGunluk.length ? wordsGunluk : wordsB1;
+    } else if(sel === 'b1'){
+      filtered = wordsB1.concat(customWords);
+    } else if(sel === 'calisma'){
+      savedData = loadSavedData();
+      filtered = [...savedData];
+      if(!filtered.length){
+        const msg = document.getElementById('splash-empty-msg');
+        if(msg){
+          msg.textContent = '📌 Çalışma seti boş — diğer seçeneklerden başla';
+          msg.style.display='block';
+          setTimeout(()=>{ msg.style.display='none'; }, 3000);
+        }
+        return;
+      }
+    } else {
+      filtered = wordsB1;
+    }
+    deck = [...filtered].sort(()=>Math.random()-.5);
+    current=0; flipped=false; results={}; learnedCount=0;
+    savedWords = loadSaved();
+    // Liste sekmesini aktif sete göre ayarla
+    if(sel === 'calisma') currentListTab = 'saved';
+    else if(sel === 'star') currentListTab = 'star';
+    else if(sel === 'diger') currentListTab = 'all';
+    else currentListTab = 'all';
+    if(sel === 'calisma') lastDataTab = 'saved';
+    else if(sel === 'star') lastDataTab = 'star';
+    // Ana deck üçüncü butonunu (Ekle ↔ Öğrendim) aktif sete göre ayarla
+    updateMainThirdBtn();
+    buildDots();
+    updateSplashActive();
+    const splash = document.getElementById('splash');
+    splash.classList.add('hide');
+    setTimeout(() => {
+      splash.style.display = 'none';
+      showCard('right');
+    }, 300);
+  }
+
+  // Render email at runtime to prevent Netlify obfuscation
+  (function(){
+    const u='mituncer'; const d='gmail.com';
+    const el = document.getElementById('contact-email');
+    if(el) el.textContent = u + '@' + d;
+  })();
+  // ── STAR SET (Günlük) ──
+  const LS_STAR = 'polonceKart_star';
+  const LS_STAR_DATA = 'polonceKart_star_data'; // tam kelime nesneleri — hangi set yüklü olursa olsun kaybolmaz
+  const LS_CUSTOM = 'polonceKart_custom';
+  function loadStar(){ try { return JSON.parse(localStorage.getItem(LS_STAR)||'[]'); } catch(e){ return []; } }
+  function saveStar(arr){ try { localStorage.setItem(LS_STAR, JSON.stringify(arr)); } catch(e){} }
+  function loadStarData(){ try { return JSON.parse(localStorage.getItem(LS_STAR_DATA)||'[]'); } catch(e){ return []; } }
+  function saveStarData(arr){ try { localStorage.setItem(LS_STAR_DATA, JSON.stringify(arr)); } catch(e){} try { publishSync(); } catch(e){} }
+  function loadCustom(){ try { return JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]'); } catch(e){ return []; } }
+  function saveCustom(arr){ try { localStorage.setItem(LS_CUSTOM, JSON.stringify(arr)); } catch(e){} }
+  let starWords = loadStar();
+  let starData = loadStarData(); // [{pl, g, ex_pl, tr, ex_tr}, ...] — kalıcı tam veri
+  let customWords = loadCustom(); // [{pl, tr}]
+
+  function toggleMainStar(){
+    if(!deck||!deck[current]) return;
+    const word = deck[current];
+    const pl = word.pl.trim();
+    const idx = starWords.indexOf(pl);
+    if(idx===-1){
+      // Yıldız aç → Günlük'e ekle VE Çalışma'ya da ekle (invaryant: Günlük ⊆ Çalışma)
+      starWords.push(pl);
+      if(!starData.find(w => w.pl.trim() === pl)) starData.push(word);
+      savedWords = loadSaved();
+      if(!savedWords.includes(pl)){
+        savedWords.push(pl); saveSaved(savedWords);
+        if(!savedData.find(w => w.pl.trim() === pl)){ savedData.push(word); saveSavedData(savedData); }
+      }
+    } else {
+      // Yıldız kapa → sadece Günlük'ten çıkar (Çalışma'da kalmaya devam eder)
+      starWords.splice(idx,1);
+      starData = starData.filter(w => w.pl.trim() !== pl);
+    }
+    saveStar(starWords);
+    saveStarData(starData);
+    updateMainStarBtn();
+  }
+  function updateMainStarBtn(){
+    if(!deck||!deck[current]) return;
+    const pl = deck[current].pl.trim();
+    const isStarred = starWords.includes(pl);
+    const glyph = isStarred ? '⭐' : '☆';
+    const icon = document.getElementById('main-star-icon');
+    const btn = document.getElementById('main-star-btn');
+    if(icon) icon.textContent = glyph;
+    if(btn) btn.classList.toggle('starred', isStarred);
+    const iconB = document.getElementById('main-star-icon-back');
+    const btnB = document.getElementById('main-star-btn-back');
+    if(iconB) iconB.textContent = glyph;
+    if(btnB) btnB.classList.toggle('starred', isStarred);
+  }
+
+  function toggleStar(){
+    if(!miniDeck||!miniDeck[miniCurrent]) return;
+    const word = miniDeck[miniCurrent];
+    const pl = word.pl.trim();
+    const idx = starWords.indexOf(pl);
+    if(idx===-1){
+      // Yıldız aç → Günlük'e ekle VE Çalışma'ya da ekle
+      starWords.push(pl);
+      if(!starData.find(w => w.pl.trim() === pl)) starData.push(word);
+      savedWords = loadSaved();
+      if(!savedWords.includes(pl)){
+        savedWords.push(pl); saveSaved(savedWords);
+        if(!savedData.find(w => w.pl.trim() === pl)){ savedData.push(word); saveSavedData(savedData); }
+      }
+    } else {
+      // Yıldız kapa → sadece Günlük'ten çıkar (Çalışma'da kalır)
+      starWords.splice(idx,1);
+      starData = starData.filter(w => w.pl.trim() !== pl);
+      // Yıldızlı tur sırasında yıldız kaldırılırsa kartı desteden anında çıkar
+      if(miniMode === 'star'){
+        miniDeck.splice(miniCurrent, 1);
+        saveStar(starWords);
+        saveStarData(starData);
+        if(miniDeck.length === 0){ closeMiniTour(); return; }
+        if(miniCurrent >= miniDeck.length) miniCurrent = miniDeck.length - 1;
+        buildMiniDots();
+        showMiniCard('right');
+        return;
+      }
+    }
+    saveStar(starWords);
+    saveStarData(starData);
+    updateStarBtn();
+  }
+  function updateStarBtn(){
+    if(!miniDeck||!miniDeck[miniCurrent]) return;
+    const pl = miniDeck[miniCurrent].pl.trim();
+    const isStarred = starWords.includes(pl);
+    const glyph = isStarred ? '⭐' : '☆';
+    // Update legacy action button (eğer hâlâ varsa)
+    const btn = document.getElementById('star-btn');
+    if(btn){
+      const ic = btn.querySelector('.btn-icon');
+      if(ic) ic.textContent = glyph;
+      btn.style.opacity = isStarred ? '1' : '0.6';
+    }
+    // Update card buttons (front + back)
+    const miniIcon = document.getElementById('mini-star-icon');
+    const miniBtn = document.getElementById('mini-star-btn');
+    if(miniIcon) miniIcon.textContent = glyph;
+    if(miniBtn) miniBtn.classList.toggle('starred', isStarred);
+    const miniIconB = document.getElementById('mini-star-icon-back');
+    const miniBtnB = document.getElementById('mini-star-btn-back');
+    if(miniIconB) miniIconB.textContent = glyph;
+    if(miniBtnB) miniBtnB.classList.toggle('starred', isStarred);
+  }
+
+  // ── LIST OVERLAY ──
+  let currentListTab = 'all';
+  let lastDataTab = 'saved'; // Yedek sekmesindeki İndir/Paylaş/Görüntüle hangi listeyi aktaracak: son gezilen liste
+  function openList(){
+    // Her açılışta taze oku
+    pendingDeletes.clear();
+    pendingUnstar.clear();
+    deleteContext = 'list';
+    starWords = loadStar();
+    savedWords = loadSaved();
+    customWords = loadCustom();
+    document.querySelectorAll('.list-tab').forEach(t => t.classList.remove('active'));
+    // Liste sekmesi adını güncelle
+    const sel = localStorage.getItem('polonceKart_set') || 'b1';
+    const tabAllBtn = document.getElementById('tab-all');
+    if(tabAllBtn){
+      if(sel==='gunluk') tabAllBtn.textContent = '📘 Günlük';
+      else if(sel==='diger') tabAllBtn.textContent = '📂 ' + (localStorage.getItem('polonceKart_diger_title')||'Diğer').split(' ')[0];
+      else tabAllBtn.textContent = '🎓 B1';
+    }
+    const activeTab = document.getElementById('tab-'+currentListTab);
+    if(activeTab) activeTab.classList.add('active');
+    document.getElementById('list-overlay').classList.add('show');
+    const startBtn = document.getElementById('list-start-btn');
+    if(startBtn) startBtn.style.display = (currentListTab==='saved'||currentListTab==='star'||currentListTab==='all'||currentListTab==='diger') ? 'block' : 'none';
+    const exportBtn = document.getElementById('list-export-btn');
+    if(exportBtn) exportBtn.style.display = (currentListTab==='saved'||currentListTab==='star') ? '' : 'none';
+    document.getElementById('list-add-row').style.display = 'none';
+    // Günlük sekme sayısını güncelle
+    const tabStarBtn = document.getElementById('tab-star');
+    if(tabStarBtn) tabStarBtn.textContent = starWords.length > 0 ? '⭐ Günlük (' + starWords.length + ')' : '⭐ Günlük';
+    renderList(currentListTab);
+  }
+  function closeList(){
+    applyPendingUnstar();
+    pendingDeletes.clear();
+    document.getElementById('list-overlay').classList.remove('show');
+  }
+  function startFromList(){
+    applyPendingUnstar();
+    const tab = currentListTab;
+    starWords = loadStar();      // taze oku
+    savedWords = loadSaved();    // taze oku
+    const allPool = wordsB1.concat(wordsGunluk).concat(customWords).concat(digerWords||[]);
+    const seen = new Set();
+    const pool = allPool.filter(w => { if(seen.has(w.pl)) return false; seen.add(w.pl); return true; });
+    let filtered = [];
+    if(tab==='all'){
+      const sel2 = localStorage.getItem('polonceKart_set') || 'b1';
+      if(sel2 === 'gunluk') filtered = wordsGunluk.length ? wordsGunluk : pool;
+      else if(sel2 === 'diger') filtered = digerWords.length ? digerWords : pool;
+      else filtered = wordsB1.length ? wordsB1 : pool;
+    } else if(tab==='saved'){
+      savedData = loadSavedData();
+      filtered = [...savedData];
+    } else if(tab==='star'){
+      starWords = loadStar(); // her zaman taze oku
+      starData = loadStarData();
+      filtered = [...starData];
+    }
+    if(!filtered.length) return;
+    // Mini tour modunu ayarla: 'Öğrendim' butonu buna göre davranır
+    // 'all' sekmesi = kaynak listeyi tekrar çalışma: read-only olmalı (miniMastered invariant'a dokunmaz)
+    miniMode = (tab === 'star') ? 'star' : (tab === 'saved') ? 'saved' : 'readonly';
+    closeList();
+    // Launch as mini-tour
+    miniDeck = [...filtered].sort(()=>Math.random()-.5);
+    miniCurrent=0; miniFlipped=false;
+    resetMiniSessionStats();
+    // Hide complete screen if showing
+    document.getElementById('complete-screen').classList.remove('show');
+    buildMiniDots(); showMiniCard('right');
+    document.getElementById('mini-tour').classList.add('show');
+  }
+  function switchListTab(tab){
+    pendingDeletes.clear();
+    updateDeleteBtn();
+    currentListTab = tab;
+    if(tab==='saved'||tab==='star') lastDataTab = tab; // İndir/Paylaş bu listeyi aktarır
+    if(tab==='star') starWords = loadStar(); // geçiş anında taze oku
+    document.querySelectorAll('.list-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-'+tab).classList.add('active');
+    document.getElementById('list-add-row').style.display = tab==='add' ? 'flex' : 'none';
+    document.getElementById('list-backup-row').style.display = tab==='backup' ? 'flex' : 'none';
+    const startBtn = document.getElementById('list-start-btn');
+    if(startBtn) startBtn.style.display = (tab==='saved'||tab==='star'||tab==='all'||tab==='diger') ? 'block' : 'none';
+    const exportBtn2 = document.getElementById('list-export-btn');
+    if(exportBtn2) exportBtn2.style.display = (tab==='saved'||tab==='star') ? '' : 'none';
+    if(tab !== 'backup') renderList(tab);
+  }
+  let currentSortOrder = 'none'; // none, az, za
+
+  function cycleSortOrder(){
+    const next = {'none': 'az', 'az': 'za', 'za': 'none'};
+    const labels = {'none': 'Sırasız', 'az': 'A→Z', 'za': 'Z→A'};
+    currentSortOrder = next[currentSortOrder];
+    const btn = document.getElementById('list-sort-btn');
+    if(btn) btn.textContent = labels[currentSortOrder];
+    renderList(currentListTab);
+  }
+
+  function sortItems(items){
+    if(currentSortOrder === 'az') return [...items].sort((a,b) => a.pl.localeCompare(b.pl));
+    if(currentSortOrder === 'za') return [...items].sort((a,b) => b.pl.localeCompare(a.pl));
+    return items;
+  }
+
+  function renderList(tab){
+    const body = document.getElementById('list-body');
+    const title = document.getElementById('list-modal-title');
+    let items = [];
+    starWords = loadStar();
+    customWords = loadCustom();
+    savedWords = loadSaved();
+    const pool = getPool();
+
+    if(!pool.length && tab !== 'add'){
+      body.innerHTML = '<div class="list-empty">Kelimeler yükleniyor...</div>';
+      return;
+    }
+
+    if(tab==='all'){
+      const sel = localStorage.getItem('polonceKart_set') || 'b1';
+      if(sel === 'gunluk'){
+        title.textContent = '📘 Günlük Cümleler';
+        items = wordsGunluk.length ? wordsGunluk : pool;
+      } else if(sel === 'diger'){
+        title.textContent = '📂 ' + (localStorage.getItem('polonceKart_diger_title') || 'Diğer Set');
+        items = digerWords.length ? digerWords : pool;
+      } else {
+        title.textContent = '🎓 B1 Kelimeler';
+        items = wordsB1.length ? wordsB1 : pool;
+      }
+    } else if(tab==='saved'){
+      title.textContent = '📌 Çalışma Seti';
+      savedData = loadSavedData();
+      items = savedData;
+    } else if(tab==='star'){
+      title.textContent = '⭐ Günlük Set';
+      starData = loadStarData();
+      items = starData;
+    } else if(tab==='add'){
+      title.textContent = '✏️ Kelime Ekle';
+      document.getElementById('list-add-row').style.display = 'flex';
+      // Show custom words added so far
+      items = customWords;
+    }
+
+    items = sortItems(items);
+
+    // Filtre / grup çubuğu (yalnızca Çalışma / Günlük / Ekle sekmelerinde)
+    const fbar = document.getElementById('list-filter-bar');
+    const filterable = (tab==='saved' || tab==='star' || tab==='add');
+    if(filterable){
+      renderFilterBar(items);
+      if(listFilterType) items = items.filter(w => (w.g||'').trim() === listFilterType);
+      if(listFilterTag)  items = items.filter(w => (w.tag||'').trim() === listFilterTag);
+    } else if(fbar){ fbar.innerHTML=''; fbar.style.display='none'; }
+
+    if(!items.length){
+      body.innerHTML = '<div class="list-empty">Kelime yok</div>';
+      return;
+    }
+
+    const sv2 = savedWords;
+    const buildItem = (w) => {
+      const isStarred = starWords.includes(w.pl.trim());
+      const isSaved = sv2.includes(w.pl.trim());
+      const plSafe = w.pl.replace(/'/g,"\\'");
+      const exHtml = (w.ex_pl||w.ex_tr)
+        ? `<div class="list-item-example"><div class="ex-pl">${w.ex_pl||''}</div><div class="ex-tr">${w.ex_tr||''}</div></div>`
+        : '';
+      const gT = (w.g||'').trim(), tagT = (w.tag||'').trim();
+      const badges = (gT||tagT)
+        ? `<div class="list-badges">${gT?`<span class="wbadge wbadge-type">${gT}</span>`:''}${tagT?`<span class="wbadge wbadge-tag">#${tagT}</span>`:''}</div>`
+        : '';
+      const editBtn = `<span class="list-edit" onclick="openEditModal('${plSafe}',event)">✏️</span>`;
+      let actions = '';
+      if(tab==='star'){
+        const isPendingRemove = pendingUnstar.has(w.pl.trim());
+        actions = `${editBtn}<span class="list-star ${isPendingRemove ? '' : 'active'}" onclick="togglePendingUnstar('${plSafe}',this,event)">${isPendingRemove ? '☆' : '⭐'}</span>
+          <span class="list-remove" onclick="toggleDeleteMark('${plSafe}',this,event)">🗑</span>`;
+      } else if(tab==='saved'){
+        actions = `${editBtn}<span class="list-star ${isStarred?'active':''}" onclick="toggleStarFromList('${plSafe}',this,event)">${isStarred?'⭐':'☆'}</span>
+          <span class="list-remove" onclick="toggleDeleteMark('${plSafe}',this,event)">🗑</span>`;
+      } else {
+        actions = `${editBtn}<span class="list-pin ${isSaved?'active':''}" onclick="toggleSaveFromList('${plSafe}',this,event)">📌</span>
+          <span class="list-star ${isStarred?'active':''}" onclick="toggleStarFromList('${plSafe}',this,event)">${isStarred?'⭐':'☆'}</span>`;
+      }
+      return `<div class="list-item" onclick="toggleExample(this)">
+        <span class="list-pl">${cardHtml(w.pl).html}</span>
+        <span class="list-tr">${cardHtml(w.tr).html}</span>
+        ${actions}
+        ${badges}
+        ${exHtml}
+      </div>`;
+    };
+
+    if(filterable && listGroupBy !== 'none'){
+      const keyOf = w => ((listGroupBy==='type' ? (w.g||'') : (w.tag||'')).trim()) || '(boş)';
+      const groups = {};
+      items.forEach(w => { const k = keyOf(w); (groups[k] = groups[k] || []).push(w); });
+      body.innerHTML = Object.keys(groups).sort().map(k =>
+        `<div class="list-group-header">${k} (${groups[k].length})</div>` + groups[k].map(buildItem).join('')
+      ).join('');
+    } else {
+      body.innerHTML = items.map(buildItem).join('');
+    }
+  }
+
+  // ── FİLTRE / GRUP / DÜZENLE / SENKRON ──
+  let listFilterType = '', listFilterTag = '', listGroupBy = 'none';
+
+  function renderFilterBar(items){
+    const fbar = document.getElementById('list-filter-bar');
+    if(!fbar) return;
+    const types = [...new Set(items.map(w => (w.g||'').trim()).filter(Boolean))].sort();
+    const tags  = [...new Set(items.map(w => (w.tag||'').trim()).filter(Boolean))].sort();
+    if(!types.length && !tags.length){ fbar.innerHTML=''; fbar.style.display='none'; return; }
+    const esc = v => (v||'').replace(/'/g,"\\'");
+    const chip = (label,val,cur,kind) =>
+      `<button class="list-sort-btn ${cur===val?'active-chip':''}" onclick="setListFilter('${kind}','${esc(val)}')">${label}</button>`;
+    let html = '';
+    if(types.length){
+      html += '<div class="filter-row"><span style="color:var(--text-dim);font-size:11px">Tür:</span>'
+            + chip('hepsi','',listFilterType,'type')
+            + types.map(t => chip(t,t,listFilterType,'type')).join('') + '</div>';
+    }
+    if(tags.length){
+      html += '<div class="filter-row"><span style="color:var(--text-dim);font-size:11px">Tag:</span>'
+            + chip('hepsi','',listFilterTag,'tag')
+            + tags.map(t => chip('#'+t,t,listFilterTag,'tag')).join('') + '</div>';
+    }
+    html += '<div class="filter-row"><span style="color:var(--text-dim);font-size:11px">Grupla:</span>'
+          + chip('Yok','none',listGroupBy,'group')
+          + chip('Tür','type',listGroupBy,'group')
+          + chip('Tag','tag',listGroupBy,'group') + '</div>';
+    fbar.innerHTML = html;
+    fbar.style.display = 'block';
+  }
+
+  function setListFilter(kind, val){
+    if(kind==='type') listFilterType = (listFilterType===val ? '' : val);
+    else if(kind==='tag') listFilterTag = (listFilterTag===val ? '' : val);
+    else if(kind==='group') listGroupBy = val || 'none';
+    renderList(currentListTab);
+  }
+
+  let editOrigPl = '';
+  function openEditModal(pl, event){
+    if(event) event.stopPropagation();
+    pl = pl.trim();
+    editOrigPl = pl;
+    const w = findWordObj(pl)
+      || loadSavedData().find(x => (x.pl||'').trim() === pl)
+      || loadStarData().find(x => (x.pl||'').trim() === pl)
+      || { pl };
+    document.getElementById('edit-pl').value   = w.pl || '';
+    document.getElementById('edit-g').value    = w.g || '';
+    document.getElementById('edit-tag').value  = w.tag || '';
+    document.getElementById('edit-tr').value   = w.tr || '';
+    document.getElementById('edit-expl').value = w.ex_pl || '';
+    document.getElementById('edit-extr').value = w.ex_tr || '';
+    document.getElementById('edit-overlay').classList.add('show');
+  }
+  function closeEditModal(){ document.getElementById('edit-overlay').classList.remove('show'); }
+  function saveEditWord(){
+    const np = document.getElementById('edit-pl').value.trim();
+    if(!np) return;
+    const upd = {
+      pl: np,
+      g:   document.getElementById('edit-g').value.trim(),
+      tag: document.getElementById('edit-tag').value.trim(),
+      tr:  document.getElementById('edit-tr').value.trim(),
+      ex_pl: document.getElementById('edit-expl').value.trim(),
+      ex_tr: document.getElementById('edit-extr').value.trim()
+    };
+    savedData = loadSavedData(); starData = loadStarData(); customWords = loadCustom();
+    const applyTo = arr => { const i = arr.findIndex(x => (x.pl||'').trim() === editOrigPl); if(i>=0) arr[i] = Object.assign({}, arr[i], upd); };
+    applyTo(savedData); applyTo(starData); applyTo(customWords);
+    if(np !== editOrigPl){
+      savedWords = loadSaved().map(x => x.trim() === editOrigPl ? np : x);
+      starWords  = loadStar().map(x => x.trim() === editOrigPl ? np : x);
+      saveSaved(savedWords); saveStar(starWords);
+    }
+    saveSavedData(savedData); saveStarData(starData); saveCustom(customWords);
+    closeEditModal();
+    renderList(currentListTab);
+  }
+
+  // ── UYGULAMADAN UYGULAMAYA SENKRON (elle, tek yön) ──
+  // GÜNLÜK listemizi diğer uygulamaya (PolishVocab) açan ayna. Bu SENKRON değildir;
+  // yalnızca provider'ın güncel Günlük veriyi sunabilmesi için yerel dosyayı tazeler.
+  function publishSync(){
+    try {
+      if(!(window.Android && typeof window.Android.publishSync === 'function')) return;
+      const arr = loadStarData()
+        .map(w => ({ pl:(w.pl||'').trim(), type:(w.g||''), tag:(w.tag||''), tr:(w.tr||''), exPl:(w.ex_pl||''), exTr:(w.ex_tr||'') }))
+        .filter(w => w.pl);
+      window.Android.publishSync(JSON.stringify(arr));
+    } catch(e){}
+  }
+  // Yalnızca butona basınca çalışır: diğer uygulamanın kelimelerini GÜNLÜK listemize çeker.
+  function syncFromOther(showMsg){
+    try {
+      if(!(window.Android && typeof window.Android.readOtherWords === 'function')){
+        if(showMsg) alert('Senkron sadece uygulama içinde çalışır (tarayıcıda değil).');
+        return;
+      }
+      let remote = [];
+      try { remote = JSON.parse(window.Android.readOtherWords() || '[]'); } catch(e){ remote = []; }
+      const norm = s => (s||'').trim().toLowerCase();
+      starWords  = loadStar();  starData  = loadStarData();
+      savedWords = loadSaved();  savedData = loadSavedData();
+      const inStar  = new Set(starData.map(w => norm(w.pl)));
+      const inSaved = new Set(savedData.map(w => norm(w.pl)));
+      let added = 0;
+      remote.forEach(r => {
+        const pl = (r.pl||'').trim(); if(!pl) return;
+        const k = norm(pl);
+        if(inStar.has(k)) return;                 // zaten Günlük'te
+        const w = { pl, g:(r.type||''), tag:(r.tag||''), tr:(r.tr||''), ex_pl:(r.exPl||''), ex_tr:(r.exTr||'') };
+        starData.push(w); inStar.add(k);
+        if(!starWords.some(x => norm(x) === k)) starWords.push(pl);
+        // İnvaryant: Günlük ⊆ Çalışma → Çalışma'ya da ekle
+        if(!inSaved.has(k)){ savedData.push(w); inSaved.add(k); }
+        if(!savedWords.some(x => norm(x) === k)) savedWords.push(pl);
+        added++;
+      });
+      if(added > 0){
+        saveStar(starWords);   saveStarData(starData);   // saveStarData ayrıca aynayı da tazeler
+        saveSaved(savedWords); saveSavedData(savedData);
+      }
+      if(typeof updateBackupTabCounts === 'function') updateBackupTabCounts();
+      const lo = document.getElementById('list-overlay');
+      if(lo && lo.classList.contains('show')) renderList(currentListTab);
+      if(showMsg) alert(added > 0 ? (added + ' kelime Günlük listesine eklendi ✓') : 'Zaten güncel');
+    } catch(e){ if(showMsg) alert('Senkron hatası: ' + (e && e.message ? e.message : e)); }
+  }
+  // Tam kelime nesnesini tüm kaynaklar arasında ara: pool, savedData, starData
+  function findWordObj(pl){
+    return getPool().find(w => w.pl.trim() === pl)
+        || savedData.find(w => w.pl.trim() === pl)
+        || starData.find(w => w.pl.trim() === pl)
+        || null;
+  }
+
+  function toggleSaveFromList(pl, el, event){
+    if(event) event.stopPropagation();
+    pl = pl.trim();
+    savedWords = loadSaved();
+    const idx = savedWords.indexOf(pl);
+    if(idx === -1){
+      const wordObj = findWordObj(pl);
+      savedWords.push(pl); saveSaved(savedWords);
+      if(wordObj && !savedData.find(w => w.pl.trim() === pl)){ savedData.push(wordObj); saveSavedData(savedData); }
+      el.classList.add('active');
+    } else {
+      savedWords.splice(idx, 1); saveSaved(savedWords);
+      savedData = savedData.filter(w => w.pl.trim() !== pl);
+      saveSavedData(savedData);
+      // invaryant: çalışma setinden çıkınca günlükten de çıkar
+      if(starWords.includes(pl)){
+        starWords = starWords.filter(w => w !== pl);
+        starData = starData.filter(w => w.pl.trim() !== pl);
+        saveStar(starWords); saveStarData(starData);
+        const row = el.closest('.list-item');
+        const starEl = row ? row.querySelector('.list-star') : null;
+        if(starEl){ starEl.textContent='☆'; starEl.classList.remove('active'); }
+        const tabStar = document.getElementById('tab-star');
+        if(tabStar) tabStar.textContent = starWords.length > 0 ? '⭐ Günlük (' + starWords.length + ')' : '⭐ Günlük';
+      }
+      el.classList.remove('active');
+    }
+    const tabSaved = document.getElementById('tab-saved');
+    if(tabSaved) tabSaved.textContent = savedWords.length > 0 ? '📌 Çalışma (' + savedWords.length + ')' : '📌 Çalışma';
+  }
+
+  function toggleStarFromList(pl, el, event){
+    if(event) event.stopPropagation();
+    pl = pl.trim();
+    const idx = starWords.indexOf(pl);
+    if(idx===-1){
+      // Yıldız aç → Günlük'e ekle VE Çalışma'ya da ekle (invaryant koruma)
+      starWords.push(pl);
+      const wordObj = findWordObj(pl);
+      if(wordObj && !starData.find(w => w.pl.trim() === pl)) starData.push(wordObj);
+      savedWords = loadSaved();
+      if(!savedWords.includes(pl)){
+        savedWords.push(pl); saveSaved(savedWords);
+        if(wordObj && !savedData.find(w => w.pl.trim() === pl)){ savedData.push(wordObj); saveSavedData(savedData); }
+      }
+      el.textContent='⭐';
+      el.classList.add('active');
+      const pinEl = el.closest('.list-item')?.querySelector('.list-pin');
+      if(pinEl) pinEl.classList.add('active');
+    } else {
+      // Yıldız kapa → sadece Günlük'ten çıkar (Çalışma'da kalır)
+      starWords.splice(idx,1);
+      starData = starData.filter(w => w.pl.trim() !== pl);
+      el.textContent='☆';
+      el.classList.remove('active');
+    }
+    saveStar(starWords);
+    saveStarData(starData);
+    // Sekme sayısını güncelle
+    const tabStar = document.getElementById('tab-star');
+    if(tabStar) tabStar.textContent = starWords.length > 0 ? '⭐ Günlük (' + starWords.length + ')' : '⭐ Günlük';
+  }
+  // Günlük sekmesinde ⭐'a basınca: sönük işaretle, listeyi kapatınca gerçek silme
+  function togglePendingUnstar(pl, starEl, event){
+    if(event) event.stopPropagation();
+    pl = pl.trim();
+    if(pendingUnstar.has(pl)){
+      pendingUnstar.delete(pl);
+      starEl.textContent = '⭐';
+      starEl.classList.add('active');
+    } else {
+      pendingUnstar.add(pl);
+      starEl.textContent = '☆';
+      starEl.classList.remove('active');
+    }
+  }
+
+  function applyPendingUnstar(){
+    if(!pendingUnstar.size) return;
+    starWords = loadStar();
+    starData  = loadStarData();
+    for(const pl of pendingUnstar){
+      starWords = starWords.filter(w => w !== pl);
+      starData  = starData.filter(w => w.pl.trim() !== pl);
+    }
+    saveStar(starWords);
+    saveStarData(starData);
+    pendingUnstar.clear();
+    const tabStar = document.getElementById('tab-star');
+    if(tabStar) tabStar.textContent = starWords.length > 0 ? `⭐ Günlük (${starWords.length})` : '⭐ Günlük';
+  }
+
+  function removeStarFromList(pl, el, event){
+    if(event) event.stopPropagation();
+    pl = pl.trim();
+    // Günlük'ten çıkar. Çalışma'da kalmaya devam eder (invaryant).
+    starWords = starWords.filter(w => w !== pl);
+    starData = starData.filter(w => w.pl.trim() !== pl);
+    saveStar(starWords);
+    saveStarData(starData);
+    const tabStar = document.getElementById('tab-star');
+    if(tabStar) tabStar.textContent = starWords.length > 0 ? '⭐ Günlük (' + starWords.length + ')' : '⭐ Günlük';
+    el.closest('.list-item').remove();
+  }
+  function removeSavedFromList(pl, row){
+    pl = pl.trim();
+    // Çalışma'dan çıkar
+    savedWords = savedWords.filter(w => w !== pl);
+    saveSaved(savedWords);
+    savedData = savedData.filter(w => w.pl.trim() !== pl);
+    saveSavedData(savedData);
+    // Invaryant: Çalışma'da değilse Günlük'te de olamaz
+    if(starWords.includes(pl)){
+      starWords = starWords.filter(w => w !== pl);
+      starData = starData.filter(w => w.pl.trim() !== pl);
+      saveStar(starWords);
+      saveStarData(starData);
+      const tabStar = document.getElementById('tab-star');
+      if(tabStar) tabStar.textContent = starWords.length > 0 ? '⭐ Günlük (' + starWords.length + ')' : '⭐ Günlük';
+    }
+    row.remove();
+  }
+
+  // ── BACKUP / RESTORE ──
+  function exportData(mode){
+    const payload = {
+      version: 1,
+      date: new Date().toISOString(),
+      savedWords: loadSaved(),
+      savedData: loadSavedData(),
+      starWords: loadStar(),
+      starData: loadStarData(),
+      customWords: loadCustom()
+    };
+    const json = JSON.stringify(payload, null, 2);
+    const dateStr = new Date().toISOString().slice(0,10);
+    const fileName = 'poloncekart-yedek-' + dateStr + '.json';
+    const st = document.getElementById('backup-status');
+
+    if(mode === 'share'){
+      const file = new File([json], fileName, {type: 'application/json'});
+      if(navigator.canShare && navigator.canShare({files:[file]})){
+        navigator.share({ files: [file], title: 'PolonceKart Yedek' })
+          .then(()=>{ if(st){ st.style.color='var(--green)'; st.textContent='✓ Paylaşıldı'; setTimeout(()=>st.textContent='',3000); } })
+          .catch(()=>{});
+      } else if(navigator.share){
+        navigator.share({ title: 'PolonceKart Yedek', text: json }).catch(()=>{});
+      } else {
+        if(st){ st.style.color='var(--red)'; st.textContent='✗ Paylaşım desteklenmiyor'; }
+      }
+      return;
+    }
+
+    if(mode === 'view'){
+      document.getElementById('text-modal-content').textContent = json;
+      document.getElementById('text-modal-overlay').classList.add('show');
+      return;
+    }
+
+    // mode === 'download'
+    const blob = new Blob([json], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fileName; a.click();
+    URL.revokeObjectURL(url);
+    if(st){ st.style.color='var(--green)'; st.textContent='✓ Yedek dosyası indirildi'; setTimeout(()=>st.textContent='',3000); }
+  }
+
+  function closeTextModal(){
+    document.getElementById('text-modal-overlay').classList.remove('show');
+  }
+
+  function copyBackupText(){
+    const text = document.getElementById('text-modal-content').textContent;
+    navigator.clipboard.writeText(text).then(()=>{
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = '✓ Kopyalandı!';
+      setTimeout(()=>btn.textContent='📋 Panoya Kopyala', 2000);
+    }).catch(()=>{
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = '✓ Kopyalandı!';
+      setTimeout(()=>btn.textContent='📋 Panoya Kopyala', 2000);
+    });
+  }
+
+  // ── TXT FORMAT: "pl / type / tag / tr / exPl / exTr" (pl dışındaki alanlar boş olabilir) ──
+  function parseTxtLine(line){
+    // Sabit " / " ayracı: boş alanları (örn. boş tag) doğru böler, "rahat/pratik" gibi
+    // boşluksuz içerikleri bölmez.
+    let parts = line.split(' / ');
+    if(parts.length < 2) parts = line.split('/'); // boşluksuz yazılmışsa
+    return parts.map(p => p.trim());
+  }
+  function importTxt(text, defaultMode){
+    const norm = s => (s||'').trim();
+    savedWords = loadSaved(); savedData = loadSavedData();
+    starWords = loadStar(); starData = loadStarData();
+    let mode = (defaultMode === 'star') ? 'star' : 'saved', addedSaved = 0, addedStar = 0;
+    text.split(/\r?\n/).forEach(rawLine => {
+      const line = rawLine.trim();
+      if(!line) return;
+      if(line.startsWith('#')){ mode = /günlük|gunluk|star/i.test(line) ? 'star' : 'saved'; return; }
+      const p = parseTxtLine(rawLine.replace(/\r$/,'')); // ham satır: sondaki " / " boşluğu korunur
+      if(!p[0]) return;
+      if(p[0].toLowerCase() === 'pl') return; // başlık satırını atla
+      const w = { pl: p[0], g: p[1]||'', tag: p[2]||'', tr: p[3]||'', ex_pl: p[4]||'', ex_tr: p[5]||'' };
+      if(!savedWords.some(x => norm(x) === w.pl)){ savedWords.push(w.pl); if(mode==='saved') addedSaved++; }
+      if(!savedData.some(x => norm(x.pl) === w.pl)) savedData.push(w);
+      if(mode === 'star'){
+        if(!starWords.some(x => norm(x) === w.pl)){ starWords.push(w.pl); addedStar++; }
+        if(!starData.some(x => norm(x.pl) === w.pl)) starData.push(w);
+      }
+    });
+    saveSaved(savedWords); saveSavedData(savedData);
+    saveStar(starWords); saveStarData(starData);
+    return { addedSaved, addedStar };
+  }
+  function exportTxt(mode){
+    const norm = s => (s||'').trim();
+    const lineOf = (pl, data) => {
+      const w = data.find(x => norm(x.pl) === norm(pl)) || {};
+      return [norm(pl), w.g||'', w.tag||'', w.tr||'', w.ex_pl||'', w.ex_tr||''].join(' / ');
+    };
+    const isStar = (lastDataTab === 'star');
+    const sw = isStar ? loadStar() : loadSaved();
+    const sd = isStar ? loadStarData() : loadSavedData();
+    let txt = '';
+    sw.forEach(p => { txt += lineOf(p, sd) + '\n'; });
+    const dateStr = new Date().toISOString().slice(0,10);
+    const fileName = (isStar ? 'gunluk-' : 'calisma-') + dateStr + '.txt';
+    const st = document.getElementById('backup-status');
+    if(mode === 'view'){
+      document.getElementById('text-modal-content').textContent = txt;
+      document.getElementById('text-modal-overlay').classList.add('show');
+      return;
+    }
+    if(mode === 'share'){
+      const f = new File([txt], fileName, {type:'text/plain'});
+      if(navigator.canShare && navigator.canShare({files:[f]})){
+        navigator.share({ files:[f], title:'PolonceKart Kelimeler' }).catch(()=>{});
+      } else if(navigator.share){
+        navigator.share({ title:'PolonceKart Kelimeler', text: txt }).catch(()=>{});
+      } else if(st){ st.style.color='var(--red)'; st.textContent='✗ Paylaşım desteklenmiyor'; }
+      return;
+    }
+    // Android uygulaması: köprü ile İndirilenler klasörüne yaz (WebView blob indiremez)
+    if(window.Android && typeof window.Android.saveCSV === 'function'){
+      window.Android.saveCSV(fileName, txt);
+      if(st){ st.style.color='var(--green)'; st.textContent='✓ İndirilenler klasörüne kaydedildi'; setTimeout(()=>st.textContent='',4000); }
+      return;
+    }
+    const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = fileName; a.click();
+    URL.revokeObjectURL(url);
+    if(st){ st.style.color='var(--green)'; st.textContent='✓ İndirildi (' + sw.length + ' kelime)'; setTimeout(()=>st.textContent='',3000); }
+  }
+  function updateBackupTabCounts(){
+    const tabSaved = document.getElementById('tab-saved');
+    if(tabSaved) tabSaved.textContent = savedWords.length > 0 ? '📌 Çalışma (' + savedWords.length + ')' : '📌 Çalışma';
+    const tabStar = document.getElementById('tab-star');
+    if(tabStar) tabStar.textContent = starWords.length > 0 ? '⭐ Günlük (' + starWords.length + ')' : '⭐ Günlük';
+  }
+
+  function importData(input){
+    const file = input.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e){
+      const st = document.getElementById('backup-status');
+      try {
+        const raw = e.target.result;
+        if(raw.trim()[0] === '{') throw new Error('Bu eski JSON yedeği — TXT dosyası kullanın');
+        // Dosya adında "gunluk" geçiyorsa kelimeler Günlük listesine eklenir
+        const r = importTxt(raw, /günlük|gunluk/i.test(file.name||'') ? 'star' : 'saved');
+        if(st){ st.style.color='var(--green)'; st.textContent='✓ Yüklendi — Çalışma +' + r.addedSaved + ', Günlük +' + r.addedStar + ' yeni'; }
+        updateBackupTabCounts();
+      } catch(err) {
+        if(st){ st.style.color='var(--red)'; st.textContent='✗ Hata: ' + err.message; }
+      }
+      input.value = '';
+    };
+    reader.readAsText(file);
+  }
+
+  // ── CUSTOM WORDS ──
+  function addCustomWord(){
+    const plEl = document.getElementById('custom-pl');
+    const trEl = document.getElementById('custom-tr');
+    const pl = plEl.value.trim();
+    const tr = trEl.value.trim();
+    if(!pl||!tr) return;
+    customWords = loadCustom();
+    if(customWords.find(w=>w.pl===pl)) { plEl.value=''; trEl.value=''; return; }
+    const hintEl = document.getElementById('custom-hint');
+    const hint = hintEl ? hintEl.value.trim() : '';
+    const gEl = document.getElementById('custom-g');
+    const tagEl = document.getElementById('custom-tag');
+    const g = gEl ? gEl.value.trim() : '';
+    const tag = tagEl ? tagEl.value.trim() : '';
+    const newWord = {pl, g, tag, ex_pl:hint, tr, ex_tr:hint};
+    customWords.push(newWord);
+    saveCustom(customWords);
+    // Auto-add to saved set
+    savedWords = loadSaved();
+    if(!savedWords.includes(pl)){
+      savedWords.push(pl); saveSaved(savedWords);
+      if(!savedData.find(w => w.pl.trim() === pl)){ savedData.push(newWord); saveSavedData(savedData); }
+    }
+    plEl.value=''; trEl.value='';
+    if(hintEl) hintEl.value='';
+    if(gEl) gEl.value=''; if(tagEl) tagEl.value='';
+    // Show confirmation
+    const btn = document.querySelector('.list-add-btn');
+    if(btn){ btn.textContent='✓ Eklendi'; setTimeout(()=>btn.textContent='+ Ekle', 1500); }
+    renderList('add');
+  }
+
+
+  // ── DİĞER SETLER (manifest.json) ──
+  let digerSets = [];
+  let digerWords = [];
+
+  async function loadManifest(){
+    // 1) Uygulamayla gelen dahili setler (Mobilya, Vücudumuz, vb.)
+    const builtins = (typeof BUILTIN_DIGER_SETS !== 'undefined') ? BUILTIN_DIGER_SETS.slice() : [];
+
+    // 2) Kullanıcının telefondan CSV olarak eklediği setler (localStorage'da saklı)
+    const userSets = (typeof loadUserSets === 'function') ? loadUserSets() : [];
+
+    // 3) GitHub'daki CSV setleri — sets.json dosyasından oku (manifest.json artık PWA manifesti)
+    let legacySets = [];
+    try {
+      const resp = await fetch('./sets.json');
+      if(resp.ok){
+        const data = await resp.json();
+        legacySets = (data.sets || []).filter(s => !!s.file);
+      }
+    } catch(e){ /* dosya yoksa sorun değil */ }
+
+    digerSets = [...builtins, ...userSets, ...legacySets];
+  }
+
+  function openDigerModal(){
+    document.getElementById('diger-overlay').classList.add('show');
+    renderDigerList();
+  }
+  function closeDigerModal(){
+    document.getElementById('diger-overlay').classList.remove('show');
+  }
+
+  function renderDigerList(){
+    const body = document.getElementById('diger-body');
+    const uploadBtn = `
+      <div style="padding:8px 4px 12px 4px;border-bottom:1px solid var(--border);margin-bottom:6px;">
+        <label class="list-add-btn" style="display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin:0;">
+          <span style="font-size:18px">＋</span>
+          <span>CSV Dosyası Yükle</span>
+          <input type="file" accept=".csv,text/csv,text/plain" style="display:none;" onchange="handleCsvUpload(event)">
+        </label>
+        <div style="font-size:10px;color:var(--text-dim);letter-spacing:.3px;text-align:center;margin-top:6px;line-height:1.5;">
+          Format: pl / type / tag / tr / exPl / exTr (veya eski pl|g|ex_pl|tr|ex_tr)<br>
+          Eklediğin setler cihazda kalıcı olarak saklanır
+        </div>
+      </div>`;
+
+    if(!digerSets.length){
+      body.innerHTML = uploadBtn + '<div class="list-empty">Henüz ek set yok.<br><small style="color:var(--text-dim);margin-top:8px;display:block">Yukarıdaki butonla kendi CSV dosyanı ekleyebilirsin.</small></div>';
+      return;
+    }
+
+    const items = digerSets.map((s,i) => {
+      const isUser = !!s._user;
+      const removeBtn = isUser ? `<span onclick="event.stopPropagation();removeUserSet(${i})" style="cursor:pointer;opacity:.5;padding:4px 6px;font-size:16px;" title="Bu seti sil">🗑️</span>` : '';
+      const subLabel = isUser ? `kendi eklediğin · ${(s._csv||'').split('\n').length - 1} kelime` : (s._builtin ? 'dahili' : (s.file || ''));
+      return `
+      <div class="list-item" style="cursor:pointer" onclick="startDigerSet(${i})">
+        <span class="list-pl" style="font-size:14px">${s.icon||'📄'} ${s.title}</span>
+        <span class="list-tr" style="font-size:11px;opacity:.7">${subLabel}</span>
+        ${removeBtn}
+        <span style="color:var(--gold);font-size:18px">▶</span>
+      </div>`;
+    }).join('');
+
+    body.innerHTML = uploadBtn + items;
+  }
+
+  // ═══ CSV UPLOAD HANDLER (kullanıcının kendi dosyası) ═══
+  function handleCsvUpload(event){
+    const file = event.target.files && event.target.files[0];
+    event.target.value = ''; // input'u temizle (aynı dosyayı tekrar seçebilsin)
+    if(!file) return;
+
+    const reader = new FileReader();
+    reader.onerror = () => alert('Dosya okunamadı.');
+    reader.onload = (e) => {
+      const text = String(e.target.result || '');
+      // Format kontrolü
+      const firstLine = (text.trim().split('\n')[0] || '').toLowerCase();
+      const okPipe = firstLine.includes('pl|') && firstLine.includes('tr|');
+      const okSlash = text.indexOf('/') !== -1;
+      if(!okPipe && !okSlash){
+        alert('Dosya formatı uygun değil.\n\nDesteklenen formatlar:\n• pl / type / tag / tr / exPl / exTr\n• pl|g|ex_pl|tr|ex_tr (başlık satırı)');
+        return;
+      }
+      const parsed = parseCSV(text);
+      if(!parsed.length){
+        alert('Dosyada geçerli kelime bulunamadı.');
+        return;
+      }
+      // Başlık iste
+      let suggested = file.name.replace(/\.[a-z]+$/i,'').replace(/[-_]/g,' ').trim();
+      if(suggested.length > 40) suggested = suggested.slice(0,40);
+      let title = prompt('Bu set için bir isim gir:', suggested);
+      if(!title) return;
+      title = title.trim().slice(0, 60);
+      if(!title) return;
+
+      const userSets = loadUserSets();
+      // Aynı isim varsa (aynı kullanıcının kendi setleri arasında) üzerine yazmak isteyip istemediğini sor
+      const existing = userSets.findIndex(s => s.title === title);
+      if(existing >= 0){
+        if(!confirm(`"${title}" zaten var. Üzerine yazılsın mı?`)) return;
+        userSets.splice(existing, 1);
+      }
+      userSets.push({
+        title: title,
+        icon: '📄',
+        _user: true,
+        _csv: text
+      });
+      if(saveUserSets(userSets)){
+        // Listeyi yenile
+        loadManifest().then(() => renderDigerList());
+      }
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  function removeUserSet(idx){
+    const set = digerSets[idx];
+    if(!set || !set._user) return;
+    if(!confirm(`"${set.title}" setini silmek istediğine emin misin?`)) return;
+    const userSets = loadUserSets();
+    const userIdx = userSets.findIndex(s => s.title === set.title);
+    if(userIdx >= 0){
+      userSets.splice(userIdx, 1);
+      saveUserSets(userSets);
+      loadManifest().then(() => renderDigerList());
+    }
+  }
+
+  async function startDigerSet(idx){
+    const set = digerSets[idx];
+    if(!set) return;
+    const body = document.getElementById('diger-body');
+    body.innerHTML = '<div class="list-empty">⏳ Yükleniyor...</div>';
+    try {
+      let text;
+      if (set._csv) {
+        // Gömülü (dahili) veya kullanıcının eklediği set
+        text = set._csv;
+      } else if (set.file) {
+        // Eski web sürümü (manifest.json dosya referansı)
+        const resp = await fetch('./' + set.file);
+        if(!resp.ok) throw new Error('HTTP ' + resp.status);
+        text = await resp.text();
+      } else {
+        throw new Error('Set veri kaynağı bulunamadı');
+      }
+      // Format kontrolü — hem eski pipe (pl|g|ex_pl|tr|ex_tr) hem yeni slash (pl / type / tag / tr / exPl / exTr)
+      const firstLine = text.trim().split('\n')[0].toLowerCase();
+      const okPipe = firstLine.includes('pl|') && firstLine.includes('tr|');
+      const okSlash = text.indexOf('/') !== -1;
+      if(!okPipe && !okSlash){
+        body.innerHTML = '<div class="list-empty">⚠️ Dosya formatı uygun değil.<br><small>Beklenen: pl / type / tag / tr / exPl / exTr</small></div>';
+        return;
+      }
+      digerWords = parseCSV(text);
+      if(!digerWords.length){
+        body.innerHTML = '<div class="list-empty">⚠️ Dosyada kelime bulunamadı.</div>';
+        return;
+      }
+      closeDigerModal();
+      // Bu seti başlat
+      localStorage.setItem('polonceKart_set', 'diger');
+      localStorage.setItem('polonceKart_diger_title', set.title);
+      deck = [...digerWords].sort(()=>Math.random()-.5);
+      current=0; flipped=false; results={}; learnedCount=0;
+      savedWords = loadSaved();
+      currentListTab = 'all';
+      buildDots();
+      updateSplashActive();
+      const splash = document.getElementById('splash');
+      splash.classList.add('hide');
+      setTimeout(() => { splash.style.display = 'none'; showCard('right'); }, 300);
+    } catch(e) {
+      body.innerHTML = '<div class="list-empty">⚠️ Dosya yüklenemedi: ' + e.message + '</div>';
+    }
+  }
+
+  loadWords();
+
+  // PWA Service Worker kaydı (sadece HTTPS/localhost'ta çalışır, file:// için görmezden gelinir)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>
